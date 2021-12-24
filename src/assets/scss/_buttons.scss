@@ -1,0 +1,69 @@
+@use "colors" as *;
+@use "globals";
+
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none !important;
+  border-radius: globals.$btn-border-radius;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  max-width: max-content;
+  user-select: none;
+  cursor: pointer;
+}
+
+.system-btn {
+  background-image: $system-btn-bg-image;
+  color: $system-btn-fg;
+  width: 8rem;
+  height: 3.5rem;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: $system-btn-bg-image-hover;
+    }
+  }
+
+  &:active {
+    background: $system-btn-bg-image-hover;
+  }
+}
+
+.logout-btn {
+  background: $logout-btn-bg-image;
+  color: $logout-btn-fg;
+  width: 8rem;
+  height: 3.5rem;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background: $logout-btn-bg-image-hover;
+    }
+  }
+
+  &:active {
+    background: $logout-btn-bg-image-hover;
+  }
+}
+
+.primary-btn {
+  background-image: $primary-btn-bg-image;
+  color: $primary-btn-fg;
+  min-width: 10rem;
+  height: 5rem;
+  margin: 0.2rem;
+
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-image: $primary-btn-bg-image-hover;
+    }
+  }
+
+  &:active {
+    background-image: $primary-btn-bg-image-hover;
+  }
+}

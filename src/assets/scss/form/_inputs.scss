@@ -1,0 +1,299 @@
+@use "../utils/display" as *;
+@use "../utils/colors" as *;
+@use "../globals" as *;
+@use "../utils/display" as *;
+@use "../colors" as *;
+
+$form-set-height: 15rem;
+$input-text-border-color: #e6e9ed;
+$input-text-border-radius: 0.5rem;
+$search-area-inside-color: #9b9b9b;
+$input-height: 4rem;
+
+//input[type="text"], input[type="password"] {
+//  border-radius: $input-text-border-radius;
+//  border: solid 1px $input-text-border-color;
+//  font-size: 1.4rem;
+//  font-family: Samim, Roboto-Regular, Sahel, sans-serif;
+//  height: $input-height;
+//  padding: 0 1rem;
+//}
+
+.form-struct {
+  @include flex-col;
+  flex-wrap: wrap;
+  padding: 1rem;
+  width: 100%;
+}
+
+.form-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+  max-width: 50rem;
+  width: 80%;
+  padding: 1rem;
+  font-size: 1.7rem;
+  background-color: $primary;
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 0.5rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .form-submit:hover {
+    cursor: pointer;
+    background-color: $primary-hover;
+  }
+}
+
+.form-inputs-main {
+  @include flex-row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+
+  & > * {
+    margin: 1rem;
+  }
+}
+
+.form-set {
+  @include flex-col;
+  justify-content: space-between;
+  align-items: flex-end;
+  border: 1px solid lightgray;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  width: 100%;
+
+  .title {
+    @include flex-col;
+    margin: auto auto 0.6rem auto;
+    width: 100%;
+
+    &::after {
+      content: "";
+      width: 100%;
+      border-bottom: 1px solid $separator-color;
+    }
+  }
+
+  .inputs {
+    @include flex-col;
+    width: 100%;
+    align-items: flex-start;
+    //max-height: 20rem;
+    height: $form-set-height;
+    overflow-y: auto;
+  }
+}
+
+.price-range-area {
+  width: 100%;
+
+  .price-selection {
+    width: 100%;
+    height: $form-set-height;
+    padding: 4rem 0.5rem 0 0.5rem;
+  }
+
+  .price-range-result {
+    @include flex-row;
+    margin: 0.5rem;
+    justify-content: space-between;
+  }
+}
+
+.login-container {
+  @include flex-col;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  color: white;
+  z-index: 2;
+
+  .login-form {
+    padding: 2rem;
+    z-index: 1;
+  }
+
+  .login-input {
+    max-width: 50rem;
+    background: lightgray;
+  }
+
+  input[type="text"], input[type="password"] {
+    text-align: center;
+    letter-spacing: 0.2rem;
+    font-size: 2rem;
+    margin: 0;
+    width: 100%;
+    outline: none;
+    font-family: Roboto-Regular, Samim, sans-serif;
+
+    &:focus {
+      box-shadow: 0 0 10px $matrix-bg;
+    }
+  }
+
+  .password-input {
+    position: relative;
+    @include flex-row;
+    justify-content: center;
+    max-width: 50rem;
+    padding: 0;
+    margin: 2rem 0;
+    width: 100%;
+
+    input[type="text"], input[type="password"] {
+      margin: 0;
+      width: 100%;
+    }
+
+    .visibility-btn {
+      position: absolute;
+      left: 0;
+      @include flex-col;
+      justify-content: center;
+      background-color: black;
+      margin: 0;
+      width: $input-height;
+      height: $input-height;
+      border: 1px solid $input-text-border-color;
+      border-right: none;
+      border-top-left-radius: $input-text-border-radius;
+      border-bottom-left-radius: $input-text-border-radius;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  .login-btn {
+    background-color: $matrix-bg;
+    color: black;
+    width: 100%;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        background-color: $matrix-bg-hover;
+      }
+    }
+  }
+}
+
+.search-container {
+  position: relative;
+  width: 100%;
+  max-width: 50rem;
+  margin: auto;
+
+  .input-area {
+    @include flex-row;
+    width: 100%;
+
+    &.result-open {
+      box-shadow: 0 3px 12px 0 rgba(0, 0, 0, .2);
+    }
+
+    input {
+      width: 100%;
+      border-bottom-left-radius: unset;
+      border-top-left-radius: unset;
+      border-left: none;
+
+      &::placeholder {
+        color: $search-area-inside-color;
+      }
+
+      &:focus {
+        outline: none;
+      }
+
+      &.result-open {
+        outline: none;
+        border-color: gray;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+    }
+
+    .search-btn {
+      @include flex-row;
+      justify-content: center;
+      background-color: white;
+      color: $search-area-inside-color;
+      width: 4rem;
+      height: 4rem;
+      border: 1px solid $input-text-border-color;
+      border-right: none;
+      border-top-left-radius: $input-text-border-radius;
+      border-bottom-left-radius: $input-text-border-radius;
+
+      &.result-open {
+        outline: none;
+        border-color: gray;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        border-bottom: none;
+      }
+    }
+  }
+
+  .search-result-container {
+    padding-top: 1rem;
+    position: absolute;
+    background-color: white;
+    border: 1px solid gray;
+    border-top: none;
+    border-radius: 0 0 0.5rem 0.5rem;
+    width: 100%;
+    height: max-content;
+    max-height: 50vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 12px 0 rgba(0, 0, 0, .2);
+
+    & > div {
+      height: max-content;
+      width: inherit;
+    }
+
+    .search-result-item {
+      padding: 2rem;
+      margin: 0.5rem auto;
+      font-size: 1.5rem;
+      height: 4rem;
+      width: 100%;
+      display: block;
+      @include flex-row;
+      color: black;
+      text-decoration: none;
+
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          background-color: #ececec;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $landscape-breakpoint-900) and (orientation: landscape) {
+  .form-set {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 1440px) and (orientation: landscape) {
+  .form-set {
+    width: 20%;
+  }
+}

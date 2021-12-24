@@ -1,0 +1,154 @@
+@use "../utils/display";
+@use "../colors";
+@use "../globals";
+
+$header-items-side-margin: 2rem;
+
+.main-header {
+  flex: 0 1 auto;
+  @include display.flex-col;
+  justify-content: space-between;
+  padding: 1rem;
+  height: max-content;
+  background: colors.$header-bg-light;
+
+  &.dark-theme {
+    background-color: colors.$header-bg-dark;
+    color: colors.$header-fg-dark;
+  }
+
+  .logo {
+    &:visited, &:hover, &:focus {
+      color: inherit;
+    }
+  }
+
+  .responsive-row {
+    @include display.flex-row;
+    justify-content: space-between;
+    width: 100%;
+    margin: auto auto 2rem auto;
+  }
+
+  .theme-btn {
+    @include display.flex-col;
+    justify-content: center;
+    margin: 0.5rem;
+    height: 3.5rem;
+    width: 100%;
+    border-radius: globals.$btn-border-radius;
+
+    &.dark {
+      color: colors.$header-fg-light;
+      border: 1px solid colors.$header-fg-light;
+    }
+
+    &.light {
+      color: colors.$header-fg-dark;
+      border: 1px solid colors.$header-fg-dark;
+    }
+  }
+
+  .buttons-row {
+    @include display.flex-col;
+    position: fixed;
+    height: 100%;
+    width: 70%;
+    top: 0;
+    left: 0;
+    transform: translateX(-105%);
+    //transform: translateX(0);
+    transition: transform 0.3s ease-in-out;
+    background-color: colors.$header-fg-dark;
+    color: colors.$header-fg-light;
+    z-index: 100;
+    will-change: trasnform;
+    padding: 7rem 1rem;
+
+    &.show {
+      transform: translateX(0);
+    }
+
+    &.dark-theme {
+      background-color: colors.$header-bg-dark;
+      color: colors.$body-fg-dark;
+    }
+
+    .btn {
+      width: 100%;
+      max-width: 100%;
+      margin: 1rem auto;
+    }
+  }
+
+  .hamburger-btn {
+    display: flex;
+    font-size: 4rem;
+  }
+}
+
+@media only screen and (min-width: globals.$landscape-breakpoint-900) and (orientation: landscape) {
+  .main-header {
+    @include display.flex-row;
+    height: 64px;
+
+    & > div:first-child {
+      margin: auto $header-items-side-margin auto auto;
+    }
+
+    .responsive-row {
+      @include display.flex-row;
+      justify-content: space-between;
+      width: auto;
+      margin: auto;
+    }
+
+    .theme-btn {
+      @include display.flex-col;
+      justify-content: center;
+      margin: auto 1rem;
+      width: auto;
+
+      &.dark {
+        color: colors.$header-fg-light;
+        border: none;
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            color: #c99400;
+            cursor: pointer;
+          }
+        }
+      }
+
+      &.light {
+        color: colors.$header-fg-dark;
+        border: none;
+        @media (hover: hover) and (pointer: fine) {
+          &:hover {
+            color: #c99400;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .buttons-row {
+      position: inherit;
+      @include display.flex-row;
+      margin: auto auto auto $header-items-side-margin;
+      transform: translateX(0);
+      background-color: transparent;
+      width: auto;
+      padding: 0;
+
+      .btn {
+        margin: auto 0.5rem;
+        width: 8rem;
+      }
+    }
+
+    .hamburger-btn {
+      display: none;
+    }
+  }
+}

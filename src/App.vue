@@ -1,32 +1,90 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+        v-if="isLoggedIn"
+        app
+        flat
+    >
+      <v-toolbar-title>پرشیا اطلس</v-toolbar-title>
+
+      <v-spacer/>
+      <!--      <v-form>-->
+      <!--        <v-text-field-->
+      <!--            dense-->
+      <!--            flat-->
+      <!--            hide-details-->
+      <!--            rounded-->
+      <!--            outlined-->
+      <!--            prepend-inner-icon="mdi-magnify"-->
+      <!--        />-->
+      <!--      </v-form>-->
+
+      <search/>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+          v-for="link in links"
+          :key="link.title"
+          class="mx-3"
+          text
+          rounded
+          outlined
+          :color="link.color || ''"
+          :to="link.url"
+      >
+        {{ link.title }}
+      </v-btn>
+
+      <v-btn icon v-if="!$vuetify.theme.dark" @click="toggleTheme()">
+        <v-icon class="mr-1" color="blue-grey darken-4">mdi-lightbulb</v-icon>
+      </v-btn>
+      <v-btn icon v-if="$vuetify.theme.dark" @click="toggleTheme()">
+        <v-icon color="yellow darken-3">mdi-lightbulb-outline</v-icon>
+      </v-btn>
+
+    </v-app-bar>
+
+    <v-main class="mt-10">
+      <router-view/>
+    </v-main>
+
+    <v-footer app>
+      کلیه حقوق سایت متعلق به خودمونه
+    </v-footer>
+
+  </v-app>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import {mapGetters, mapState} from 'vuex'
+import Search from "@/components/Header/Search";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  name: 'App',
+  components: {
+    Search
+  },
+  data() {
+    return {
+      links: [
+        {title: 'خانه', url: '/'},
+        {title: 'خروج', url: '/logout', color: 'red'},
+      ]
+    }
+  },
+  computed: {
+    ...mapState({
+      isAuthenticated: state => state.user
+    }),
+    ...mapGetters({
+      isLoggedIn: 'auth/isAuthenticated'
+    })
+  },
+  methods: {
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
     }
   }
-}
-</style>
+};
+</script>

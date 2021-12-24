@@ -1,0 +1,214 @@
+@use "./utils/display" as *;
+@use "./colors" as *;
+
+$variant-wrapper-bg: #9db0be;
+$variant-wrapper-fg: black;
+$variant-card-border-radius: 0.8rem;
+
+.variants-page {
+  margin: 1%;
+  max-width: 1270px;
+  width: 95%;
+}
+
+.variants-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: $sub-container-bg-light;
+  color: $sub-container-fg-light;
+  padding: 1rem;
+  margin: 1rem auto auto auto;
+  width: 100%;
+  border-radius: 1rem;
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, .05);
+
+  &.dark-theme {
+    background-color: $sub-container-bg-dark;
+    color: $sub-container-fg-dark;
+  }
+}
+
+.variant-row {
+  background-color: inherit;
+  margin: 0.5rem auto;
+}
+
+.variant-card {
+  @include flex-col;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0;
+  margin: 0.8rem;
+  background-color: #ffd8c5;
+  border: 1px solid #e9e6ed;
+  border-radius: $variant-card-border-radius;
+
+  &.dark-theme {
+    background-color: $variant-wrapper-bg;
+    color: $variant-wrapper-fg;
+    border: 1px solid $variant-wrapper-bg;
+
+    input[disabled] {
+      background-color: lightgray;
+      color: black;
+    }
+  }
+
+  .small-number {
+    width: 5rem;
+  }
+
+  .medium-number {
+    width: 10rem;
+  }
+
+  .variant-info {
+    @include flex-col;
+    justify-content: space-between;
+    width: 100%;
+    margin: 1rem;
+    padding: 1rem;
+
+    &.dark-theme {
+      background-color: $variant-wrapper-bg;
+      color: $variant-wrapper-fg;
+    }
+
+    & > * {
+      margin: 1rem auto;
+    }
+  }
+
+  .variant-stock {
+    @include flex-col;
+    width: 100%;
+    height: max-content;
+    padding: 1rem;
+    background: #f9fafc;
+
+    &.dark-theme {
+      background-color: $sub-container-bg-dark;
+      color: $sub-container-fg-dark;
+    }
+
+    .data {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-rows: repeat(4, minmax(0, 1fr));
+      width: 100%;
+
+      & > * {
+        margin: 1rem 0 1rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  .variant-robot {
+    @include flex-col;
+    width: 100%;
+    height: max-content;
+    padding: 1rem;
+    background: #f9fafc;
+    border-bottom-left-radius: $variant-card-border-radius;
+    border-bottom-right-radius: $variant-card-border-radius;
+
+    &.dark-theme {
+      background-color: $sub-container-bg-dark;
+      color: $sub-container-fg-dark;
+    }
+
+    .data {
+      @include flex-row;
+      justify-content: space-between;
+      width: 100%;
+
+      & > * {
+        margin: 1rem 0 1rem auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+
+.server-update {
+  width: 100%;
+
+  .digi-update-btns {
+    @include flex-row;
+    justify-content: space-between;
+    width: 100%;
+
+    .digi-btn {
+      width: 100%;
+      max-width: none;
+      height: 5rem;
+      margin: auto 0.5rem;
+      color: black!important;
+
+      &.confirm {
+        background-color: $digi-update-btn;
+      }
+
+      &.cancel {
+        background-color: #ff9c9c;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 570px) and (orientation: landscape) {
+  .variant-card {
+
+    .variant-info {
+      flex-direction: row;
+    }
+
+    .variant-stock {
+      flex-direction: row;
+      justify-content: space-between;
+      height: 11rem;
+
+      .data {
+        @include flex-row;
+        justify-content: space-between;
+      }
+    }
+
+    .variant-robot {
+      height: 11rem;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+  }
+
+  .server-update {
+    width: 10rem;
+
+    .digi-update-btns {
+      @include flex-col;
+      width: 7rem;
+
+      .digi-btn {
+        width: 6rem;
+        height: 3rem;
+        margin: 0.5rem;
+
+        &.confirm {
+          background-color: $digi-update-btn;
+        }
+
+        &.cancel {
+          background-color: #ff9c9c;
+        }
+      }
+    }
+
+  }
+}
