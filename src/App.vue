@@ -45,7 +45,7 @@
 
     </v-app-bar>
 
-    <v-main class="mt-10">
+    <v-main class="mt-10 mb-40 mx-20">
       <router-view/>
     </v-main>
 

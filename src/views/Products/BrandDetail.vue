@@ -1,21 +1,34 @@
 <template>
-  <div class="variants-page">
-    <router-link :to="{name:'Brands'}" class="btn primary-btn">برندها</router-link>
+  <v-sheet
+      class="container"
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
+  >
+    <v-btn
+        :to="{name:'Brands'}"
+        x-large
+        color="primary"
+    >
+      برندها
+    </v-btn>
     <Errors v-if="errors" :errors="errors"></Errors>
     <div v-if="isLoading">
       <LoadingSpinner></LoadingSpinner>
     </div>
-    <div class="variants-container" :class="{'dark-theme':isDarkTheme}" v-else>
-      <h1 v-if="brand">{{ brand.title }}</h1>
+    <div class="d-flex flex-column justify-center align-center" v-else>
+      <div class="text-h3 mb-20" v-if="brand">{{ brand.title }}</div>
       <div class="variant-row" v-for="product in brand.actual_products" :key="product.id">
-        <router-link :to="{name:'ActualProductDetail',
-         params:{id:product.id, brandTitle:brand.title, brandId:brand.id}}"
-                     class="btn primary-btn">
+        <v-btn
+            :to="{name:'ActualProductDetail', params:{id:product.id, brandTitle:brand.title, brandId:brand.id}}"
+            tile
+            x-large
+            elevation="2"
+            color="success"
+        >
           {{ product.title }}
-        </router-link>
+        </v-btn>
       </div>
     </div>
-  </div>
+  </v-sheet>
 </template>
 
 <script>

@@ -1,11 +1,14 @@
 <template>
-  <v-container>
-    <h1>برندها</h1>
+  <v-sheet
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
+      class="m-50 p-30"
+  >
+    <div class="text-h3 transition-swing" v-text="'برندها'"></div>
     <Errors v-if="errors" :errors="errors"/>
     <div v-if="isLoading">
       <LoadingSpinner/>
     </div>
-    <div class="variants-container" v-else>
+    <div class="d-flex flex-column justify-center align-center" v-else>
       <!--      <div v-for="brand in brands" :key="brand.id">-->
       <!--        <router-link :to="{name:'BrandDetail', params:{id:brand.id}}">-->
       <!--          <div class="btn primary-btn">-->
@@ -16,14 +19,15 @@
       <v-btn
           v-for="brand in brands"
           :key="brand.id"
-          class="m-3"
+          class="m-3 w-100"
           color="primary"
           @click="handleBrandSelect(brand.id)"
+          :to="{name: 'BrandDetail', params: {id: brand.id}}"
       >
         {{ brand.title }}
       </v-btn>
     </div>
-  </v-container>
+  </v-sheet>
 </template>
 
 <script>
@@ -57,8 +61,8 @@ export default {
           this.errors = err.response?.data
         })
   },
-  methods:{
-    handleBrandSelect(id){
+  methods: {
+    handleBrandSelect(id) {
       console.log(id)
     }
   }

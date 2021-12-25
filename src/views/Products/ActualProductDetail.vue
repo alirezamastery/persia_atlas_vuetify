@@ -1,26 +1,32 @@
 <template>
-  <div class="variants-page">
-    <router-link :to="{name:'Brands'}" class="btn primary-btn">برندها</router-link>
-    <!--    <router-link :to="{name:'BrandDetail',params:{id:brandId}}" class="btn product-btn">-->
-    <!--      {{ brandTitle }}-->
-    <!--    </router-link>-->
+  <v-sheet
+      :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
+      class="m-50 p-30"
+  >
+    <v-btn
+        :to="{name:'Brands'}"
+        color="primary"
+        x-large
+    >
+      برندها
+    </v-btn>
     <Errors v-if="errors" :errors="errors"></Errors>
     <div v-if="isLoading">
       <LoadingSpinner></LoadingSpinner>
     </div>
-    <div class="variants-container" :class="{'dark-theme':isDarkTheme}" v-else>
+    <div class="d-flex flex-column align-center justify-center" v-else>
       <h1 v-if="product">{{ product.title }}</h1>
-      <div class="variant-card" :class="{'dark-theme':isDarkTheme}"
-           v-for="(variant , index) in variants" :key="variant.id">
-        <Variant :variant="variant" :index="index+1"></Variant>
-      </div>
+      <Variant
+          v-for="(variant , index) in variants"
+          :key="variant.id"
+          :variant="variant"
+          :index="index+1"
+      />
     </div>
-  </div>
+  </v-sheet>
 </template>
 
 <script>
-import {useStore} from "vuex";
-import {computed} from "vue";
 import LoadingSpinner from "../../components/animation/LoadingSpinner";
 import Variant from "../../components/products/Variant";
 import Errors from "../../components/Errors";
@@ -31,15 +37,6 @@ export default {
     LoadingSpinner,
     Variant,
     Errors
-  },
-  setup() {
-    const store = useStore()
-
-    const isDarkTheme = computed(() => store.getters.isDarkThemeSet)
-
-    return {
-      isDarkTheme
-    }
   },
   data() {
     return {

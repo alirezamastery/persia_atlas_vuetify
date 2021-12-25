@@ -4,6 +4,11 @@ import store from '@/store'
 
 import Login from "@/views/auth/Login"
 import Brands from "@/views/Products/Brands";
+import NotFound from "@/views/NotFound";
+import Panel from "@/views/auth/Panel";
+import BrandDetail from "@/views/Products/BrandDetail";
+import ActualProducts from "@/views/Products/ActualProducts";
+import ActualProductDetail from "@/views/Products/ActualProductDetail";
 
 Vue.use(VueRouter)
 
@@ -33,6 +38,43 @@ const routes = [
     },
     component: Login
   },
+  {
+    path: '/panel',
+    component: Panel,
+    name: 'Panel',
+    meta: {requiresAuth: true},
+  },
+  {
+    path: '/brands',
+    component: Brands,
+    name: 'Brands',
+    meta: {requiresAuth: true},
+  },
+  {
+    path: '/brands/:id',
+    component: BrandDetail,
+    name: 'BrandDetail',
+    meta: {requiresAuth: true},
+    props: true
+  },
+  {
+    path: '/actual-products',
+    component: ActualProducts,
+    name: 'ActualProducts',
+    meta: {requiresAuth: true},
+  },
+  {
+    path: '/actual-products/:id',
+    component: ActualProductDetail,
+    name: 'ActualProductDetail',
+    meta: {requiresAuth: true},
+    props: true
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: 'NotFound',
+    component: NotFound,
+  }
 ]
 
 const router = new VueRouter({

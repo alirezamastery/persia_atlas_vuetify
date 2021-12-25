@@ -1,117 +1,118 @@
 <template>
+  <v-card>
 
-  <div class="variant-info" :class="{'dark-theme':isDarkTheme}">
-    <div class="flex-20">
-      {{ variant.product.title }}
-    </div>
-    <div>
-      {{ variant.selector_values[0]['value'] }}
-    </div>
-    <div>
-      {{ variant.dkpc }}
-    </div>
-
-    <div v-if="!showWaitAnimationDigiStatus">
-      <label :for="`${variant.id}-status`">
-        فعال:
-      </label>
-      <input :id="`${variant.id}-status`"
-             type="checkbox"
-             :checked="variantStatus"
-             @input="handleDigiStatusUpdate">
-    </div>
-    <div v-else>
-      <LoadingDots_1></LoadingDots_1>
-    </div>
-  </div>
-
-  <form class="variant-stock" :class="{'dark-theme':isDarkTheme}">
-    <div class="data">
-      <label :for="`${variant.id}-price`">
-        قیمت:
-      </label>
-      <input :id="`${variant.id}-price`"
-             type="text"
-             class="medium-number"
-             v-model="newPrice"
-             @input="onDigiDataChange">
-      <label :for="`${variant.id}-stock`">
-        موجودی:
-      </label>
-      <input :id="`${variant.id}-stock`"
-             type="text"
-             class="small-number"
-             v-model="newStock"
-             @input="onDigiDataChange">
-      <label :for="`${variant.id}-reserved`">
-        سفارش خورده:
-      </label>
-      <input :id="`${variant.id}-reserved`"
-             type="text"
-             class="small-number"
-             :value="variant.reserved"
-             :disabled="true">
-      <label :for="`${variant.id}-digi-warehouse`">
-        انبار دیجیکالا:
-      </label>
-      <input :id="`${variant.id}-digi-warehouse`"
-             type="text"
-             class="small-number"
-             :value="variant.warehouse_stock"
-             :disabled="true">
-    </div>
-
-    <div class="server-update">
-      <div v-show="showBtnDigiUpdate && !showWaitAnimationDigiData" class="digi-update-btns">
-        <div class="btn digi-btn confirm" @click="handleDigiDataUpdate">update</div>
-        <div class="btn digi-btn cancel" @click="revertDigiChange">cancel</div>
+    <div class="variant-info">
+      <div class="flex-20">
+        {{ variant.product.title }}
       </div>
-      <div v-show="showWaitAnimationDigiData">
+      <div>
+        {{ variant.selector_values[0]['value'] }}
+      </div>
+      <div>
+        {{ variant.dkpc }}
+      </div>
+
+      <div v-if="!showWaitAnimationDigiStatus">
+        <label :for="`${variant.id}-status`">
+          فعال:
+        </label>
+        <input :id="`${variant.id}-status`"
+               type="checkbox"
+               :checked="variantStatus"
+               @input="handleDigiStatusUpdate">
+      </div>
+      <div v-else>
         <LoadingDots_1></LoadingDots_1>
       </div>
     </div>
-  </form>
 
-  <form class="variant-robot" :class="{'dark-theme':isDarkTheme}">
-    <div class="data">
-      <label :for="`${variant.id}-price-min`">
-        قیمت کف:
-      </label>
-      <input :id="`${variant.id}-price-min`"
-             type="text"
-             class="medium-number"
-             v-model="newPriceMin"
-             @input="onAtlasDataChange">
-      <label :for="`${variant.id}-price-min`">
-        ربات:
-      </label>
-      <input :id="`${variant.id}-robot-status`"
-             type="checkbox"
-             v-model="robotStatus"
-             @input="handleRobotStatusUpdate">
-    </div>
-    <div class="server-update">
-      <div v-if="showBtnAtlasUpdate && !showWaitAnimationPriceMin" class="digi-update-btns">
-        <div class="btn digi-btn confirm" @click="handleAtlasUpdate">update</div>
-        <div class="btn digi-btn cancel" @click="revertAtlasDataChange">cancel</div>
+    <form class="variant-stock">
+      <div class="data">
+        <label :for="`${variant.id}-price`">
+          قیمت:
+        </label>
+        <input :id="`${variant.id}-price`"
+               type="text"
+               class="medium-number"
+               v-model="newPrice"
+               @input="onDigiDataChange">
+        <label :for="`${variant.id}-stock`">
+          موجودی:
+        </label>
+        <input :id="`${variant.id}-stock`"
+               type="text"
+               class="small-number"
+               v-model="newStock"
+               @input="onDigiDataChange">
+        <label :for="`${variant.id}-reserved`">
+          سفارش خورده:
+        </label>
+        <input :id="`${variant.id}-reserved`"
+               type="text"
+               class="small-number"
+               :value="variant.reserved"
+               :disabled="true">
+        <label :for="`${variant.id}-digi-warehouse`">
+          انبار دیجیکالا:
+        </label>
+        <input :id="`${variant.id}-digi-warehouse`"
+               type="text"
+               class="small-number"
+               :value="variant.warehouse_stock"
+               :disabled="true">
       </div>
-      <div v-if="showWaitAnimationPriceMin">
-        <LoadingDots_1></LoadingDots_1>
-      </div>
-    </div>
-  </form>
 
-  <div v-if="errors">
-    <div class="alert alert-error" v-for="(value, key) in errors" :key="key">
-      {{ value }}
+      <div class="server-update">
+        <div v-show="showBtnDigiUpdate && !showWaitAnimationDigiData" class="digi-update-btns">
+          <div class="btn digi-btn confirm" @click="handleDigiDataUpdate">update</div>
+          <div class="btn digi-btn cancel" @click="revertDigiChange">cancel</div>
+        </div>
+        <div v-show="showWaitAnimationDigiData">
+          <LoadingDots_1></LoadingDots_1>
+        </div>
+      </div>
+    </form>
+
+    <form class="variant-robot" >
+      <div class="data">
+        <label :for="`${variant.id}-price-min`">
+          قیمت کف:
+        </label>
+        <input :id="`${variant.id}-price-min`"
+               type="text"
+               class="medium-number"
+               v-model="newPriceMin"
+               @input="onAtlasDataChange">
+        <label :for="`${variant.id}-price-min`">
+          ربات:
+        </label>
+        <input :id="`${variant.id}-robot-status`"
+               type="checkbox"
+               v-model="robotStatus"
+               @input="handleRobotStatusUpdate">
+      </div>
+      <div class="server-update">
+        <div v-if="showBtnAtlasUpdate && !showWaitAnimationPriceMin" class="digi-update-btns">
+          <div class="btn digi-btn confirm" @click="handleAtlasUpdate">update</div>
+          <div class="btn digi-btn cancel" @click="revertAtlasDataChange">cancel</div>
+        </div>
+        <div v-if="showWaitAnimationPriceMin">
+          <LoadingDots_1></LoadingDots_1>
+        </div>
+      </div>
+    </form>
+
+    <div v-if="errors">
+      <div class="alert alert-error" v-for="(value, key) in errors" :key="key">
+        {{ value }}
+      </div>
     </div>
-  </div>
+
+  </v-card>
 </template>
 
 <script>
 import LoadingDots_1 from "../animation/LoadingDots_1";
-import {useStore} from "vuex";
-import {computed} from "vue";
 
 export default {
   name: "Variant",
@@ -121,15 +122,6 @@ export default {
   props: {
     variant: Object,
     index: Number
-  },
-  setup(){
-    const store = useStore()
-
-    const isDarkTheme = computed(() => store.getters.isDarkThemeSet)
-
-    return{
-      isDarkTheme
-    }
   },
   data() {
     return {
