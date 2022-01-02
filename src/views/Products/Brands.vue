@@ -49,14 +49,15 @@ export default {
   },
   mounted() {
     this.isLoading = true
+    console.log('gettin brands')
     this.axios.get('products/brands/')
         .then(res => {
-          console.log(res)
+          console.log('brands response:', res)
           this.isLoading = false
           this.brands = res.data
         })
         .catch(err => {
-          console.log(err)
+          console.log('brands error:', err)
           this.isLoading = false
           this.errors = err.response?.data
         })

@@ -32,8 +32,6 @@
 </template>
 
 <script>
-import {useStore} from "vuex";
-import {computed} from "vue";
 import Errors from "../../components/Errors";
 import LoadingSpinner from "../../components/animation/LoadingSpinner";
 
@@ -42,15 +40,6 @@ export default {
   components: {
     Errors,
     LoadingSpinner,
-  },
-  setup() {
-    const store = useStore()
-
-    const isDarkTheme = computed(() => store.getters.isDarkThemeSet)
-
-    return {
-      isDarkTheme
-    }
   },
   data() {
     return {
