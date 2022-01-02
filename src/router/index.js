@@ -82,7 +82,7 @@ export const routesObj = {
     path: '/',
     name: 'Brands',
     component: Brands,
-    meta: {requiresAuth: false},
+    meta: {requiresAuth: true},
   },
   login: {
     path: '/login',

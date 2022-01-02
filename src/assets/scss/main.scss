@@ -5,7 +5,7 @@
 @import "animation/animations";
 @import "utils/display";
 @import "utils/width";
-@import "form/inputs";
+//@import "form/inputs";
 @import "utils/colors";
 @import "utils/alerts";
 @import "globals";
@@ -22,8 +22,8 @@
   text-rendering: optimizeLegibility;
 }
 
-$body-font-family: 'Samim';
-$title-font: 'Samim';
+$body-font-family: Samim;
+$title-font: Samim;
 
 .v-application {
   font-family: $body-font-family, sans-serif !important;
@@ -33,7 +33,7 @@ $title-font: 'Samim';
   }
 
   .text-h3 {
-    font-family: $title-font, sans-serif !important;
+    font-family: Samim, sans-serif !important;
   }
 }
 
@@ -44,7 +44,7 @@ html, body {
   padding: 0;
   font-family: Samim, Roboto-Regular, Sahel, sans-serif !important;
   direction: rtl;
-  //background-color: #f5f7fa;
+  overflow: auto !important;
 }
 
 //.v-application{

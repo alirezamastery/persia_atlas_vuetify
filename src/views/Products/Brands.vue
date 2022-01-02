@@ -3,19 +3,12 @@
       :color="$vuetify.theme.dark ? 'grey darken-3' : 'grey lighten-4'"
       class="m-50 p-30"
   >
-    <div class="text-h3 transition-swing" v-text="'برندها'"></div>
+    <div class="text-h3 transition-swing" v-text="$t('general.brands')"></div>
     <Errors v-if="errors" :errors="errors"/>
     <div v-if="isLoading">
       <LoadingSpinner/>
     </div>
     <div class="d-flex flex-column justify-center align-center" v-else>
-      <!--      <div v-for="brand in brands" :key="brand.id">-->
-      <!--        <router-link :to="{name:'BrandDetail', params:{id:brand.id}}">-->
-      <!--          <div class="btn primary-btn">-->
-      <!--            {{ brand.title }}-->
-      <!--          </div>-->
-      <!--        </router-link>-->
-      <!--      </div>-->
       <v-btn
           v-for="brand in brands"
           :key="brand.id"
@@ -33,6 +26,7 @@
 <script>
 import LoadingSpinner from "../../components/animation/LoadingSpinner";
 import Errors from "../../components/Errors";
+import {mapGetters, mapState} from 'vuex'
 
 export default {
   name: "Brands",
@@ -46,6 +40,14 @@ export default {
       isLoading: Boolean,
       errors: ''
     }
+  },
+  computed: {
+    ...mapState({
+      sidebarOpen: state => state.sidebarOpen,
+    }),
+    ...mapGetters({
+      isMobileWidth: 'isMobileWidth',
+    }),
   },
   mounted() {
     this.isLoading = true

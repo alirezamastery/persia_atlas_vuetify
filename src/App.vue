@@ -7,57 +7,16 @@
         :fixed="true"
         style="z-index: 10000"
     />
-    <!--    <v-app-bar-->
-    <!--        v-if="isAuthenticated"-->
-    <!--        app-->
-    <!--        flat-->
-    <!--    >-->
-    <!--      <v-toolbar-title>پرشیا اطلس</v-toolbar-title>-->
 
-    <!--      <v-spacer/>-->
-    <!--      &lt;!&ndash;      <v-form>&ndash;&gt;-->
-    <!--      &lt;!&ndash;        <v-text-field&ndash;&gt;-->
-    <!--      &lt;!&ndash;            dense&ndash;&gt;-->
-    <!--      &lt;!&ndash;            flat&ndash;&gt;-->
-    <!--      &lt;!&ndash;            hide-details&ndash;&gt;-->
-    <!--      &lt;!&ndash;            rounded&ndash;&gt;-->
-    <!--      &lt;!&ndash;            outlined&ndash;&gt;-->
-    <!--      &lt;!&ndash;            prepend-inner-icon="mdi-magnify"&ndash;&gt;-->
-    <!--      &lt;!&ndash;        />&ndash;&gt;-->
-    <!--      &lt;!&ndash;      </v-form>&ndash;&gt;-->
+    <HeaderBar v-if="isAuthenticated"/>
 
-    <!--      <Search/>-->
-
-    <!--      <v-spacer></v-spacer>-->
-
-    <!--      <v-btn-->
-    <!--          v-for="link in links"-->
-    <!--          :key="link.title"-->
-    <!--          class="mx-3"-->
-    <!--          text-->
-    <!--          rounded-->
-    <!--          outlined-->
-    <!--          :color="link.color || ''"-->
-    <!--          :to="link.url"-->
-    <!--      >-->
-    <!--        {{ link.title }}-->
-    <!--      </v-btn>-->
-
-    <!--      <v-btn icon v-if="!$vuetify.theme.dark" @click="toggleTheme()">-->
-    <!--        <v-icon class="mr-1" color="blue-grey darken-4">mdi-lightbulb</v-icon>-->
-    <!--      </v-btn>-->
-    <!--      <v-btn icon v-if="$vuetify.theme.dark" @click="toggleTheme()">-->
-    <!--        <v-icon color="yellow darken-3">mdi-lightbulb-outline</v-icon>-->
-    <!--      </v-btn>-->
-
-    <!--    </v-app-bar>-->
-    <Sidebar/>
+    <Sidebar v-if="isAuthenticated"/>
 
     <v-main class="mt-10 mb-40 mx-20">
       <router-view/>
     </v-main>
 
-    <v-footer app>
+    <v-footer v-if="isAuthenticated" app>
       کلیه حقوق سایت متعلق به خودمونه
     </v-footer>
 
@@ -66,13 +25,13 @@
 
 <script>
 import {mapGetters, mapState} from 'vuex'
-import Search from '@/components/Header/Search'
 import Sidebar from '@/components/layout/Sidebar'
+import HeaderBar from '@/components/layout/HeaderBar'
 
 export default {
   name: 'App',
   components: {
-    // Search
+    HeaderBar,
     Sidebar,
   },
   data() {
@@ -94,12 +53,33 @@ export default {
     }),
   },
   methods: {
-    toggleTheme() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    handleWindowResize() {
+      this.$store.commit('SET_WINDOW_WIDTH', window.innerWidth)
     },
   },
-  mounted() {
-    console.log(this.$t('general.routes.home'))
+  created() {
+    this.handleWindowResize()
+    window.addEventListener('resize', this.handleWindowResize)
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleWindowResize)
   },
 }
 </script>
+
+<style lang="scss">
+$body-font-family: Samim;
+$title-font: Samim;
+
+.v-application {
+  font-family: $body-font-family, sans-serif !important;
+
+  .title {
+    font-family: $title-font, sans-serif !important;
+  }
+
+  .text-h3 {
+    font-family: $title-font, sans-serif !important;
+  }
+}
+</style>

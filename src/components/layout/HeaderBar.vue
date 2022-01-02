@@ -1,0 +1,59 @@
+<template>
+  <v-app-bar
+      app
+      dense
+      flat
+  >
+
+    <v-toolbar-title>پرشیا اطلس</v-toolbar-title>
+
+    <v-spacer/>
+
+    <v-app-bar-nav-icon v-if="isMobileWidth" @click="handleNavClick"/>
+    <v-btn icon v-if="!$vuetify.theme.dark" @click="toggleTheme()">
+      <v-icon class="mr-1" color="blue-grey darken-4">mdi-lightbulb</v-icon>
+    </v-btn>
+    <v-btn icon v-if="$vuetify.theme.dark" @click="toggleTheme()">
+      <v-icon color="yellow darken-3">mdi-lightbulb-outline</v-icon>
+    </v-btn>
+
+    <v-btn
+        small
+        depressed
+        color="red lighten-1"
+        class="mr-5"
+        @click="logout"
+    >
+      {{ $t('general.routes.logout') }}
+    </v-btn>
+  </v-app-bar>
+</template>
+
+<script>
+import {mapGetters} from 'vuex'
+
+export default {
+  name: 'HeaderBar',
+  computed: {
+    ...mapGetters({
+      isMobileWidth: 'isMobileWidth',
+    }),
+  },
+  methods: {
+    handleNavClick() {
+      this.$store.dispatch('HandleSidebarOpenStatus', true)
+    },
+    toggleTheme() {
+      this.$vuetify.theme.dark = !this.$vuetify.theme.dark
+    },
+    async logout(){
+      await this.$store.dispatch('auth/LogOut')
+      await this.$router.push({name: 'Login'})
+    }
+  },
+}
+</script>
+
+<style scoped>
+
+</style>

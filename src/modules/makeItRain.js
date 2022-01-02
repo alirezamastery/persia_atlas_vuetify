@@ -1,4 +1,4 @@
-export default function makeItRain() {
+export default async function makeItRain() {
   const sleep = ms => new Promise(res => setTimeout(res, ms));
 
   function setCharAt(str, index, chr) {
@@ -149,6 +149,6 @@ export default function makeItRain() {
     }
   }
 
-  main()
+  await main()
 
 }

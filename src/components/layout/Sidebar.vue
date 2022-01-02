@@ -2,8 +2,10 @@
   <v-navigation-drawer
       absolute
       app
-      permanent
+      v-model="sidebarOpen"
       right
+      :permanent="!isMobileWidth"
+      :temporary="isMobileWidth"
   >
     <template v-slot:prepend>
       <v-list-item two-line>
@@ -35,9 +37,9 @@
           link
           ripple
       >
-<!--        <v-list-item-icon>-->
-<!--          <v-icon v-text="subItem.icon"/>-->
-<!--        </v-list-item-icon>-->
+        <!--        <v-list-item-icon>-->
+        <!--          <v-icon v-text="subItem.icon"/>-->
+        <!--        </v-list-item-icon>-->
         <v-list-item-title v-text="$t(subItem.titleI18n)"/>
       </v-list-item>
     </v-list-group>
@@ -45,6 +47,7 @@
 </template>
 
 <script>
+import {mapGetters, mapState} from 'vuex'
 import menuItems from '@/components/layout/sideMenuItems'
 
 export default {
@@ -54,6 +57,22 @@ export default {
       userMenuItems: menuItems,
     }
   },
+  computed: {
+    ...mapState({
+      sidebarOpen: state => state.sidebarOpen,
+    }),
+    ...mapGetters(['isMobileWidth', 'auth/isAuthenticated']),
+    sidebarOpen: {
+      get() {
+        return this.$store.state.sidebarOpen
+      },
+      set(value) {
+        console.log(value)
+        this.$store.dispatch('HandleSidebarOpenStatus', value)
+      },
+    },
+  },
+  methods: {},
 }
 </script>
 
