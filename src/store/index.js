@@ -3,21 +3,20 @@ import Vuex from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 
-import auth from "@/store/modules/auth";
+import auth from '@/store/modules/auth'
+import {state, mutations, getters, actions} from './general'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions,
   modules: {
-    auth
+    auth,
   },
   plugins: [
-    createPersistedState()  // it will persist the store next time you open the browser
-  ]
+    createPersistedState(),  // it will persist the store next time you open the browser
+  ],
 })
