@@ -2,13 +2,13 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 
-import Login from "@/views/auth/Login"
-import Brands from "@/views/Products/Brands";
-import NotFound from "@/views/NotFound";
-import Panel from "@/views/auth/Panel";
-import BrandDetail from "@/views/Products/BrandDetail";
-import ActualProducts from "@/views/Products/ActualProducts";
-import ActualProductDetail from "@/views/Products/ActualProductDetail";
+import Login from '@/views/auth/Login'
+import Brands from '@/views/Products/Brands'
+import NotFound from '@/views/NotFound'
+import Panel from '@/views/auth/Panel'
+import BrandDetail from '@/views/Products/BrandDetail'
+import ActualProducts from '@/views/Products/ActualProducts'
+import ActualProductDetail from '@/views/Products/ActualProductDetail'
 
 Vue.use(VueRouter)
 
@@ -36,7 +36,7 @@ const routes = [
       title: 'login',
       guest: true,
     },
-    component: Login
+    component: Login,
   },
   {
     path: '/panel',
@@ -55,7 +55,7 @@ const routes = [
     component: BrandDetail,
     name: 'BrandDetail',
     meta: {requiresAuth: true},
-    props: true
+    props: true,
   },
   {
     path: '/actual-products',
@@ -68,19 +68,54 @@ const routes = [
     component: ActualProductDetail,
     name: 'ActualProductDetail',
     meta: {requiresAuth: true},
-    props: true
+    props: true,
   },
   {
     path: '/:catchAll(.*)',
     name: 'NotFound',
     component: NotFound,
-  }
+  },
 ]
+
+export const routesObj = {
+  home: {
+    path: '/',
+    name: 'Brands',
+    component: Brands,
+    meta: {requiresAuth: false},
+  },
+  login: {
+    path: '/login',
+    name: 'Login',
+    meta: {
+      key: 'login',
+      title: 'login',
+      guest: true,
+    },
+    component: Login,
+  },
+  brands: {
+    path: '/brands',
+    component: Brands,
+    name: 'Brands',
+    meta: {
+      titleI18n: 'general.routes.units',
+      icon: 'mdi-home',
+      requiresAuth: false,
+    },
+  },
+  '404': {
+    path: '*',
+    name: 'NotFound',
+    component: NotFound,
+  },
+}
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  // routes,
+  routes: Object.values(routesObj),
 })
 
 router.beforeEach((to, from, next) => {
