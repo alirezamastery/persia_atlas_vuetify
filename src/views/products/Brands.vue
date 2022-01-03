@@ -51,7 +51,7 @@ export default {
   },
   mounted() {
     this.isLoading = true
-    console.log('gettin brands')
+    console.log('getting brands')
     this.axios.get('products/brands/')
         .then(res => {
           console.log('brands response:', res)

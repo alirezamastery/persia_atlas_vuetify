@@ -13,8 +13,8 @@ const getRoute = route => {
 const menuItems = [
   // {
   //   icon: 'products',
-  //   order: 20,
-  //   titleI18n: 'general.routes.login',
+  //   order: 10,
+  //   titleI18n: 'general.routes.home',
   //   children: [getRoute('usersList')],
   // },
   {
@@ -22,7 +22,13 @@ const menuItems = [
     order: 30,
     titleI18n: 'general.routes.products',
     children: [
-      getRoute('brands'),
+      getRoute('actualProductsList'),
+      getRoute('brandsList'),
+      getRoute('productsList'),
+      getRoute('productTypesList'),
+      getRoute('productTypeSelectorsList'),
+      getRoute('productTypeSelectorValuesList'),
+      getRoute('variantsList'),
     ],
   },
 ]

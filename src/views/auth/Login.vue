@@ -1,17 +1,24 @@
 <template>
   <div class="login-container">
     <MatrixRain/>
-    <div class="alert alert-error" v-if="errors">{{ errors }}</div>
     <v-card
         width="350"
         class="p-10 justify-center my-auto"
         style="z-index: 10000;max-height: max-content"
     >
       <v-card-text>
-        <v-form @submit.prevent="handleSubmit">
+<!--        <div class="alert alert-error" v-if="errors">{{ errors }}</div>-->
+        <div v-if="errors">
+          <v-alert type="error" v-for="error in errors" :key="error">
+            {{error}}
+          </v-alert>
+        </div>
+        <v-form @submit.prevent="handleSubmit" v-model="formIsValid">
           <v-text-field
               :label="$t('general.mobile')"
               prepend-icon="mdi-account-circle"
+              v-model="mobile"
+              :rules="mobileRules"
           />
           <v-text-field
               :type="showPassword ? 'text' : 'password'"
@@ -19,6 +26,8 @@
               prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               @click:append="showPassword = !showPassword"
+              v-model="password"
+              :rules="mobileRules"
           />
           <v-btn
               large
@@ -26,7 +35,9 @@
               color="#00ff1c"
               class="m-10"
               style="color: black"
-          >{{ $t('general.routes.login') }}
+              :disabled="!formIsValid"
+          >
+            {{ $t('general.routes.login') }}
           </v-btn>
         </v-form>
       </v-card-text>
@@ -58,9 +69,16 @@ export default {
       pwInputType: 'password',
       showPassword: false,
       eyeSlash: false,
-      mobile: '',
-      password: '',
       errors: null,
+      mobile: '',
+      mobileRules: [
+        value => !!value || 'this field is required',
+      ],
+      password: '',
+      passwordRules: [
+        value => !!value || 'this field is required',
+      ],
+      formIsValid: false,
     }
   },
   methods: {
@@ -74,6 +92,7 @@ export default {
       }
     },
     handleSubmit() {
+      if (!(this.mobile && this.password)) return
       this.axios.post('token/', {
         mobile: this.mobile,
         password: this.password,
@@ -85,7 +104,8 @@ export default {
         this.$store.dispatch('auth/LogIn', this.mobile)
         this.$router.push({path: '/'})
       }).catch(err => {
-        console.log('axios error:', err)
+        console.log('axios error:', err.response.data)
+        this.errors = err.response.data
       })
     },
   },

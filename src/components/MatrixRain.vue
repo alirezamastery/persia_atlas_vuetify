@@ -11,8 +11,8 @@ export default {
   beforeMount() {
     document.body.classList.add('matrix')
   },
-  mounted() {
-    makeItRain()
+  async mounted() {
+    await makeItRain()
   },
   beforeDestroy() {
     document.body.classList.remove('matrix')

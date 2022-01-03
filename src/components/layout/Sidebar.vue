@@ -36,6 +36,8 @@
           :key="j"
           link
           ripple
+          class="px-10"
+          :to="{name: subItem.routeName}"
       >
         <!--        <v-list-item-icon>-->
         <!--          <v-icon v-text="subItem.icon"/>-->
@@ -67,7 +69,6 @@ export default {
         return this.$store.state.sidebarOpen
       },
       set(value) {
-        console.log(value)
         this.$store.dispatch('HandleSidebarOpenStatus', value)
       },
     },

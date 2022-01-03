@@ -2,88 +2,29 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 
+import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
-import Brands from '@/views/Products/Brands'
+import Brands from '@/views/products/Brands'
 import NotFound from '@/views/NotFound'
 import Panel from '@/views/auth/Panel'
-import BrandDetail from '@/views/Products/BrandDetail'
-import ActualProducts from '@/views/Products/ActualProducts'
-import ActualProductDetail from '@/views/Products/ActualProductDetail'
+import BrandDetail from '@/views/products/BrandDetail'
+import ActualProducts from '@/views/products/ActualProducts'
+import ActualProductDetail from '@/views/products/ActualProductDetail'
+import * as views from './chunks'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Brands',
-    component: Brands,
-    meta: {requiresAuth: true},
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-    meta: {requiresAuth: true},
-  },
-  {
-    path: '/login',
-    name: 'Login',
-    meta: {
-      key: 'login',
-      title: 'login',
-      guest: true,
-    },
-    component: Login,
-  },
-  {
-    path: '/panel',
-    component: Panel,
-    name: 'Panel',
-    meta: {requiresAuth: true},
-  },
-  {
-    path: '/brands',
-    component: Brands,
-    name: 'Brands',
-    meta: {requiresAuth: true},
-  },
-  {
-    path: '/brands/:id',
-    component: BrandDetail,
-    name: 'BrandDetail',
-    meta: {requiresAuth: true},
-    props: true,
-  },
-  {
-    path: '/actual-products',
-    component: ActualProducts,
-    name: 'ActualProducts',
-    meta: {requiresAuth: true},
-  },
-  {
-    path: '/actual-products/:id',
-    component: ActualProductDetail,
-    name: 'ActualProductDetail',
-    meta: {requiresAuth: true},
-    props: true,
-  },
-  {
-    path: '/:catchAll(.*)',
-    name: 'NotFound',
-    component: NotFound,
-  },
-]
+const actualProductsList = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
+const actualProductsDetails = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
+
+const brandsDetails = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
+const brandsList = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
+
+const Details = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
+const List = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
 
 export const routesObj = {
-  home: {
-    path: '/',
-    name: 'Brands',
-    component: Brands,
-    meta: {requiresAuth: true},
-  },
+  // Auth
   login: {
     path: '/login',
     name: 'Login',
@@ -94,21 +35,171 @@ export const routesObj = {
     },
     component: Login,
   },
-  brands: {
-    path: '/brands',
-    component: Brands,
-    name: 'Brands',
+  home: {
+    path: '/',
+    name: 'Home',
+    component: Home,
     meta: {
-      titleI18n: 'general.routes.units',
+      titleI18n: 'general.routes.home',
       icon: 'mdi-home',
-      requiresAuth: false,
+      requiresAuth: true,
     },
   },
+  // Products
+  actualProductsList: {
+    path: '/actual-products',
+    component: views.actualProductsList,
+    name: 'actualProductsList',
+    meta: {
+      titleI18n: 'general.routes.actualProducts',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  actualProductsDetails: {
+    path: '/actual-products/:id',
+    component: views.actualProductsDetails,
+    name: 'actualProductsDetails',
+    meta: {
+      titleI18n: 'general.routes.actualProducts',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  brandsList: {
+    path: '/brands',
+    component: views.brandsList,
+    name: 'brandsList',
+    meta: {
+      titleI18n: 'general.routes.brands',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  brandsDetails: {
+    path: '/brands/:id',
+    component: views.brandsDetails,
+    name: 'brandsDetails',
+    meta: {
+      titleI18n: 'general.routes.brands',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  productsList: {
+    path: '/products',
+    component: views.productsList,
+    name: 'productsList',
+    meta: {
+      titleI18n: 'general.routes.products',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  productsDetails: {
+    path: '/products/:id',
+    component: views.productsDetails,
+    name: 'productsDetails',
+    meta: {
+      titleI18n: 'general.routes.products',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  productTypesList: {
+    path: '/product-types',
+    component: views.productTypesList,
+    name: 'productTypesList',
+    meta: {
+      titleI18n: 'general.routes.productTypes',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  productTypesDetails: {
+    path: '/product-types/:id',
+    component: views.productTypesDetails,
+    name: 'productTypesDetails',
+    meta: {
+      titleI18n: 'general.routes.productTypes',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  productTypeSelectorsList: {
+    path: '/product-type-selectors',
+    component: views.productTypeSelectorsList,
+    name: 'productTypeSelectorsList',
+    meta: {
+      titleI18n: 'general.routes.productTypes',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  productTypeSelectorsDetails: {
+    path: '/product-type-selectors/:id',
+    component: views.productTypeSelectorsDetails,
+    name: 'productTypeSelectorsDetails',
+    meta: {
+      titleI18n: 'general.routes.productTypeSelectors',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  productTypeSelectorValuesList: {
+    path: '/product-type-selector-values',
+    component: views.productTypeSelectorValuesList,
+    name: 'productTypeSelectorValuesList',
+    meta: {
+      titleI18n: 'general.routes.productTypeSelectorValues',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  productTypeSelectorValuesDetails: {
+    path: '/product-type-selector-values/:id',
+    component: views.productTypeSelectorValuesDetails,
+    name: 'productTypeSelectorValuesDetails',
+    meta: {
+      titleI18n: 'general.routes.productTypeSelectorValues',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  variantsList: {
+    path: '/variants',
+    component: views.variantsList,
+    name: 'variantsList',
+    meta: {
+      titleI18n: 'general.routes.variants',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  variantsDetails: {
+    path: '/variants/:id',
+    component: views.variantsDetails,
+    name: 'variantsDetails',
+    meta: {
+      titleI18n: 'general.routes.variants',
+      icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+  // Error
   '404': {
     path: '*',
     name: 'NotFound',
     component: NotFound,
+    props: true,
   },
+
 }
 
 const router = new VueRouter({

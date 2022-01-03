@@ -1,15 +1,13 @@
 <template>
-  <hello-world />
+  <v-card class="m-20 p-20">
+    <v-card-title>
+      {{ $t('general.routes.home') }}
+    </v-card-title>
+  </v-card>
 </template>
 
 <script>
-  import HelloWorld from '../components/HelloWorld'
-
-  export default {
-    name: 'Home',
-
-    components: {
-      HelloWorld,
-    },
-  }
+export default {
+  name: 'Home',
+}
 </script>
