@@ -12,8 +12,10 @@
 
     <Sidebar v-if="isAuthenticated"/>
 
-    <v-main class="mt-10 mb-40 mx-20">
-      <router-view/>
+    <v-main>
+<!--      <v-container class="rounded-0" style="padding: 40px 20px">-->
+        <router-view/>
+<!--      </v-container>-->
     </v-main>
 
     <v-footer v-if="isAuthenticated" app>

@@ -9,6 +9,7 @@ import axiosInstance from './services/axios'
 import VueAxios from 'vue-axios'
 import FontAwesomeIcon from '@/components/fontawsome-icons'
 import i18n from '@/i18n'
+import '@/modules/filters'
 
 Vue.config.productionTip = false
 

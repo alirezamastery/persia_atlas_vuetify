@@ -18,7 +18,7 @@ const menuItems = [
   //   children: [getRoute('usersList')],
   // },
   {
-    icon: 'mdi-home',
+    icon: 'mdi-warehouse',
     order: 30,
     titleI18n: 'general.routes.products',
     children: [

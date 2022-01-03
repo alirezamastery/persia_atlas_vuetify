@@ -4,24 +4,11 @@ import store from '@/store'
 
 import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
-import Brands from '@/views/products/Brands'
 import NotFound from '@/views/NotFound'
-import Panel from '@/views/auth/Panel'
-import BrandDetail from '@/views/products/BrandDetail'
-import ActualProducts from '@/views/products/ActualProducts'
-import ActualProductDetail from '@/views/products/ActualProductDetail'
 import * as views from './chunks'
 
 Vue.use(VueRouter)
 
-const actualProductsList = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
-const actualProductsDetails = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
-
-const brandsDetails = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
-const brandsList = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
-
-const Details = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
-const List = () => import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Details.vue')
 
 export const routesObj = {
   // Auth
@@ -56,10 +43,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  actualProductsDetails: {
+  actualProductsDetail: {
     path: '/actual-products/:id',
-    component: views.actualProductsDetails,
-    name: 'actualProductsDetails',
+    component: views.actualProductsDetail,
+    name: 'actualProductsDetail',
     meta: {
       titleI18n: 'general.routes.actualProducts',
       icon: 'mdi-home',
@@ -77,10 +64,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  brandsDetails: {
+  brandsDetail: {
     path: '/brands/:id',
-    component: views.brandsDetails,
-    name: 'brandsDetails',
+    component: views.brandsDetail,
+    name: 'brandsDetail',
     meta: {
       titleI18n: 'general.routes.brands',
       icon: 'mdi-home',
@@ -98,10 +85,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productsDetails: {
+  productsDetail: {
     path: '/products/:id',
-    component: views.productsDetails,
-    name: 'productsDetails',
+    component: views.productsDetail,
+    name: 'productsDetail',
     meta: {
       titleI18n: 'general.routes.products',
       icon: 'mdi-home',
@@ -119,10 +106,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypesDetails: {
+  productTypesDetail: {
     path: '/product-types/:id',
-    component: views.productTypesDetails,
-    name: 'productTypesDetails',
+    component: views.productTypesDetail,
+    name: 'productTypesDetail',
     meta: {
       titleI18n: 'general.routes.productTypes',
       icon: 'mdi-home',
@@ -135,15 +122,15 @@ export const routesObj = {
     component: views.productTypeSelectorsList,
     name: 'productTypeSelectorsList',
     meta: {
-      titleI18n: 'general.routes.productTypes',
+      titleI18n: 'general.routes.productTypeSelectors',
       icon: 'mdi-home',
       requiresAuth: true,
     },
   },
-  productTypeSelectorsDetails: {
+  productTypeSelectorsDetail: {
     path: '/product-type-selectors/:id',
-    component: views.productTypeSelectorsDetails,
-    name: 'productTypeSelectorsDetails',
+    component: views.productTypeSelectorsDetail,
+    name: 'productTypeSelectorsDetail',
     meta: {
       titleI18n: 'general.routes.productTypeSelectors',
       icon: 'mdi-home',
@@ -161,10 +148,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeSelectorValuesDetails: {
+  productTypeSelectorValuesDetail: {
     path: '/product-type-selector-values/:id',
-    component: views.productTypeSelectorValuesDetails,
-    name: 'productTypeSelectorValuesDetails',
+    component: views.productTypeSelectorValuesDetail,
+    name: 'productTypeSelectorValuesDetail',
     meta: {
       titleI18n: 'general.routes.productTypeSelectorValues',
       icon: 'mdi-home',
@@ -182,10 +169,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  variantsDetails: {
+  variantsDetail: {
     path: '/variants/:id',
-    component: views.variantsDetails,
-    name: 'variantsDetails',
+    component: views.variantsDetail,
+    name: 'variantsDetail',
     meta: {
       titleI18n: 'general.routes.variants',
       icon: 'mdi-home',

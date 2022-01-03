@@ -2,6 +2,7 @@ const state = {
   windowWidth: -1,
   httpRequestQueue: 0,
   sidebarOpen: false,
+  globalCardClass: 'px-20 py-40'
 }
 
 const getters = {
