@@ -10,11 +10,14 @@ import VueAxios from 'vue-axios'
 import FontAwesomeIcon from '@/components/fontawsome-icons'
 import i18n from '@/i18n'
 import '@/modules/filters'
+import api from '@/modules/api'
 
 Vue.config.productionTip = false
 
 Vue.use(VueAxios, axiosInstance)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
+
+Vue.prototype.$api = api
 
 new Vue({
   router,
