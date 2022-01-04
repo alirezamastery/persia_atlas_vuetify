@@ -1,0 +1,13 @@
+{
+  "actualProduct": "محصول واقعی",
+  "variant": "تنوع",
+  "brands": "برندها",
+  "DKPC": "DKPC",
+  "priceMin": "قیمت کف",
+  "hasCompetition": "دارای رقیب",
+  "isActive": "فعال",
+  "tools": "ابزارها",
+  "createANew": "ایجاد یک {0} جدید",
+  "product": "محصول",
+  "variantDeleteQ": "آیا مطمئن به حذف {0} هستید؟"
+}

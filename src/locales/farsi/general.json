@@ -120,7 +120,15 @@
     "scores": "امتیازات"
   },
   "all": "همه",
+  "create": "ایجاد",
   "brands": "برندها",
+  "DKPC": "DKPC",
+  "priceMin": "قیمت کف",
+  "hasCompetition": "دارای رقیب",
+  "isActive": "فعال",
+  "tools": "ابزارها",
+  "createANew": "ایجاد یک {0} جدید",
+  "product": "محصول",
   "save": "ذخیره",
   "cancel": "انصراف",
   "back": "بازگشت",
@@ -202,5 +210,6 @@
   "haveNot": "ندارد",
   "programType": "نوع برنامه",
   "challenge": "چالش",
+  "noItemsFound": "موردی پیدا نشد",
   "accounting": "حسابداری"
 }

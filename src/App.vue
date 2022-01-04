@@ -76,12 +76,18 @@ $title-font: Samim;
 .v-application {
   font-family: $body-font-family, sans-serif !important;
 
-  .title {
-    font-family: $title-font, sans-serif !important;
-  }
+  .title {font-family: $title-font, sans-serif !important;}
 
-  .text-h3 {
-    font-family: $title-font, sans-serif !important;
-  }
+  .text-h1 {font-family: $title-font, sans-serif !important;}
+
+  .text-h2 {font-family: $title-font, sans-serif !important;}
+
+  .text-h3 {font-family: $title-font, sans-serif !important;}
+
+  .text-h4 {font-family: $title-font, sans-serif !important;}
+
+  .text-h5 {font-family: $title-font, sans-serif !important;}
+
+  .text-h6 {font-family: $title-font, sans-serif !important;}
 }
 </style>
