@@ -9,5 +9,6 @@
   "tools": "ابزارها",
   "createANew": "ایجاد یک {0} جدید",
   "product": "محصول",
+  "selectorValues": "مقدار انتخابگر",
   "variantDeleteQ": "آیا مطمئن به حذف {0} هستید؟"
 }

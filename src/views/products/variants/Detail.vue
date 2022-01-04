@@ -2,20 +2,20 @@
   <v-card>
     <v-card-title>
       <!--                  <span class="text-h5">{{ $t('general.createANew').replace('{0}', $t('products.variant')) }}</span>-->
-      <span class="text-h5">{{ formTitle }}</span>
+      <span class="text-h5">{{ id }}</span>
     </v-card-title>
 
-    <v-card-text>
+    <v-card-text v-if="editedItem">
       <v-container>
         <v-row>
           <v-col cols="12">
             <AutoComplete
                 :label="$t('products.product')"
                 :query-param="'title'"
-                :obj-title-key="'title'"
+                :obj-repr-field="'title'"
                 :api="$api.products"
                 v-on:value-change="handleSelectProduct"
-                :default-value="editedItem.product ? editedItem.product.id : null"
+                :default-value="editedItem.product.id"
             />
           </v-col>
         </v-row>
@@ -24,22 +24,23 @@
             <AutoComplete
                 :label="$t('products.actualProduct')"
                 :query-param="'title'"
-                :obj-title-key="'title'"
+                :obj-repr-field="'title'"
                 :api="$api.actualProducts"
                 v-on:value-change="handleSelectActualProduct"
-                :default-value="editedItem.actual_product ? editedItem.actual_product.id : null"
+                :default-value="editedItem.actual_product.id"
             />
           </v-col>
         </v-row>
         <v-row>
           <v-col>
             <AutoComplete
-                :label="$t('products.actualProduct')"
-                :query-param="'title'"
-                :obj-title-key="'title'"
-                :api="$api.actualProducts"
-                v-on:value-change="handleSelectActualProduct"
-                :default-value="editedItem.actual_product ? editedItem.actual_product.id : null"
+                :label="$t('products.selectorValues')"
+                :query-param="'value'"
+                :obj-repr-field="'value'"
+                :api="$api.productSelectorValues"
+                v-on:value-change="handleSelectProductSelectorValues"
+                :default-value="editedItem.selector_values"
+                select-multiple
             />
           </v-col>
         </v-row>
@@ -78,40 +79,53 @@
       </v-container>
     </v-card-text>
 
-    <v-card-actions>
-      <v-spacer/>
-      <v-btn
-          color="orange"
-          text
-          @click="closeDialog"
-      >
-        {{ $t('general.cancel') }}
-      </v-btn>
-      <v-btn
-          color="green darken-1"
-          @click="saveItem"
-      >
-        {{ $t('general.save') }}
-      </v-btn>
-    </v-card-actions>
   </v-card>
 
 </template>
 
 <script>
 import AutoComplete from '@/components/AutoComplete'
+
 export default {
   name: 'Details',
-  components:{AutoComplete},
+  components: {AutoComplete},
   props: {
-    itemDetails: null,
+    id: [Number, String],
     itemId: null,
   },
+  data() {
+    return {
+      itemDetails: {},
+      editedItem: null,
+    }
+  },
   created() {
-    if (!this.itemDetails && this.itemId) {
-      // this.axios.get()
+    if (this.id) {
+      this.axios.get(this.$api.variants + this.id)
+          .then(res => {
+            console.log('details', res)
+            this.itemDetails = res.data
+            this.editedItem = res.data
+          })
       console.log('no details, getting the item details from server')
     }
+  },
+  methods: {
+    handleSelectProduct(event) {
+      console.log(event)
+      // this.$router.push({name:})
+      console.log('change in list', event, this.editedItem)
+      this.editedItem.product = event
+    },
+
+    handleSelectActualProduct(event) {
+      this.editedItem.actual_product = event
+    },
+
+    handleSelectProductSelectorValues(event) {
+      console.log('handleSelectProductSelectorValues', event)
+      this.editedItem.selector_values = event
+    },
   },
 }
 </script>

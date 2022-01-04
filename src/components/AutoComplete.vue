@@ -5,10 +5,11 @@
       :items="items"
       :search-input.sync="searchPhrase"
       :label="label"
-      :cache-items="true"
-      item-text="title"
-      item-value="id"
+      :item-text="objReprField"
+      :item-value="objUniqueId"
+      :multiple="selectMultiple"
       class="mx-4"
+      cache-items
       flat
       hide-no-data
       hide-details
@@ -25,7 +26,7 @@
 
     <template v-slot:item="{ item }">
       <v-list-item-content>
-        <v-list-item-title v-text="item[objTitleKey]"/>
+        <v-list-item-title v-text="item[objReprField]"/>
       </v-list-item-content>
     </template>
 
@@ -42,27 +43,34 @@ import {debounce} from '@/modules/api-tools'
 export default {
   name: 'AutoComplete',
   props: {
-    defaultValue: null,
+    defaultValue: [Number, Array],
+    objUniqueId: {type: String, default: 'id'},
+    objReprField: {type: String, default: 'title'},
     label: String,
-    objTitleKey: {type: String, default: 'title'},
     api: String,
     queryParam: String,
+    selectMultiple: {type: Boolean, default: false},
   },
   data() {
     return {
       loading: false,
       searchPhrase: '',
       items: [],
-      defaultItem: null
+      defaultItem: [Number, Array],
     }
   },
   watch: {
     searchPhrase(val) {
       val && val !== this.select && this.handleSearchInput(val)
     },
+    items(value) {
+      console.log('watch', value)
+    },
   },
   created() {
-    this.defaultItem = this.defaultValue
+    console.log('defaultValue', this.defaultValue)
+    if (this.defaultValue)
+      this.defaultItem = this.defaultValue
     this.axios.get(this.api)
         .then(res => {
           this.items = res.data
@@ -93,7 +101,6 @@ export default {
       debouncedAPICall(url)
     },
     handleSelect(event) {
-      console.log('handleSelect', event)
       this.$emit('value-change', event)
     },
   },

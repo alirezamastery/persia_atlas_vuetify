@@ -73,18 +73,19 @@
                         />
                       </v-col>
                     </v-row>
-                    <v-row>
-                      <v-col>
-                        <AutoComplete
-                            :label="$t('products.actualProduct')"
-                            :query-param="'title'"
-                            :obj-title-key="'title'"
-                            :api="$api.actualProducts"
-                            v-on:value-change="handleSelectActualProduct"
-                            :default-value="editedItem.actual_product ? editedItem.actual_product.id : null"
-                        />
-                      </v-col>
-                    </v-row>
+                    <!--                    <v-row>-->
+                    <!--                      <v-col>-->
+                    <!--                        <AutoComplete-->
+                    <!--                            :label="$t('products.selectorValues')"-->
+                    <!--                            :query-param="'value'"-->
+                    <!--                            :obj-repr-field="'value'"-->
+                    <!--                            :api="$api.productSelectorValues"-->
+                    <!--                            v-on:value-change="handleSelectProductSelectorValues"-->
+                    <!--                            select-multiple-->
+                    <!--                            :default-value="editedItem.selector_values ? editedItem.selector_values : null"-->
+                    <!--                        />-->
+                    <!--                      </v-col>-->
+                    <!--                    </v-row>-->
                     <v-row>
                       <v-col
                           cols="12"
@@ -250,28 +251,29 @@ export default {
         {text: this.$t('products.isActive'), value: 'is_active'},
         {text: this.$t('products.tools'), value: 'actions', sortable: false},
       ],
-      editedIndex: -1,
       editedItem: {
-        product_id: null,
+        product: null,
         dkpc: '',
         price_min: 0,
         is_active: true,
-        selector_value: 0,
-        actual_product_id: 0,
+        selector_values: [],
+        actual_product: 0,
       },
       defaultItem: {
-        product_id: null,
+        product: null,
         dkpc: '',
         price_min: 0,
         is_active: true,
-        selector_value: 0,
-        actual_product_id: 0,
+        selector_values: [],
+        actual_product: 0,
       },
+      editedIndex: -1,
       dialog: false,
       dialogDelete: false,
       loading: false,
       searchPhrase: '',
       productItems: [],
+      selectorValues: [],
     }
   },
   computed: {
@@ -294,14 +296,21 @@ export default {
     },
   },
   created() {
-    this.axios.get('products/variants/')
+    this.axios.get(this.$api.variants)
         .then(res => {
-          console.log('items', res)
+          console.log('main items', res)
           this.items = res.data
         })
         .catch(err => {
-          console.log('items error', err)
-
+          console.log('main items error', err)
+        })
+    this.axios.get(this.$api.productSelectorValues)
+        .then(res => {
+          console.log('selectorValues', res)
+          this.selectorValues = res.data
+        })
+        .catch(err => {
+          console.log('selectorValues error', err)
         })
   },
   methods: {
@@ -309,11 +318,16 @@ export default {
       console.log(event)
       // this.$router.push({name:})
       console.log('change in list', event, this.editedItem)
-      this.editedItem.product_id = event
+      this.editedItem.product = event
     },
 
     handleSelectActualProduct(event) {
-      this.editedItem.actual_product_id = event
+      this.editedItem.actual_product = event
+    },
+
+    handleSelectProductSelectorValues(event) {
+      console.log('handleSelectProductSelectorValues', event)
+      this.editedItem.selector_values = event
     },
 
     handleSearchInput() {
@@ -342,10 +356,11 @@ export default {
     },
 
     editItem(item) {
-      console.log('editItem', item)
       this.editedIndex = this.items.indexOf(item)
+      console.log('editItem', this.editedIndex, item)
       this.editedItem = Object.assign({}, item)
-      this.dialog = true
+      // this.dialog = true
+      this.$router.push({name: 'variantsDetail', params: {id: item.id}})
     },
 
     deleteItem(item) {
@@ -386,7 +401,7 @@ export default {
             .catch(err => console.log('patch error ', err))
 
       } else {
-        console.log('post this.editedItem' , this.editedItem)
+        console.log('post this.editedItem', this.editedItem)
         this.items.push(this.editedItem)
         this.axios.post(this.$api.variants, this.editedItem)
             .then(res => {

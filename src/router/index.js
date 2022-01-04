@@ -173,6 +173,7 @@ export const routesObj = {
     path: '/variants/:id',
     component: views.variantsDetail,
     name: 'variantsDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.variants',
       icon: 'mdi-home',
