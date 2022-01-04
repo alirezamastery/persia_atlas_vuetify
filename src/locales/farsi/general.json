@@ -120,6 +120,9 @@
     "scores": "امتیازات"
   },
   "all": "همه",
+  "yes": "بله",
+  "no": "نه",
+  "ok": "ردیفه",
   "create": "ایجاد",
   "brands": "برندها",
   "DKPC": "DKPC",
@@ -211,5 +214,6 @@
   "programType": "نوع برنامه",
   "challenge": "چالش",
   "noItemsFound": "موردی پیدا نشد",
-  "accounting": "حسابداری"
+  "accounting": "حسابداری",
+  "itemDeleteQ": "آیا مطمئن به حذف {0} هستید؟"
 }
