@@ -1,5 +1,6 @@
 <template>
   <v-autocomplete
+      v-model="defaultItem"
       :loading="loading"
       :items="items"
       :search-input.sync="searchPhrase"
@@ -41,6 +42,7 @@ import {debounce} from '@/modules/api-tools'
 export default {
   name: 'AutoComplete',
   props: {
+    defaultValue: null,
     label: String,
     objTitleKey: {type: String, default: 'title'},
     api: String,
@@ -51,6 +53,7 @@ export default {
       loading: false,
       searchPhrase: '',
       items: [],
+      defaultItem: null
     }
   },
   watch: {
@@ -59,6 +62,7 @@ export default {
     },
   },
   created() {
+    this.defaultItem = this.defaultValue
     this.axios.get(this.api)
         .then(res => {
           this.items = res.data
