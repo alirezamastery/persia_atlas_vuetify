@@ -1,8 +1,11 @@
+import Vue from 'vue'
+
 const state = {
   windowWidth: -1,
   httpRequestQueue: 0,
   sidebarOpen: false,
-  globalCardClass: 'px-20 py-40'
+  alerts: [],
+  globalCardClass: 'px-20 py-40',
 }
 
 const getters = {
@@ -28,6 +31,13 @@ const mutations = {
   },
   SET_SIDEBAR_IS_OPEN(state, value) {
     state.sidebarOpen = value
+  },
+  ADD_ALERT(state, alert) {
+    state.alerts.push(alert)
+  },
+  REMOVE_ALERT(state, alert) {
+    const index = state.alerts.indexOf(alert)
+    state.alerts.splice(index, 1)
   },
 }
 

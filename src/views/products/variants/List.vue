@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-title>
       <!--      {{ $t('general.routes.variants') }}-->
     </v-card-title>
@@ -10,6 +10,7 @@
           dense
           :headers="headers"
           :items="items"
+          :items-per-page="100"
           item-key="name"
           class="elevation-1"
           multi-sort
@@ -26,119 +27,14 @@
                 vertical
             />
             <v-spacer/>
-            <v-dialog
-                v-model="dialog"
-                max-width="500px"
+            <v-btn
+                color="primary"
+                dark
+                class="mb-2"
+                @click="$router.push({name:'variantsDetail'})"
             >
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                    color="primary"
-                    dark
-                    class="mb-2"
-                    v-bind="attrs"
-                    v-on="on"
-                >
-                  {{ $t('general.create') }}
-                </v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <!--                  <span class="text-h5">{{ $t('general.createANew').replace('{0}', $t('products.variant')) }}</span>-->
-                  <span class="text-h5">{{ formTitle }}</span>
-                </v-card-title>
-
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <AutoComplete
-                            :label="$t('products.product')"
-                            :query-param="'title'"
-                            :obj-title-key="'title'"
-                            :api="$api.products"
-                            v-on:value-change="handleSelectProduct"
-                            :default-value="editedItem.product ? editedItem.product.id : null"
-                        />
-                      </v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col>
-                        <AutoComplete
-                            :label="$t('products.actualProduct')"
-                            :query-param="'title'"
-                            :obj-title-key="'title'"
-                            :api="$api.actualProducts"
-                            v-on:value-change="handleSelectActualProduct"
-                            :default-value="editedItem.actual_product ? editedItem.actual_product.id : null"
-                        />
-                      </v-col>
-                    </v-row>
-                    <!--                    <v-row>-->
-                    <!--                      <v-col>-->
-                    <!--                        <AutoComplete-->
-                    <!--                            :label="$t('products.selectorValues')"-->
-                    <!--                            :query-param="'value'"-->
-                    <!--                            :obj-repr-field="'value'"-->
-                    <!--                            :api="$api.productSelectorValues"-->
-                    <!--                            v-on:value-change="handleSelectProductSelectorValues"-->
-                    <!--                            select-multiple-->
-                    <!--                            :default-value="editedItem.selector_values ? editedItem.selector_values : null"-->
-                    <!--                        />-->
-                    <!--                      </v-col>-->
-                    <!--                    </v-row>-->
-                    <v-row>
-                      <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                      >
-                        <v-text-field
-                            v-model="editedItem.dkpc"
-                            :label="$t('products.DKPC')"
-                        />
-                      </v-col>
-                      <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                      >
-                        <v-text-field
-                            v-model="editedItem.price_min"
-                            :label="$t('products.priceMin')"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col
-                          cols="12"
-                          sm="6"
-                          md="4"
-                      >
-                        <v-checkbox
-                            v-model="editedItem.is_active"
-                            :label="$t('products.isActive')"
-                        ></v-checkbox>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                </v-card-text>
-
-                <v-card-actions>
-                  <v-spacer/>
-                  <v-btn
-                      color="orange"
-                      text
-                      @click="closeDialog"
-                  >
-                    {{ $t('general.cancel') }}
-                  </v-btn>
-                  <v-btn
-                      color="green darken-1"
-                      @click="saveItem"
-                  >
-                    {{ $t('general.save') }}
-                  </v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+              {{ $t('general.create') }}
+            </v-btn>
 
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
@@ -239,7 +135,9 @@ import AutoComplete from '@/components/AutoComplete'
 
 export default {
   name: 'List',
-  components: {AutoComplete},
+  components: {
+    // AutoComplete
+  },
   data() {
     return {
       items: [],
@@ -315,13 +213,12 @@ export default {
   },
   methods: {
     handleSelectProduct(event) {
-      console.log(event)
-      // this.$router.push({name:})
-      console.log('change in list', event, this.editedItem)
+      console.log('handleSelectProduct', event)
       this.editedItem.product = event
     },
 
     handleSelectActualProduct(event) {
+      console.log('handleSelectActualProduct' , event)
       this.editedItem.actual_product = event
     },
 

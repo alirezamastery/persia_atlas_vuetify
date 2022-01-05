@@ -43,6 +43,7 @@ import {debounce} from '@/modules/api-tools'
 export default {
   name: 'AutoComplete',
   props: {
+    value:{type:[Number, Array] },
     defaultValue: [Number, Array],
     objUniqueId: {type: String, default: 'id'},
     objReprField: {type: String, default: 'title'},
@@ -63,9 +64,12 @@ export default {
     searchPhrase(val) {
       val && val !== this.select && this.handleSearchInput(val)
     },
-    items(value) {
-      console.log('watch', value)
-    },
+    // items(value) {
+    //   console.log('watch', value)
+    // },
+    defaultValue(value){
+      console.log('watch defaultValue' , value)
+    }
   },
   created() {
     console.log('defaultValue', this.defaultValue)
@@ -100,6 +104,7 @@ export default {
       const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
       debouncedAPICall(url)
     },
+
     handleSelect(event) {
       this.$emit('value-change', event)
     },

@@ -8,14 +8,29 @@
         style="z-index: 10000"
     />
 
+    <template v-if="alerts">
+      <v-alert
+          v-for="(alert, index) in alerts"
+          :key="index"
+          border="right"
+          color="blue"
+          dismissible
+          elevation="3"
+          icon="$mdiVuetify"
+          prominent
+          type="info"
+      />
+    </template>
+
+
     <HeaderBar v-if="isAuthenticated"/>
 
     <Sidebar v-if="isAuthenticated"/>
 
     <v-main>
-<!--      <v-container class="rounded-0" style="padding: 40px 20px">-->
+      <v-container class="rounded-0" style="padding: 40px 20px">
         <router-view/>
-<!--      </v-container>-->
+      </v-container>
     </v-main>
 
     <v-footer v-if="isAuthenticated" app>
@@ -48,6 +63,7 @@ export default {
     ...mapState({
       isAuthenticated: state => state.user,
       requestQueueLength: state => state.httpRequestQueue,
+      alerts: state => state.alerts,
     }),
     ...mapGetters({
       isAuthenticated: 'auth/isAuthenticated',

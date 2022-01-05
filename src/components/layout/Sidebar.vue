@@ -1,9 +1,9 @@
 <template>
   <v-navigation-drawer
-      absolute
       app
       v-model="sidebarOpen"
       right
+      fixed
       :permanent="!isMobileWidth"
       :temporary="isMobileWidth"
   >
