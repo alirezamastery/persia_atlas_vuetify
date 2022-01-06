@@ -5,63 +5,73 @@
     </v-card-title>
 
     <v-card-text v-if="showForm">
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-text-field
-                v-model="form.title"
-                :label="$t('general.title')"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col cols="12">
-            <AutoComplete
-                :label="$t('products.actualProduct')"
-                :query-param="'title'"
-                :obj-repr-field="'title'"
-                :api="$api.brands"
-                v-on:value-change="form.brand.id = $event"
-                :default-value="form.brand.id"
-            />
-          </v-col>
-        </v-row>
-      </v-container>
+      <validation-observer
+          ref="form"
+          v-slot="{ invalid }"
+      >
+        <v-form @submit.prevent="submit">
+          <v-container>
+            <v-row>
+              <v-col>
+                <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                      v-model="form.title"
+                      :label="$t('general.title')"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12">
+                <ValidationProvider name="Brand" rules="required" v-slot="{ errors }">
+                  <AutoComplete
+                      :label="$t('products.brand')"
+                      :query-param="'title'"
+                      :obj-repr-field="'title'"
+                      :api="$api.brands"
+                      v-model="form.brand.id"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <DetailViewActions
+              :show-delete="!!editingItemId"
+              :save-disabled="invalid"
+              v-on:save="saveItem"
+              v-on:delete="handleDeleteDialog"
+          />
+
+        </v-form>
+
+      </validation-observer>
     </v-card-text>
 
-    <DetailViewActions
-        v-on:save="saveItem"
-        v-on:delete="deleteDialog = true"
+    <DetailViewDeleteDialog
+        v-if="editingItemId"
+        v-model="deleteDialog"
+        :item-title="form.title"
+        v-on:delete="deleteItem"
     />
 
-    <!-- added v-if="editingItemId" to prevent form.title error when creating new object-->
-    <v-dialog v-if="editingItemId" v-model="deleteDialog" max-width="500px">
-      <v-card>
-        <v-card-title class="text-h5">
-          {{ $t('general.itemDeleteQ').replace('{0}', form.title) }}
-        </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue" @click="deleteDialog = false">{{ $t('general.cancel') }}</v-btn>
-          <v-btn color="red" @click="deleteItem">{{ $t('general.yes') }}</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-card>
-
 </template>
 
 <script>
 import {textToolsMixin} from '@/modules/mixins'
 import AutoComplete from '@/components/AutoComplete'
 import DetailViewActions from '@/components/general/DetailViewActions'
+import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
 
 export default {
-  name: 'Details',
+  name: 'AddEdit',
   components: {
     AutoComplete,
     DetailViewActions,
+    DetailViewDeleteDialog,
   },
   mixins: [textToolsMixin],
   props: {
@@ -78,7 +88,7 @@ export default {
       showForm: true,
       form: {
         title: null,
-        brand: {},
+        brand: {id: null},
       },
       deleteDialog: false,
     }
@@ -106,13 +116,12 @@ export default {
     }
   },
   methods: {
-    // createNewTitle(i18Path) {
-    //   return this.$t('general.createANew').replace('{0}', this.$t(i18Path))
-    // },
+    submit() {
+      this.$refs.form.validate()
+    },
 
-    handleSelectBrand(event) {
-      console.log('handleSelectProduct', event)
-      this.form.product.id = event
+    handleDeleteDialog() {
+      this.deleteDialog = true
     },
 
     saveItem() {

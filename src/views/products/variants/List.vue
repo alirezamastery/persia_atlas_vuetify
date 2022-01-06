@@ -4,7 +4,6 @@
     </v-card-title>
     <v-card-text>
       <v-data-table
-          v-model="selectedRows"
           :headers="headers"
           :items="items"
           :items-per-page="100"
@@ -12,14 +11,13 @@
           class="elevation-1"
           dense
           multi-sort
-          show-select
       >
         <!-- Customize table header START -->
         <template v-slot:top>
           <ListViewTableHeader
               :title="$t('general.routes.variants')"
               :api-root="apiRoot"
-              :detail-view-route="detailViewRoute"
+              :add-route="'variantAdd'"
               v-on:search-result="items = $event"
           />
         </template>
@@ -27,7 +25,7 @@
 
         <!-- Customize how each row is displayed START -->
         <template v-slot:item.product="{ item }">
-          <v-btn text :to="{name:'variantsDetail', params:{id:item.id}}" class="overflow-hidden">
+          <v-btn text :to="{name: editRoute, params:{id:item.id}}">
             {{ item.product.title }}
           </v-btn>
         </template>
@@ -77,16 +75,9 @@
         <template v-slot:item.actions="{ item }">
           <v-icon
               small
-              @click="$router.push({name: detailViewRoute, params: {id: item.id}})"
+              @click="$router.push({name: editRoute, params: {id: item.id}})"
           >
             mdi-pencil
-          </v-icon>
-          <v-icon
-              small
-              class="mr-3"
-              @click="deleteItem(item)"
-          >
-            mdi-delete
           </v-icon>
         </template>
         <!-- Customize how each row is displayed END -->
@@ -117,20 +108,21 @@
 
 <script>
 import ListViewTableHeader from '@/components/general/ListViewTableHeader'
+import {listViewMixin} from '@/modules/mixins'
 
 export default {
   name: 'List',
   components: {
     ListViewTableHeader,
   },
+  mixins: [listViewMixin],
   data() {
     return {
       apiRoot: this.$api.variants,
-      detailViewRoute: 'variantsDetail',
-      items: [],
+      editRoute: 'variantEdit',
       headers: [
         {text: this.$t('products.product'), value: 'product', sortable: false},
-        {text: this.$t('products.DKPC'), value: 'dkpc'},
+        {text: this.$t('products.DKPC'), value: 'dkpc', align: 'start'},
         {text: this.$t('products.priceMin'), value: 'price_min'},
         {text: this.$t('products.hasCompetition'), value: 'has_competition'},
         {text: this.$t('products.isActive'), value: 'is_active'},
@@ -144,89 +136,75 @@ export default {
         selector_values: [],
         actual_product: 0,
       },
-      defaultItem: {
-        product: null,
-        dkpc: '',
-        price_min: 0,
-        is_active: true,
-        selector_values: [],
-        actual_product: 0,
-      },
-      editedIndex: -1,
-      dialog: false,
-      dialogDelete: false,
-      loading: false,
-      searchPhrase: '',
-      selectedRows: [],
     }
   },
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? this.$t('general.create') : this.$t('general.create')
-    },
-  },
-  watch: {
-    dialog(val) {
-      val || this.closeDialog()
-    },
-    dialogDelete(val) {
-      val || this.closeDelete()
-    },
-  },
-  created() {
-    this.axios.get(this.$api.variants)
-        .then(res => {
-          console.log('main items', res)
-          this.items = res.data
-        })
-        .catch(err => {
-          console.log('main items error', err)
-        })
-  },
-  methods: {
-    handleSelection(event) {
-      console.log('handleSelection', event)
-    },
-    closeDialog() {
-      this.dialog = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-
-    closeDelete() {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
-
-    deleteItem(item) {
-      this.editedIndex = this.items.indexOf(item)
-      console.log('deleteItem | editedIndex', this.editedIndex)
-      this.editedItem = Object.assign({}, item)
-      console.log('deleteItem | editedItem', this.editedItem)
-      this.dialogDelete = true
-    },
-
-    handleItemDeletion() {
-      const url = `${this.$api.variants}${this.editedItem.id}/`
-      const deletedItemIndex = this.editedIndex
-
-      this.axios.delete(url)
-          .then(res => {
-            // console.log('delete', res)
-            // console.log('delete index', deletedItemIndex)
-            this.items.splice(deletedItemIndex, 1)
-            // console.log('items after dleete' , this.items)
-          })
-          .catch(err => console.log('delete error ', err))
-
-      this.closeDelete()
-    },
-  },
+  // computed: {
+  //   formTitle() {
+  //     return this.editedIndex === -1 ? this.$t('general.create') : this.$t('general.create')
+  //   },
+  // },
+  // watch: {
+  //   dialog(val) {
+  //     val || this.closeDialog()
+  //   },
+  //   dialogDelete(val) {
+  //     val || this.closeDelete()
+  //   },
+  // },
+  // created() {
+  //   this.axios.get(this.$api.variants)
+  //       .then(res => {
+  //         console.log('main items', res)
+  //         this.items = res.data
+  //       })
+  //       .catch(err => {
+  //         console.log('main items error', err)
+  //       })
+  // },
+  // methods: {
+  //   handleSelection(event) {
+  //     console.log('handleSelection', event)
+  //   },
+  //   closeDialog() {
+  //     this.dialog = false
+  //     this.$nextTick(() => {
+  //       this.editedItem = Object.assign({}, this.defaultItem)
+  //       this.editedIndex = -1
+  //     })
+  //   },
+  //
+  //   closeDelete() {
+  //     this.dialogDelete = false
+  //     this.$nextTick(() => {
+  //       this.editedItem = Object.assign({}, this.defaultItem)
+  //       this.editedIndex = -1
+  //     })
+  //   },
+  //
+  //   deleteItem(item) {
+  //     this.editedIndex = this.items.indexOf(item)
+  //     console.log('deleteItem | editedIndex', this.editedIndex)
+  //     this.editedItem = Object.assign({}, item)
+  //     console.log('deleteItem | editedItem', this.editedItem)
+  //     this.dialogDelete = true
+  //   },
+  //
+  //   handleItemDeletion() {
+  //     const url = `${this.$api.variants}${this.editedItem.id}/`
+  //     const deletedItemIndex = this.editedIndex
+  //
+  //     this.axios.delete(url)
+  //         .then(res => {
+  //           // console.log('delete', res)
+  //           // console.log('delete index', deletedItemIndex)
+  //           this.items.splice(deletedItemIndex, 1)
+  //           // console.log('items after dleete' , this.items)
+  //         })
+  //         .catch(err => console.log('delete error ', err))
+  //
+  //     this.closeDelete()
+  //   },
+  // },
 }
 </script>
 

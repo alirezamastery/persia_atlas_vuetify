@@ -23,7 +23,7 @@ const menuItems = [
     titleI18n: 'general.routes.products',
     children: [
       getRoute('actualProductsList'),
-      getRoute('brandsList'),
+      getRoute('brandList'),
       getRoute('productsList'),
       getRoute('productTypesList'),
       getRoute('productTypeSelectorsList'),

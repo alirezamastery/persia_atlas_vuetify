@@ -43,6 +43,10 @@ html, body {
   overflow: auto !important;
 }
 
+.v-data-table__mobile-row {
+  justify-content: flex-start !important;
+}
+
 //.v-application{
 //  font-family: Samim, Roboto-Regular, Sahel, sans-serif!important;
 //}

@@ -21,7 +21,7 @@
     <v-btn
         color="primary"
         dark
-        @click="$router.push({name: detailViewRoute})"
+        @click="$router.push({name: addRoute})"
     >
       {{ $t('general.create') }}
     </v-btn>
@@ -42,7 +42,7 @@ export default {
       type: String,
       required: true,
     },
-    detailViewRoute: {
+    addRoute: {
       type: String,
       required: true,
     },

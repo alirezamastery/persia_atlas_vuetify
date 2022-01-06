@@ -9,7 +9,6 @@ import * as views from './chunks'
 
 Vue.use(VueRouter)
 
-
 export const routesObj = {
   // Auth
   login: {
@@ -32,7 +31,9 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // Products
+
+  // Products App
+  // ***************** Actual Products *****************
   actualProductsList: {
     path: '/actual-products',
     component: views.actualProductsList,
@@ -43,40 +44,53 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  actualProductsDetail: {
-    path: '/actual-products/:id',
-    component: views.actualProductsDetail,
-    name: 'actualProductsDetail',
-    props: true,
+  actualProductAdd: {
+    path: '/actual-products/add',
+    component: views.actualProductAddEdit,
+    name: 'actualProductAdd',
     meta: {
-      titleI18n: 'general.routes.actualProducts',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
-
-  brandsList: {
+  actualProductEdit: {
+    path: '/actual-products/edit/:id',
+    component: views.actualProductAddEdit,
+    name: 'actualProductEdit',
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  // ***************** Brands *****************
+  brandList: {
     path: '/brands',
-    component: views.brandsList,
-    name: 'brandsList',
+    component: views.brandList,
+    name: 'brandList',
     meta: {
       titleI18n: 'general.routes.brands',
       icon: 'mdi-home',
       requiresAuth: true,
     },
   },
-  brandsDetail: {
-    path: '/brands/:id',
-    component: views.brandsDetail,
-    name: 'brandsDetail',
+  brandAdd: {
+    path: '/brands/add',
+    component: views.brandAddEdit,
+    name: 'brandAdd',
     props: true,
     meta: {
-      titleI18n: 'general.routes.brands',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
-
+  brandEdit: {
+    path: '/brands/edit/:id',
+    component: views.brandAddEdit,
+    name: 'brandEdit',
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  // ***************** Products *****************
   productsList: {
     path: '/products',
     component: views.productsList,
@@ -87,10 +101,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productsDetail: {
+  productAddEdit: {
     path: '/products/:id',
-    component: views.productsDetail,
-    name: 'productsDetail',
+    component: views.productAddEdit,
+    name: 'productAddEdit',
     props: true,
     meta: {
       titleI18n: 'general.routes.products',
@@ -98,7 +112,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
+  // ***************** Product Types *****************
   productTypesList: {
     path: '/product-types',
     component: views.productTypesList,
@@ -109,10 +123,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypesDetail: {
+  productTypeAddEdit: {
     path: '/product-types/:id',
-    component: views.productTypesDetail,
-    name: 'productTypesDetail',
+    component: views.productTypeAddEdit,
+    name: 'productTypeAddEdit',
     props: true,
     meta: {
       titleI18n: 'general.routes.productTypes',
@@ -120,7 +134,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
+  // ***************** Product Type Selectors *****************
   productTypeSelectorsList: {
     path: '/product-type-selectors',
     component: views.productTypeSelectorsList,
@@ -131,10 +145,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeSelectorsDetail: {
+  productTypeSelectorAddEdit: {
     path: '/product-type-selectors/:id',
-    component: views.productTypeSelectorsDetail,
-    name: 'productTypeSelectorsDetail',
+    component: views.productTypeSelectorAddEdit,
+    name: 'productTypeSelectorAddEdit',
     props: true,
     meta: {
       titleI18n: 'general.routes.productTypeSelectors',
@@ -142,7 +156,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
+  // ***************** Product Type Selector Values *****************
   productTypeSelectorValuesList: {
     path: '/product-type-selector-values',
     component: views.productTypeSelectorValuesList,
@@ -153,10 +167,10 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeSelectorValuesDetail: {
+  productTypeSelectorValueAddEdit: {
     path: '/product-type-selector-values/:id',
-    component: views.productTypeSelectorValuesDetail,
-    name: 'productTypeSelectorValuesDetail',
+    component: views.productTypeSelectorValueAddEdit,
+    name: 'productTypeSelectorValueAddEdit',
     props: true,
     meta: {
       titleI18n: 'general.routes.productTypeSelectorValues',
@@ -164,7 +178,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
+  // ***************** Variants *****************
   variantsList: {
     path: '/variants',
     component: views.variantsList,
@@ -175,17 +189,24 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  variantsDetail: {
-    path: '/variants/:id',
-    component: views.variantsDetail,
-    name: 'variantsDetail',
-    props: true,
+  variantAdd: {
+    path: '/variants/add',
+    component: views.variantAddEdit,
+    name: 'variantAdd',
     meta: {
-      titleI18n: 'general.routes.variants',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
+  variantEdit: {
+    path: '/variants/edit/:id?',
+    component: views.variantAddEdit,
+    name: 'variantEdit',
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+
   // Error
   '404': {
     path: '*',

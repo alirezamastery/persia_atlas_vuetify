@@ -1,6 +1,6 @@
 <template>
   <v-autocomplete
-      v-model="defaultItem"
+      v-model="content"
       :loading="loading"
       :items="items"
       :search-input.sync="searchPhrase"
@@ -8,13 +8,14 @@
       :item-text="objReprField"
       :item-value="objUniqueId"
       :multiple="selectMultiple"
+      :error-messages="errorMessages"
       class="mx-4"
       cache-items
       flat
       hide-no-data
       hide-details
       solo-inverted
-      @change="handleSelect"
+      @change="handleInput"
   >
     <template v-slot:no-data>
       <v-list-item>
@@ -43,7 +44,7 @@ import {debounce} from '@/modules/api-tools'
 export default {
   name: 'AutoComplete',
   props: {
-    value:{type:[Number, Array] },
+    value: {type: [Number, Array]},
     defaultValue: [Number, Array],
     objUniqueId: {type: String, default: 'id'},
     objReprField: {type: String, default: 'title'},
@@ -51,6 +52,7 @@ export default {
     api: String,
     queryParam: String,
     selectMultiple: {type: Boolean, default: false},
+    errorMessages: [],
   },
   data() {
     return {
@@ -58,6 +60,7 @@ export default {
       searchPhrase: '',
       items: [],
       defaultItem: [Number, Array],
+      content: this.value,
     }
   },
   watch: {
@@ -67,9 +70,9 @@ export default {
     // items(value) {
     //   console.log('watch', value)
     // },
-    defaultValue(value){
-      console.log('AutoComplete | watch defaultValue' , value)
-    }
+    defaultValue(value) {
+      console.log('AutoComplete | watch defaultValue', value)
+    },
   },
   created() {
     console.log('AutoComplete | defaultValue', this.defaultValue)
@@ -81,9 +84,14 @@ export default {
         })
   },
   methods: {
+    handleInput(e) {
+      this.$emit('input', this.content)
+    },
+    handleSelect(event) {
+      this.$emit('value-change', event)
+    },
     handleSearchInput() {
       if (!this.searchPhrase) {
-        this.items = []
         return
       }
 
@@ -103,10 +111,6 @@ export default {
       this.loading = true
       const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
       debouncedAPICall(url)
-    },
-
-    handleSelect(event) {
-      this.$emit('value-change', event)
     },
   },
 }

@@ -1,0 +1,10 @@
+{
+  "code": "fa",
+  "messages": {
+    "required_if": "{_field_} الزامی است",
+    "required": "{_field_} الزامی است"
+  },
+  "names": {
+
+  }
+}

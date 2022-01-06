@@ -1,13 +1,7 @@
 <template>
   <v-card flat>
     <v-card-title>
-      <!--                  <span class="text-h5">{{ $t('general.createANew').replace('{0}', $t('products.variant')) }}</span>-->
-      <span class="text-h5" v-if="editingItemId">
-        {{ $t('general.change') + ' ' + $t('products.variant') }}
-      </span>
-      <span v-else>
-        {{ formTitle }}
-      </span>
+      {{ formTitle }}
     </v-card-title>
 
     <v-card-text v-if="showForm">
@@ -86,6 +80,7 @@
 
     <DetailViewActions
         v-on:save="saveItem"
+        :show-delete="!!editingItemId"
         v-on:delete="deleteDialog = true"
     />
 

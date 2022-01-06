@@ -1,7 +1,8 @@
 <template>
-  <v-sheet rounded>
-    <v-card-actions>
+  <v-sheet class="mt-10">
+    <v-toolbar flat>
       <v-btn
+          v-if="showDelete"
           color="red darken-2"
           @click="$emit('delete')"
       >
@@ -9,18 +10,31 @@
       </v-btn>
       <v-spacer/>
       <v-btn
+          :disabled="saveDisabled"
           color="green darken-2"
           @click="$emit('save')"
       >
         {{ $t('general.save') }}
       </v-btn>
-    </v-card-actions>
+    </v-toolbar>
   </v-sheet>
 </template>
 
 <script>
 export default {
   name: 'DetailViewActions',
+  props: {
+    saveDisabled: {
+      type: Boolean,
+      default: false,
+      required: false,
+    },
+    showDelete: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
+  },
 }
 </script>
 

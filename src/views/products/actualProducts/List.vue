@@ -17,7 +17,7 @@
           <ListViewTableHeader
               :title="$t('general.routes.actualProducts')"
               :api-root="apiRoot"
-              :detail-view-route="detailViewRoute"
+              :add-route="'actualProductAdd'"
               v-on:search-result="items = $event"
           />
         </template>
@@ -25,7 +25,7 @@
 
         <!-- Customize how each row is displayed START -->
         <template v-slot:item.title="{ item }">
-          <v-btn text :to="{name: detailViewRoute, params: {id: item.id}}">
+          <v-btn text :to="{name: editRoute, params: {id: item.id}}">
             {{ item.title }}
           </v-btn>
         </template>
@@ -37,7 +37,7 @@
         <template v-slot:item.actions="{ item }">
           <v-icon
               small
-              @click="$router.push({name: detailViewRoute, params: {id: item.id}})"
+              @click="$router.push({name: editRoute, params: {id: item.id}})"
           >
             mdi-pencil
           </v-icon>
@@ -87,7 +87,7 @@ export default {
   data() {
     return {
       apiRoot: this.$api.actualProducts,
-      detailViewRoute: 'actualProductsDetail',
+      editRoute: 'actualProductEdit',
       headers: [
         {text: this.$t('general.title'), value: 'title', sortable: false},
         {text: this.$t('products.brand'), value: 'brand', sortable: false},
@@ -95,10 +95,6 @@ export default {
       ],
       editedItem: {
         title: null,
-        brand: {},
-      },
-      defaultItem: {
-        title: '',
         brand: {},
       },
     }
