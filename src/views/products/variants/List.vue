@@ -27,7 +27,6 @@
                 :label="$t('general.search')"
                 single-line
                 hide-details
-                clearable
                 solo
                 dense
                 flat
@@ -214,10 +213,6 @@ export default {
   },
   methods: {
     handleSearchInput() {
-      if (!this.searchPhrase) {
-        return
-      }
-
       const apiCall = (url) => {
         this.axios.get(url)
             .then(res => {
@@ -233,7 +228,9 @@ export default {
       const debouncedAPICall = debounce(apiCall, 300)
 
       this.loading = true
-      const url = `products/variants/?product_title=${this.searchPhrase}`
+      let url = this.$api.variants
+      if (this.searchPhrase !== '')
+        url += `?search=${this.searchPhrase}`
       debouncedAPICall(url)
     },
 
