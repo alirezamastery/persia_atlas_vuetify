@@ -42,7 +42,7 @@
                 :label="$t('products.selectorValues')"
                 :query-param="'value'"
                 :obj-repr-field="'value'"
-                :api="$api.productSelectorValues"
+                :api="$api.productTypeSelectorValues"
                 v-on:value-change="handleSelectProductSelectorValues"
                 :default-value="form.selector_values"
                 select-multiple
@@ -92,7 +92,6 @@
     <v-dialog v-if="editingItemId" v-model="deleteDialog" max-width="500px">
       <v-card>
         <v-card-title class="text-h5">
-          <!--          FOR ADD FORM form IS NULL!!! -->
           {{ $t('general.itemDeleteQ').replace('{0}', form.dkpc) }}
         </v-card-title>
         <v-card-actions>
@@ -134,7 +133,6 @@ export default {
         selector_values: [],
         actual_product: {},
       },
-      productId: null,
       deleteDialog: false,
     }
   },
@@ -201,22 +199,6 @@ export default {
         if (!this.editingItemId)
           this.$router.push({name: 'variantsList'})
       })
-
-      // if (this.id) {
-      //   const url = this.$api.variants + this.id + '/'
-      //   this.axios.patch(url, payload)
-      //       .then(res => {
-      //         console.log('patch', res)
-      //       })
-      //       .catch(err => console.log('patch error ', err))
-      // } else {
-      //   console.log('post this.form', payload)
-      //   this.axios.post(this.$api.variants, payload)
-      //       .then(res => {
-      //         console.log('post', res)
-      //       })
-      //       .catch(err => console.log('post error ', err))
-      // }
     },
 
     deleteItem() {

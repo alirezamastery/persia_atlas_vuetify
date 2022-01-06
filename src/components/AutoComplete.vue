@@ -68,11 +68,11 @@ export default {
     //   console.log('watch', value)
     // },
     defaultValue(value){
-      console.log('watch defaultValue' , value)
+      console.log('AutoComplete | watch defaultValue' , value)
     }
   },
   created() {
-    console.log('defaultValue', this.defaultValue)
+    console.log('AutoComplete | defaultValue', this.defaultValue)
     if (this.defaultValue)
       this.defaultItem = this.defaultValue
     this.axios.get(this.api)

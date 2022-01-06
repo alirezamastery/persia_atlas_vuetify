@@ -1,11 +1,14 @@
 const api = process.env.VUE_APP_API_URL
 
 export default {
-  products: 'products/products/',
   brands: 'products/brands/',
   actualProducts: 'products/actual-products/',
+  products: 'products/products/',
+  productTypes: 'products/products-types/',
+  productTypeSelectors: 'products/product-type-selectors/',
+  productTypeSelectorValues: 'products/product-type-selector-values/',
   variants: 'products/variants/',
-  productSelectorValues: 'products/product-selector-values/',
+
   invoices: 'products/invoices/',
   invoiceItems: 'products/invoice-items/',
 

@@ -10,7 +10,7 @@
   },
   "routes": {
     "aboutUs": "درباره ما",
-    "mainTitle": "مدیریت به اندام",
+    "mainTitle": "پرشیا اطلس",
     "login": "ورود",
     "logout": "خروج",
     "units": "واحدها",
@@ -24,6 +24,7 @@
     "dashboard": "داشبورد",
     "home": "خانه",
     "users": "کاربران",
+    "title": "عنوان",
     "newUser": "کاربر جدید",
     "userProfile": "پروفایل کاربر",
     "sicks": "بیماری ها",

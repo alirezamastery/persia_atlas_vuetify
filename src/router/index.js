@@ -47,6 +47,7 @@ export const routesObj = {
     path: '/actual-products/:id',
     component: views.actualProductsDetail,
     name: 'actualProductsDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.actualProducts',
       icon: 'mdi-home',
@@ -68,6 +69,7 @@ export const routesObj = {
     path: '/brands/:id',
     component: views.brandsDetail,
     name: 'brandsDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.brands',
       icon: 'mdi-home',
@@ -89,6 +91,7 @@ export const routesObj = {
     path: '/products/:id',
     component: views.productsDetail,
     name: 'productsDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.products',
       icon: 'mdi-home',
@@ -110,6 +113,7 @@ export const routesObj = {
     path: '/product-types/:id',
     component: views.productTypesDetail,
     name: 'productTypesDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.productTypes',
       icon: 'mdi-home',
@@ -131,6 +135,7 @@ export const routesObj = {
     path: '/product-type-selectors/:id',
     component: views.productTypeSelectorsDetail,
     name: 'productTypeSelectorsDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.productTypeSelectors',
       icon: 'mdi-home',
@@ -152,6 +157,7 @@ export const routesObj = {
     path: '/product-type-selector-values/:id',
     component: views.productTypeSelectorValuesDetail,
     name: 'productTypeSelectorValuesDetail',
+    props: true,
     meta: {
       titleI18n: 'general.routes.productTypeSelectorValues',
       icon: 'mdi-home',

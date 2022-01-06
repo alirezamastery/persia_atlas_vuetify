@@ -1,7 +1,10 @@
 {
   "actualProduct": "محصول واقعی",
+  "actualProductس": "محصولات واقعی",
+  "variants": "تنوع ها",
   "variant": "تنوع",
   "brands": "برندها",
+  "brand": "برند",
   "DKPC": "DKPC",
   "priceMin": "قیمت کف",
   "hasCompetition": "دارای رقیب",
