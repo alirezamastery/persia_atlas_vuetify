@@ -1,5 +1,5 @@
 <template>
-  <v-sheet rounded color="grey darken-3">
+  <v-sheet rounded>
     <v-card-actions>
       <v-btn
           color="red darken-2"

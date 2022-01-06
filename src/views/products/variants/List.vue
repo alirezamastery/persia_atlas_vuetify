@@ -1,10 +1,8 @@
 <template>
   <v-card flat>
     <v-card-title>
-      <!--      {{ $t('general.routes.variants') }}-->
     </v-card-title>
     <v-card-text>
-
       <v-data-table
           v-if="items.length"
           dense
@@ -14,17 +12,26 @@
           item-key="name"
           class="elevation-1"
           multi-sort
-          show-select
       >
         <template v-slot:top>
-          <v-toolbar
-              flat
-          >
+          <v-toolbar flat>
             <v-toolbar-title>{{ $t('general.routes.variants') }}</v-toolbar-title>
             <v-divider
                 class="mx-4"
                 inset
                 vertical
+            />
+            <v-text-field
+                v-model="searchPhrase"
+                append-icon="mdi-magnify"
+                :label="$t('general.search')"
+                single-line
+                hide-details
+                clearable
+                solo
+                dense
+                flat
+                @input="handleSearchInput"
             />
             <v-spacer/>
             <v-btn
@@ -54,7 +61,9 @@
         </template>
 
         <template v-slot:item.product="{ item }">
-          {{ item.product.title }}
+          <v-btn text :to="{name:'variantsDetail', params:{id:item.id}}">
+            {{ item.product.title }}
+          </v-btn>
         </template>
 
         <template v-slot:item.price_min="{ item }">
@@ -142,7 +151,7 @@ export default {
     return {
       items: [],
       headers: [
-        {text: this.$t('products.product'), value: 'product'},
+        {text: this.$t('products.product'), value: 'product', filterable: true},
         {text: this.$t('products.DKPC'), value: 'dkpc'},
         {text: this.$t('products.priceMin'), value: 'price_min'},
         {text: this.$t('products.hasCompetition'), value: 'has_competition'},
@@ -170,7 +179,6 @@ export default {
       dialogDelete: false,
       loading: false,
       searchPhrase: '',
-      productItems: [],
       selectorValues: [],
     }
   },
@@ -189,9 +197,10 @@ export default {
     dialogDelete(val) {
       val || this.closeDelete()
     },
-    searchPhrase(val) {
-      val && val !== this.select && this.handleSearchInput(val)
-    },
+    // searchPhrase(newValue, oldValue) {
+    //   console.log('search', newValue, oldValue)
+    //   this.handleSearchInput(newValue)
+    // },
   },
   created() {
     this.axios.get(this.$api.variants)
@@ -202,34 +211,10 @@ export default {
         .catch(err => {
           console.log('main items error', err)
         })
-    this.axios.get(this.$api.productSelectorValues)
-        .then(res => {
-          console.log('selectorValues', res)
-          this.selectorValues = res.data
-        })
-        .catch(err => {
-          console.log('selectorValues error', err)
-        })
   },
   methods: {
-    handleSelectProduct(event) {
-      console.log('handleSelectProduct', event)
-      this.editedItem.product = event
-    },
-
-    handleSelectActualProduct(event) {
-      console.log('handleSelectActualProduct' , event)
-      this.editedItem.actual_product = event
-    },
-
-    handleSelectProductSelectorValues(event) {
-      console.log('handleSelectProductSelectorValues', event)
-      this.editedItem.selector_values = event
-    },
-
     handleSearchInput() {
       if (!this.searchPhrase) {
-        this.productItems = []
         return
       }
 
@@ -237,8 +222,8 @@ export default {
         this.axios.get(url)
             .then(res => {
               this.loading = false
-              this.productItems = res.data
-              console.log('handleSearchInput', this.productItems)
+              this.items = res.data
+              console.log('handleSearchInput', this.items)
             })
             .catch(err => {
               console.log(err)
@@ -248,27 +233,16 @@ export default {
       const debouncedAPICall = debounce(apiCall, 300)
 
       this.loading = true
-      const url = `products/actual-products/?title=${this.searchPhrase}`
+      const url = `products/variants/?product_title=${this.searchPhrase}`
       debouncedAPICall(url)
     },
 
     editItem(item) {
-      this.editedIndex = this.items.indexOf(item)
-      console.log('editItem', this.editedIndex, item)
-      this.editedItem = Object.assign({}, item)
+      // this.editedIndex = this.items.indexOf(item)
+      // console.log('editItem', this.editedIndex, item)
+      // this.editedItem = Object.assign({}, item)
       // this.dialog = true
       this.$router.push({name: 'variantsDetail', params: {id: item.id}})
-    },
-
-    deleteItem(item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
-    },
-
-    deleteItemConfirm() {
-      this.items.splice(this.editedIndex, 1)
-      this.closeDelete()
     },
 
     closeDialog() {
@@ -310,13 +284,29 @@ export default {
       this.closeDialog()
     },
 
+
+    deleteItem(item) {
+      this.editedIndex = this.items.indexOf(item)
+      console.log('deleteItem | editedIndex', this.editedIndex)
+      this.editedItem = Object.assign({}, item)
+      console.log('deleteItem | editedItem', this.editedItem)
+      this.dialogDelete = true
+    },
+
     handleItemDeletion() {
       const url = `${this.$api.variants}${this.editedItem.id}/`
+      const deletedItemIndex = this.editedIndex
+
       this.axios.delete(url)
           .then(res => {
-            console.log('patch', res)
+            // console.log('delete', res)
+            // console.log('delete index', deletedItemIndex)
+            this.items.splice(deletedItemIndex, 1)
+            // console.log('items after dleete' , this.items)
           })
-          .catch(err => console.log('patch error ', err))
+          .catch(err => console.log('delete error ', err))
+
+      this.closeDelete()
     },
   },
 }
