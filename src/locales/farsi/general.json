@@ -32,6 +32,8 @@
   "create": "ایجاد",
   "change": "تغییر",
   "brands": "برندها",
+  "dkp": "dkp",
+  "dkpc": "DKPC",
   "DKPC": "DKPC",
   "priceMin": "قیمت کف",
   "hasCompetition": "دارای رقیب",
@@ -92,7 +94,8 @@
   },
   "snack": {
     "saveError": "خطا در ثبت",
-    "deleteError": "خطا در حذف"
+    "deleteError": "خطا در حذف",
+    "saveSuccess": "تغییرات با موفقیت ثبت شد"
   },
   "Q": {
     "deleteConfirm": "آیا مطمئن هستید که میخواهید {0} \"{1}\" را حذف کنید؟"

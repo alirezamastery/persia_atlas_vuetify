@@ -13,8 +13,8 @@ export const AddEditViewMixin = {
     },
     formTitle() {
       if (this.editingItemId)
-        return this.$t('general.change') + ' ' + this.$t('products.variant')
-      return this.createNewTitle('products.variant')
+        return this.$t('general.change') + ' ' + this.itemType
+      return this.$t('general.createANew').replace('{0}', this.itemType)
     },
   },
   created() {
@@ -23,9 +23,8 @@ export const AddEditViewMixin = {
       this.axios.get(this.apiRoot + this.id)
           .then(res => {
             console.log('details', res)
-            this.form = res.data
+            this.formInit(res.data)
             this.showForm = true
-            this.form.selector_values = res.data.selector_values.map(itm => itm.id)
           })
       console.log('no details, getting the item details from server')
     }
@@ -43,7 +42,13 @@ export const AddEditViewMixin = {
       this.axios.request({url, data, method})
           .then(res => {
             console.log('save success', res.data)
-            if (!this.editingItemId) {
+            if (this.editingItemId) {
+              this.$store.dispatch('HandleSettingSnackbar', {
+                key: uuid4(),
+                color: 'green',
+                data: this.$t('general.snack.saveSuccess'),
+              })
+            } else {
               this.$store.dispatch('HandleAddingAlert', {
                 key: uuid4(),
                 type: 'success',
@@ -54,7 +59,6 @@ export const AddEditViewMixin = {
           })
           .catch(err => {
             console.log('request error', err)
-            this.$store.dispatch('HandleRemovingSnackbar', 'xx')
             this.$store.dispatch('HandleSettingSnackbar', {
               key: uuid4(),
               color: 'red',

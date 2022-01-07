@@ -75,6 +75,7 @@ const actions = {
     commit('REMOVE_SNACKBAR', snackbar)
   },
   HandleSettingSnackbar({commit}, payload) {
+    console.log('HandleSettingSnackbar' , payload)
     commit('SET_SNACKBAR', payload)
   },
 }

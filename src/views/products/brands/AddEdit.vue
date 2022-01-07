@@ -14,7 +14,7 @@
             <v-row>
               <v-col
                   cols="12"
-                  lg="3"
+                  lg="4"
                   sm="12"
                   md="12"
               >
@@ -42,7 +42,7 @@
     <DetailViewDeleteDialog
         v-if="editingItemId"
         v-model="deleteDialog"
-        :item-title="form.dkpc"
+        :item-title="itemRepr"
         v-on:delete="deleteItem"
     />
 
@@ -72,7 +72,7 @@ export default {
     return {
       apiRoot: this.$api.brands,
       listViewRoute: 'brandList',
-      itemType: this.$t('products.variant'),
+      itemType: this.$t('products.brand'),
       form: {
         title: '',
       },
@@ -84,6 +84,9 @@ export default {
     },
   },
   methods: {
+    formInit(resData) {
+      this.form = resData
+    },
     getRequestData() {
       return {
         title: this.form.title,

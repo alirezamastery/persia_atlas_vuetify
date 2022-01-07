@@ -7,6 +7,7 @@
         vertical
     />
     <v-text-field
+        v-if="showSearch"
         v-model="searchPhrase"
         append-icon="mdi-magnify"
         :label="$t('general.search')"
@@ -49,6 +50,11 @@ export default {
     queryParam: {
       type: String,
       default: 'search',
+      required: false,
+    },
+    showSearch: {
+      type: Boolean,
+      default: true,
       required: false,
     },
   },

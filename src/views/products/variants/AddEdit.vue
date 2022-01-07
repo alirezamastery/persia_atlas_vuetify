@@ -128,7 +128,7 @@
     <DetailViewDeleteDialog
         v-if="editingItemId"
         v-model="deleteDialog"
-        :item-title="form.dkpc"
+        :item-title="itemRepr"
         v-on:delete="deleteItem"
     />
 
@@ -177,6 +177,10 @@ export default {
     },
   },
   methods: {
+    formInit(resData) {
+      this.form = resData
+      this.form.selector_values = resData.selector_values.map(itm => itm.id)
+    },
     getRequestData() {
       return {
         product: this.form.product.id,

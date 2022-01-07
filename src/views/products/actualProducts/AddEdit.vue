@@ -61,6 +61,7 @@
 
 <script>
 import {textToolsMixin} from '@/mixins/textTools'
+import {AddEditViewMixin} from '@/mixins/addEditView'
 import AutoComplete from '@/components/AutoComplete'
 import DetailViewActions from '@/components/general/DetailViewActions'
 import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
@@ -72,34 +73,27 @@ export default {
     DetailViewActions,
     DetailViewDeleteDialog,
   },
-  mixins: [textToolsMixin],
+  mixins: [textToolsMixin, AddEditViewMixin],
   props: {
     id: {
       type: [Number, String],
       default: null,
-      required: false,
     },
   },
   data() {
     return {
       apiRoot: this.$api.actualProducts,
       listViewRoute: 'actualProductList',
-      showForm: true,
+      itemType: this.$t('products.brand'),
       form: {
         title: null,
         brand: {id: null},
       },
-      deleteDialog: false,
     }
   },
   computed: {
-    editingItemId() {
-      return this.$route.params.id
-    },
-    formTitle() {
-      if (this.editingItemId)
-        return this.$t('general.change') + ' ' + this.$t('products.actualProduct')
-      return this.createNewTitle('products.actualProduct')
+    itemRepr() {
+      return this.form.title.toString()
     },
   },
   created() {
@@ -115,41 +109,16 @@ export default {
     }
   },
   methods: {
-    submit() {
-      this.$refs.form.validate()
+    formInit(resData) {
+      this.form = resData
     },
-
-    handleDeleteDialog() {
-      this.deleteDialog = true
-    },
-
-    saveItem() {
-      this.$refs.form.validate()
-      console.log('form', this.form)
-      const data = {
+    getRequestData() {
+      return {
         title: this.form.title,
         brand: this.form.brand.id,
       }
-      console.log('save payload', data)
-
-      let url = this.apiRoot
-      if (this.editingItemId) url += `${this.editingItemId}/`
-      let method = this.editingItemId ? 'patch' : 'post'
-      this.axios.request({url, data, method}).then(res => {
-        if (!this.editingItemId)
-          this.$router.push({name: this.listViewRoute})
-      })
-    },
-
-    deleteItem() {
-      this.axios.delete(this.apiRoot + this.id + '/')
-          .then(() => {
-            this.$router.push({name: this.listViewRoute})
-          })
-          .catch(err => console.log('patch error ', err))
     },
   },
-
 }
 </script>
 
