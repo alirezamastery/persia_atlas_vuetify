@@ -107,8 +107,8 @@
 </template>
 
 <script>
-import ListViewTableHeader from '@/components/general/ListViewTableHeader'
 import {listViewMixin} from '@/modules/mixins'
+import ListViewTableHeader from '@/components/general/ListViewTableHeader'
 
 export default {
   name: 'List',
@@ -138,73 +138,6 @@ export default {
       },
     }
   },
-  // computed: {
-  //   formTitle() {
-  //     return this.editedIndex === -1 ? this.$t('general.create') : this.$t('general.create')
-  //   },
-  // },
-  // watch: {
-  //   dialog(val) {
-  //     val || this.closeDialog()
-  //   },
-  //   dialogDelete(val) {
-  //     val || this.closeDelete()
-  //   },
-  // },
-  // created() {
-  //   this.axios.get(this.$api.variants)
-  //       .then(res => {
-  //         console.log('main items', res)
-  //         this.items = res.data
-  //       })
-  //       .catch(err => {
-  //         console.log('main items error', err)
-  //       })
-  // },
-  // methods: {
-  //   handleSelection(event) {
-  //     console.log('handleSelection', event)
-  //   },
-  //   closeDialog() {
-  //     this.dialog = false
-  //     this.$nextTick(() => {
-  //       this.editedItem = Object.assign({}, this.defaultItem)
-  //       this.editedIndex = -1
-  //     })
-  //   },
-  //
-  //   closeDelete() {
-  //     this.dialogDelete = false
-  //     this.$nextTick(() => {
-  //       this.editedItem = Object.assign({}, this.defaultItem)
-  //       this.editedIndex = -1
-  //     })
-  //   },
-  //
-  //   deleteItem(item) {
-  //     this.editedIndex = this.items.indexOf(item)
-  //     console.log('deleteItem | editedIndex', this.editedIndex)
-  //     this.editedItem = Object.assign({}, item)
-  //     console.log('deleteItem | editedItem', this.editedItem)
-  //     this.dialogDelete = true
-  //   },
-  //
-  //   handleItemDeletion() {
-  //     const url = `${this.$api.variants}${this.editedItem.id}/`
-  //     const deletedItemIndex = this.editedIndex
-  //
-  //     this.axios.delete(url)
-  //         .then(res => {
-  //           // console.log('delete', res)
-  //           // console.log('delete index', deletedItemIndex)
-  //           this.items.splice(deletedItemIndex, 1)
-  //           // console.log('items after dleete' , this.items)
-  //         })
-  //         .catch(err => console.log('delete error ', err))
-  //
-  //     this.closeDelete()
-  //   },
-  // },
 }
 </script>
 
