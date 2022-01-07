@@ -60,7 +60,7 @@
                   <AutoComplete
                       v-model="form.selector_values"
                       :label="$t('products.selectorValues')"
-                      :query-param="'value'"
+                      :query-param="'search'"
                       :obj-repr-field="'value'"
                       :api="$api.productTypeSelectorValues"
                       :error-messages="errors"

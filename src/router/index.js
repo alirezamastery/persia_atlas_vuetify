@@ -105,7 +105,6 @@ export const routesObj = {
     path: '/products/add',
     component: views.productAddEdit,
     name: 'productAdd',
-    props: true,
     meta: {
       requiresAuth: true,
     },
@@ -130,10 +129,18 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeAddEdit: {
-    path: '/product-types/:id',
+  productTypeAdd: {
+    path: '/product-types/add',
     component: views.productTypeAddEdit,
-    name: 'productTypeAddEdit',
+    name: 'productTypeAdd',
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  productTypeEdit: {
+    path: '/product-types/edit/:id',
+    component: views.productTypeAddEdit,
+    name: 'productTypeEdit',
     props: true,
     meta: {
       requiresAuth: true,

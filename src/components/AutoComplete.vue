@@ -74,7 +74,7 @@ export default {
     },
   },
   created() {
-    console.log('AutoComplete | defaultValue', this.defaultValue)
+    // console.log('AutoComplete | defaultValue', this.defaultValue)
     if (this.defaultValue)
       this.defaultItem = this.defaultValue
     this.axios.get(this.api)

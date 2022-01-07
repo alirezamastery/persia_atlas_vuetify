@@ -20,9 +20,9 @@ export const AddEditViewMixin = {
   created() {
     if (this.editingItemId) {
       this.showForm = false
-      this.axios.get(this.apiRoot + this.id)
+      this.axios.get(this.apiRoot + this.id + '/')
           .then(res => {
-            console.log('details', res)
+            console.log('item details', res)
             this.formInit(res.data)
             this.showForm = true
           })

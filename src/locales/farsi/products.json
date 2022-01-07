@@ -15,5 +15,6 @@
   "createANew": "ایجاد یک {0} جدید",
   "product": "محصول",
   "selectorValues": "مقدار انتخابگر",
+  "selectors": "انتخابگرها",
   "variantDeleteQ": "آیا مطمئن به حذف {0} هستید؟"
 }
