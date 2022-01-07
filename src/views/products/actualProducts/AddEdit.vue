@@ -9,7 +9,7 @@
           ref="form"
           v-slot="{ invalid }"
       >
-        <v-form @submit.prevent="submit">
+        <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
               <v-col>
@@ -26,11 +26,11 @@
               <v-col cols="12">
                 <ValidationProvider name="Brand" rules="required" v-slot="{ errors }">
                   <AutoComplete
+                      v-model="form.brand.id"
                       :label="$t('products.brand')"
                       :query-param="'title'"
                       :obj-repr-field="'title'"
                       :api="$api.brands"
-                      v-model="form.brand.id"
                       :error-messages="errors"
                   />
                 </ValidationProvider>
@@ -41,8 +41,7 @@
           <DetailViewActions
               :show-delete="!!editingItemId"
               :save-disabled="invalid"
-              v-on:save="saveItem"
-              v-on:delete="handleDeleteDialog"
+              v-on:delete="deleteDialog = true"
           />
 
         </v-form>
@@ -61,7 +60,7 @@
 </template>
 
 <script>
-import {textToolsMixin} from '@/modules/mixins'
+import {textToolsMixin} from '@/mixins/textTools'
 import AutoComplete from '@/components/AutoComplete'
 import DetailViewActions from '@/components/general/DetailViewActions'
 import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
@@ -125,6 +124,7 @@ export default {
     },
 
     saveItem() {
+      this.$refs.form.validate()
       console.log('form', this.form)
       const data = {
         title: this.form.title,

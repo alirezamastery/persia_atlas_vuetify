@@ -1,4 +1,4 @@
-export const listViewMixin = {
+const listViewMixin = {
   data() {
     return {
       items: [],
@@ -14,7 +14,6 @@ export const listViewMixin = {
   created() {
     this.axios.get(this.apiRoot)
         .then(res => {
-          console.log('main items', res)
           this.items = res.data
         })
         .catch(err => {
@@ -52,3 +51,5 @@ export const listViewMixin = {
     },
   },
 }
+
+export default listViewMixin

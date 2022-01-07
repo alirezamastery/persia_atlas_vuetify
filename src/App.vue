@@ -8,28 +8,24 @@
         style="z-index: 10000"
     />
 
-    <template v-if="alerts">
-      <v-alert
-          v-for="(alert, index) in alerts"
-          :key="index"
-          border="right"
-          color="blue"
-          dismissible
-          elevation="3"
-          icon="$mdiVuetify"
-          prominent
-          type="info"
-      />
-    </template>
-
-
     <HeaderBar v-if="isAuthenticated"/>
 
     <Sidebar v-if="isAuthenticated"/>
 
     <v-main>
       <v-container class="rounded-0" style="padding: 40px 20px">
+        <v-alert
+            v-for="(alert,index) in alerts"
+            :key="index"
+            :type="alert.type"
+            dismissible
+            @input="handleAlertDismiss(alert)"
+        >
+          {{ alert.data }}
+        </v-alert>
+
         <router-view/>
+
       </v-container>
     </v-main>
 
@@ -70,17 +66,21 @@ export default {
       hasHttpRequestWaiting: 'hasHttpRequestWaiting',
     }),
   },
-  methods: {
-    handleWindowResize() {
-      this.$store.commit('SET_WINDOW_WIDTH', window.innerWidth)
-    },
-  },
   created() {
     this.handleWindowResize()
     window.addEventListener('resize', this.handleWindowResize)
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)
+  },
+  methods: {
+    handleWindowResize() {
+      this.$store.commit('SET_WINDOW_WIDTH', window.innerWidth)
+    },
+    handleAlertDismiss(alert) {
+      console.log('close alert', alert)
+      this.$store.dispatch('HandleRemovingAlert', alert)
+    },
   },
 }
 </script>

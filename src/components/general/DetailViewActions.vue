@@ -10,6 +10,7 @@
       </v-btn>
       <v-spacer/>
       <v-btn
+          type="submit"
           :disabled="saveDisabled"
           color="green darken-2"
           @click="$emit('save')"

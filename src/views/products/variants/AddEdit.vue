@@ -5,112 +5,136 @@
     </v-card-title>
 
     <v-card-text v-if="showForm">
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <AutoComplete
-                :label="$t('products.product')"
-                :query-param="'title'"
-                :obj-repr-field="'title'"
-                :api="$api.products"
-                v-on:value-change="handleSelectProduct"
-                :default-value="form.product.id"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <AutoComplete
-                :label="$t('products.actualProduct')"
-                :query-param="'title'"
-                :obj-repr-field="'title'"
-                :api="$api.actualProducts"
-                v-on:value-change="handleSelectActualProduct"
-                :default-value="form.actual_product.id"
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
-            <AutoComplete
-                :label="$t('products.selectorValues')"
-                :query-param="'value'"
-                :obj-repr-field="'value'"
-                :api="$api.productTypeSelectorValues"
-                v-on:value-change="handleSelectProductSelectorValues"
-                :default-value="form.selector_values"
-                select-multiple
-            />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col
-              cols="12"
-              sm="6"
-              md="4"
-          >
-            <v-text-field
-                v-model="form.dkpc"
-                :label="$t('products.DKPC')"
-            />
-          </v-col>
-          <v-col
-              cols="12"
-              sm="6"
-              md="4"
-          >
-            <v-text-field
-                v-model="form.price_min"
-                :label="$t('products.priceMin')"
-            ></v-text-field>
-          </v-col>
-          <v-col
-              cols="12"
-              sm="6"
-              md="4"
-          >
-            <v-checkbox
-                v-model="form.is_active"
-                :label="$t('products.isActive')"
-            ></v-checkbox>
-          </v-col>
-        </v-row>
-      </v-container>
+      <validation-observer
+          ref="form"
+          v-slot="{ invalid }"
+      >
+        <v-form @submit.prevent="saveItem">
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <ValidationProvider name="Product" rules="required" v-slot="{ errors }">
+                  <AutoComplete
+                      v-model="form.product.id"
+                      :label="$t('products.product')"
+                      :query-param="'title'"
+                      :obj-repr-field="'title'"
+                      :api="$api.products"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <ValidationProvider name="ActualProduct" rules="required" v-slot="{ errors }">
+                  <AutoComplete
+                      v-model="form.actual_product.id"
+                      :label="$t('products.actualProduct')"
+                      :query-param="'title'"
+                      :obj-repr-field="'title'"
+                      :api="$api.actualProducts"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
+                  <AutoComplete
+                      v-model="form.selector_values"
+                      :label="$t('products.selectorValues')"
+                      :query-param="'value'"
+                      :obj-repr-field="'value'"
+                      :api="$api.productTypeSelectorValues"
+                      :error-messages="errors"
+                      select-multiple
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+              >
+                <ValidationProvider name="dkpc" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                      v-model="form.dkpc"
+                      :label="$t('products.DKPC')"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+              >
+                <ValidationProvider
+                    name="PriceMin"
+                    rules="required|max_value:2147483647"
+                    v-slot="{ errors }"
+                >
+                  <v-text-field
+                      v-model="form.price_min"
+                      :label="$t('products.priceMin')"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+              <v-col
+                  cols="12"
+                  sm="6"
+                  md="4"
+              >
+                <v-checkbox
+                    v-model="form.is_active"
+                    :label="$t('products.isActive')"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <DetailViewActions
+              :save-disabled="invalid"
+              :show-delete="!!editingItemId"
+              v-on:delete="deleteDialog = true"
+          />
+
+        </v-form>
+      </validation-observer>
     </v-card-text>
 
-    <DetailViewActions
-        v-on:save="saveItem"
-        :show-delete="!!editingItemId"
-        v-on:delete="deleteDialog = true"
+    <DetailViewDeleteDialog
+        v-if="editingItemId"
+        v-model="deleteDialog"
+        :item-title="form.dkpc"
+        v-on:delete="deleteItem"
     />
 
-    <v-dialog v-if="editingItemId" v-model="deleteDialog" max-width="500px">
-      <v-card>
-        <v-card-title class="text-h5">
-          {{ $t('general.itemDeleteQ').replace('{0}', form.dkpc) }}
-        </v-card-title>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="blue" @click="deleteDialog = false">{{ $t('general.cancel') }}</v-btn>
-          <v-btn color="red" @click="deleteItem">{{ $t('general.yes') }}</v-btn>
-          <v-spacer></v-spacer>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </v-card>
 
 </template>
 
 <script>
+import {AddEditViewMixin} from '@/mixins/addEditView'
 import AutoComplete from '@/components/AutoComplete'
 import DetailViewActions from '@/components/general/DetailViewActions'
+import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
+import {v4 as uuid4} from 'uuid'
+import {textToolsMixin} from '@/mixins/textTools'
 
 export default {
   name: 'Details',
   components: {
     AutoComplete,
     DetailViewActions,
+    DetailViewDeleteDialog,
   },
+  mixins: [textToolsMixin, AddEditViewMixin],
   props: {
     id: {
       type: [Number, String],
@@ -119,7 +143,10 @@ export default {
   },
   data() {
     return {
+      apiRoot: this.$api.variants,
+      listViewRoute: 'variantsList',
       showForm: true,
+      deleteDialog: false,
       form: {
         product: {},
         dkpc: '',
@@ -128,7 +155,6 @@ export default {
         selector_values: [],
         actual_product: {},
       },
-      deleteDialog: false,
     }
   },
   computed: {
@@ -144,7 +170,7 @@ export default {
   created() {
     if (this.id) {
       this.showForm = false
-      this.axios.get(this.$api.variants + this.id)
+      this.axios.get(this.apiRoot + this.id)
           .then(res => {
             console.log('details', res)
             this.form = res.data
@@ -155,26 +181,8 @@ export default {
     }
   },
   methods: {
-    createNewTitle(i18Path) {
-      return this.$t('general.createANew').replace('{0}', this.$t(i18Path))
-    },
-
-    handleSelectProduct(event) {
-      console.log('handleSelectProduct', event)
-      this.form.product.id = event
-    },
-
-    handleSelectActualProduct(event) {
-      console.log('handleSelectActualProduct', event)
-      this.form.actual_product.id = event
-    },
-
-    handleSelectProductSelectorValues(event) {
-      console.log('handleSelectProductSelectorValues', event)
-      this.form.selector_values = event
-    },
-
     saveItem() {
+      this.$refs.form.validate()
       console.log('form', this.form)
       const data = {
         product: this.form.product.id,
@@ -187,21 +195,50 @@ export default {
       }
       console.log('save payload', data)
 
-      let url = this.$api.variants
+      let url = this.apiRoot
       if (this.editingItemId) url += `${this.editingItemId}/`
       let method = this.editingItemId ? 'patch' : 'post'
-      this.axios.request({url, data, method}).then(res => {
-        if (!this.editingItemId)
-          this.$router.push({name: 'variantsList'})
-      })
+      this.axios.request({url, data, method})
+          .then(res => {
+            console.log('save success', res.data)
+            if (!this.editingItemId) {
+              this.$store.dispatch('HandleAddingAlert', {
+                key: uuid4(),
+                type: 'success',
+                data: this.itemAction(
+                    'general.alert.saveSuccess',
+                    'products.variant',
+                    this.form.dkpc,
+                ),
+              })
+              this.$router.push({name: this.listViewRoute})
+            }
+          })
+          .catch(err => {
+            console.log('request error', err)
+          })
     },
 
     deleteItem() {
-      this.axios.delete(this.$api.variants + this.id + '/')
-          .then(() => {
-            this.$router.push({name: 'variantsList'})
+      this.axios.delete(this.apiRoot + this.id + '/')
+          .then(res => {
+            console.log('res delete', res.data)
+            this.$store.dispatch('HandleRemovingAlert', 'xx')
+            this.$store.dispatch('HandleAddingAlert', {
+              key: uuid4(),
+              type: 'success',
+              data: this.fillTranslationString('general.alertDeleteSuccess', this.form.dkpc),
+            })
+            this.$router.push({name: this.listViewRoute})
           })
-          .catch(err => console.log('patch error ', err))
+          .catch(err => {
+            console.log('delete error ', err)
+            this.$store.dispatch('HandleAddingAlert', {
+              key: uuid4(),
+              type: 'error',
+              data: `error in deleting ${this.form.dkpc}`,
+            })
+          })
     },
   },
 

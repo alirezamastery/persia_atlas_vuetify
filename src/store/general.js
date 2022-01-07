@@ -36,14 +36,21 @@ const mutations = {
     state.alerts.push(alert)
   },
   REMOVE_ALERT(state, alert) {
-    const index = state.alerts.indexOf(alert)
-    state.alerts.splice(index, 1)
+    const index = state.alerts.findIndex(item => item.key === alert.key)
+    if (index > -1)
+      state.alerts.splice(index, 1)
   },
 }
 
 const actions = {
   HandleSidebarOpenStatus({commit}, payload) {
     commit('SET_SIDEBAR_IS_OPEN', payload)
+  },
+  HandleAddingAlert({commit}, alert) {
+    commit('ADD_ALERT', alert)
+  },
+  HandleRemovingAlert({commit}, alert) {
+    commit('REMOVE_ALERT', alert)
   },
 }
 
