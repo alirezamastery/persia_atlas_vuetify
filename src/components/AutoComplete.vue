@@ -84,6 +84,7 @@ export default {
   },
   methods: {
     handleInput(e) {
+      console.log('selected value' , e, this.content)
       this.$emit('input', this.content)
     },
     handleSelect(event) {

@@ -37,7 +37,7 @@
                 <ValidationProvider name="Product" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.selectors"
-                      :label="$t('products.productType')"
+                      :label="$t('products.productTypeSelector')"
                       :query-param="'title'"
                       :obj-repr-field="'title'"
                       :api="$api.productTypeSelectors"
@@ -110,7 +110,6 @@ export default {
   methods: {
     formInit(resData) {
       this.form = resData
-      this.form.selectors = resData.selectors.map(itm => itm.id)
     },
     getRequestData() {
       return {
