@@ -29,6 +29,26 @@
       </v-container>
     </v-main>
 
+    <v-snackbar
+        v-if="snackbar"
+        v-model="snackbar"
+        :color="snackbar.color"
+        absolute
+        style="z-index: 10000"
+    >
+      {{ snackbar.data }}
+      <template v-slot:action="{ attrs }">
+        <v-btn
+            color="white"
+            icon
+            v-bind="attrs"
+            @click="snackbar = null"
+        >
+          <v-icon>mdi-close</v-icon>
+        </v-btn>
+      </template>
+    </v-snackbar>
+
     <v-footer v-if="isAuthenticated" app>
       کلیه حقوق سایت متعلق به خودمونه
     </v-footer>
@@ -49,10 +69,7 @@ export default {
   },
   data() {
     return {
-      links: [
-        {title: 'خانه', url: '/'},
-        {title: 'خروج', url: '/logout', color: 'red'},
-      ],
+      snackbarOpen: true,
     }
   },
   computed: {
@@ -65,6 +82,14 @@ export default {
       isAuthenticated: 'auth/isAuthenticated',
       hasHttpRequestWaiting: 'hasHttpRequestWaiting',
     }),
+    snackbar: {
+      get() {
+        return this.$store.state.snackbar
+      },
+      set(value) {
+        this.$store.dispatch('HandleSettingSnackbar', value)
+      },
+    },
   },
   created() {
     this.handleWindowResize()
@@ -80,6 +105,10 @@ export default {
     handleAlertDismiss(alert) {
       console.log('close alert', alert)
       this.$store.dispatch('HandleRemovingAlert', alert)
+    },
+    handleSnackDismiss(snack) {
+      console.log('close snack', snack)
+      this.$store.dispatch('HandleRemovingSnackbar', snack)
     },
   },
 }

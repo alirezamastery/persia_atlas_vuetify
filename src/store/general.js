@@ -5,6 +5,8 @@ const state = {
   httpRequestQueue: 0,
   sidebarOpen: false,
   alerts: [],
+  snackbars: [],
+  snackbar: null,
   globalCardClass: 'px-20 py-40',
 }
 
@@ -40,6 +42,18 @@ const mutations = {
     if (index > -1)
       state.alerts.splice(index, 1)
   },
+  ADD_SNACKBAR(state, snackbar) {
+    state.snackbars.push(snackbar)
+  },
+  REMOVE_SNACKBAR(state, snackbar) {
+    const index = state.snackbars.findIndex(item => item.key === snackbar.key)
+    if (index > -1)
+      state.snackbars.splice(index, 1)
+    state.snackbars = []
+  },
+  SET_SNACKBAR(state, payload) {
+    state.snackbar = payload
+  },
 }
 
 const actions = {
@@ -51,6 +65,17 @@ const actions = {
   },
   HandleRemovingAlert({commit}, alert) {
     commit('REMOVE_ALERT', alert)
+  },
+  HandleAddingSnackbar({commit, dispatch}, snackbar) {
+    console.log('HandleAddingSnackbar', snackbar)
+    commit('ADD_SNACKBAR', snackbar)
+    // window.setTimeout(dispatch('HandleRemovingSnackbar', snackbar), 5000)
+  },
+  HandleRemovingSnackbar({commit}, snackbar) {
+    commit('REMOVE_SNACKBAR', snackbar)
+  },
+  HandleSettingSnackbar({commit}, payload) {
+    commit('SET_SNACKBAR', payload)
   },
 }
 

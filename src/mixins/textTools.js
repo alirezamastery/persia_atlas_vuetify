@@ -8,7 +8,7 @@ export const textToolsMixin = {
     },
     itemAction(sentence, itemType, item) {
       return this.$t(sentence)
-          .replace('{0}', this.$t(itemType))
+          .replace('{0}', itemType)
           .replace('{1}', item.toString())
     },
     createNewTitle(i18Path) {

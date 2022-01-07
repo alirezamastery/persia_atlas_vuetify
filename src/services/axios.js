@@ -51,20 +51,12 @@ axiosInstance.interceptors.response.use(
       store.commit('DECREMENT_HTTP_REQUEST_QUEUE')
 
       const originalRequest = error.config
-      console.log('in axiosInstance | BEGINING OF ERROR SECTION | error: ', error)
-      console.log('in axiosInstance | BEGINING OF ERROR SECTION | error.response.data: ', error.response.data)
-      console.log('in axiosInstance | BEGINING OF ERROR SECTION | error.response.status: ', error.response.status)
+      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error: ', error)
+      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error.response.data: ', error.response.data)
+      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error.response.status: ', error.response.status)
 
       if (typeof error.response === 'undefined') {
-        alert(
-            'A server/network error occurred. ' +
-            'Looks like CORS might be the problem. ' +
-            'Sorry about this - we will get it fixed shortly.',
-        )
-        return Promise.reject(error)
-      }
-
-      if (error.response.status === 400){
+        alert('A server/network error occurred')
         return Promise.reject(error)
       }
 
@@ -80,7 +72,7 @@ axiosInstance.interceptors.response.use(
           error.response.status === 401 &&
           originalRequest.url === baseURL + 'token/refresh/'
       ) {
-        // window.location.href = '/login/';
+        window.location.href = '/login/';
         return Promise.reject(error)
       }
 

@@ -145,8 +145,9 @@ export default {
     return {
       apiRoot: this.$api.variants,
       listViewRoute: 'variantsList',
-      showForm: true,
-      deleteDialog: false,
+      itemType: this.$t('products.variant'),
+      // showForm: true,
+      // deleteDialog: false,
       form: {
         product: {},
         dkpc: '',
@@ -158,33 +159,34 @@ export default {
     }
   },
   computed: {
-    editingItemId() {
-      return this.$route.params.id
+    itemRepr() {
+      return this.form.dkpc.toString()
     },
-    formTitle() {
-      if (this.editingItemId)
-        return this.$t('general.change') + ' ' + this.$t('products.variant')
-      return this.createNewTitle('products.variant')
-    },
+    // editingItemId() {
+    //   return this.$route.params.id
+    // },
+    // formTitle() {
+    //   if (this.editingItemId)
+    //     return this.$t('general.change') + ' ' + this.$t('products.variant')
+    //   return this.createNewTitle('products.variant')
+    // },
   },
-  created() {
-    if (this.id) {
-      this.showForm = false
-      this.axios.get(this.apiRoot + this.id)
-          .then(res => {
-            console.log('details', res)
-            this.form = res.data
-            this.showForm = true
-            this.form.selector_values = res.data.selector_values.map(itm => itm.id)
-          })
-      console.log('no details, getting the item details from server')
-    }
-  },
+  // created() {
+  //   if (this.id) {
+  //     this.showForm = false
+  //     this.axios.get(this.apiRoot + this.id)
+  //         .then(res => {
+  //           console.log('details', res)
+  //           this.form = res.data
+  //           this.showForm = true
+  //           this.form.selector_values = res.data.selector_values.map(itm => itm.id)
+  //         })
+  //     console.log('no details, getting the item details from server')
+  //   }
+  // },
   methods: {
-    saveItem() {
-      this.$refs.form.validate()
-      console.log('form', this.form)
-      const data = {
+    getRequestData() {
+      return {
         product: this.form.product.id,
         dkpc: this.form.dkpc,
         has_competition: this.form.has_competition,
@@ -193,53 +195,10 @@ export default {
         selector_values: this.form.selector_values,
         actual_product: this.form.actual_product.id,
       }
-      console.log('save payload', data)
-
-      let url = this.apiRoot
-      if (this.editingItemId) url += `${this.editingItemId}/`
-      let method = this.editingItemId ? 'patch' : 'post'
-      this.axios.request({url, data, method})
-          .then(res => {
-            console.log('save success', res.data)
-            if (!this.editingItemId) {
-              this.$store.dispatch('HandleAddingAlert', {
-                key: uuid4(),
-                type: 'success',
-                data: this.itemAction(
-                    'general.alert.saveSuccess',
-                    'products.variant',
-                    this.form.dkpc,
-                ),
-              })
-              this.$router.push({name: this.listViewRoute})
-            }
-          })
-          .catch(err => {
-            console.log('request error', err)
-          })
     },
 
-    deleteItem() {
-      this.axios.delete(this.apiRoot + this.id + '/')
-          .then(res => {
-            console.log('res delete', res.data)
-            this.$store.dispatch('HandleRemovingAlert', 'xx')
-            this.$store.dispatch('HandleAddingAlert', {
-              key: uuid4(),
-              type: 'success',
-              data: this.fillTranslationString('general.alertDeleteSuccess', this.form.dkpc),
-            })
-            this.$router.push({name: this.listViewRoute})
-          })
-          .catch(err => {
-            console.log('delete error ', err)
-            this.$store.dispatch('HandleAddingAlert', {
-              key: uuid4(),
-              type: 'error',
-              data: `error in deleting ${this.form.dkpc}`,
-            })
-          })
-    },
+
+
   },
 
 }
