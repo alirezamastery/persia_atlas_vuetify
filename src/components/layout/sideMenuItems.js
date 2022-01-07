@@ -19,8 +19,22 @@ const menuItems = [
   // },
   {
     icon: 'mdi-warehouse',
-    order: 30,
+    order: 20,
     titleI18n: 'general.routes.products',
+    children: [
+      getRoute('actualProductList'),
+      getRoute('brandList'),
+      getRoute('productList'),
+      getRoute('productTypeList'),
+      getRoute('productTypeSelectorList'),
+      getRoute('productTypeSelectorValueList'),
+      getRoute('variantList'),
+    ],
+  },
+  {
+    icon: 'mdi-robot-industrial',
+    order: 30,
+    titleI18n: 'general.routes.robot',
     children: [
       getRoute('actualProductList'),
       getRoute('brandList'),

@@ -8,12 +8,14 @@
       :item-text="objReprField"
       :item-value="objUniqueId"
       :multiple="selectMultiple"
+      :chips="selectMultiple"
       :error-messages="errorMessages"
       class="mx-4"
       cache-items
       flat
       hide-no-data
       hide-details
+      deletable-chips
       @change="handleInput"
   >
     <template v-slot:no-data>
@@ -30,9 +32,9 @@
       </v-list-item-content>
     </template>
 
-    <template v-slot:append>
-      <v-progress-circular v-if="loading" indeterminate color="#ad5697"/>
-    </template>
+<!--    <template v-slot:append>-->
+<!--      <v-progress-circular v-if="loading" indeterminate color="#ad5697"/>-->
+<!--    </template>-->
 
   </v-autocomplete>
 </template>

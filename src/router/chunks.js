@@ -1,9 +1,5 @@
 export const actualProductsList = () =>
     import(/* webpackChunkName: "products" */ '../views/products/actualProducts/List.vue')
-// export const actualProductAdd = () =>
-//     import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Add.vue')
-// export const actualProductEdit = () =>
-//     import(/* webpackChunkName: "products" */ '../views/products/actualProducts/Edit.vue')
 export const actualProductAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/actualProducts/AddEdit.vue')
 
@@ -37,10 +33,6 @@ export const productTypeSelectorValueAddEdit = () =>
 
 export const variantsList = () =>
     import(/* webpackChunkName: "products" */ '../views/products/variants/List.vue')
-// export const variantAdd = () =>
-//     import(/* webpackChunkName: "products" */ '../views/products/variants/Add.vue')
-// export const variantEdit = () =>
-//     import(/* webpackChunkName: "products" */ '../views/products/variants/List.vue')
 export const variantAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/variants/AddEdit.vue')
 
