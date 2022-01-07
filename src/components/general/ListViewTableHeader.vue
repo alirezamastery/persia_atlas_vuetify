@@ -20,6 +20,7 @@
     />
     <v-spacer/>
     <v-btn
+        v-if="showCreateBtn"
         color="primary"
         dark
         @click="$router.push({name: addRoute})"
@@ -53,6 +54,11 @@ export default {
       required: false,
     },
     showSearch: {
+      type: Boolean,
+      default: true,
+      required: false,
+    },
+    showCreateBtn: {
       type: Boolean,
       default: true,
       required: false,

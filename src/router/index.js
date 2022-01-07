@@ -157,10 +157,18 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeSelectorAddEdit: {
-    path: '/product-type-selectors/:id',
+  productTypeSelectorAdd: {
+    path: '/product-type-selectors/add',
     component: views.productTypeSelectorAddEdit,
-    name: 'productTypeSelectorAddEdit',
+    name: 'productTypeSelectorAdd',
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  productTypeSelectorEdit: {
+    path: '/product-type-selectors/edit/:id',
+    component: views.productTypeSelectorAddEdit,
+    name: 'productTypeSelectorEdit',
     props: true,
     meta: {
       requiresAuth: true,
@@ -177,10 +185,18 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  productTypeSelectorValueAddEdit: {
-    path: '/product-type-selector-values/:id',
+  productTypeSelectorValueAdd: {
+    path: '/product-type-selector-values/add',
     component: views.productTypeSelectorValueAddEdit,
-    name: 'productTypeSelectorValueAddEdit',
+    name: 'productTypeSelectorValueAdd',
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  productTypeSelectorValueEdit: {
+    path: '/product-type-selector-values/edit/:id',
+    component: views.productTypeSelectorValueAddEdit,
+    name: 'productTypeSelectorValueEdit',
     props: true,
     meta: {
       requiresAuth: true,
