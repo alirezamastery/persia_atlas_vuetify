@@ -1,122 +1,93 @@
 <template>
-  <validation-observer
-      ref="observer"
-      v-slot="{ invalid }"
-  >
-    <form @submit.prevent="submit">
-      <validation-provider
-          v-slot="{ errors }"
-          name="Name"
-          rules="required|max:10"
-      >
-        <v-text-field
-            v-model="name"
-            :counter="10"
-            :error-messages="errors"
-            label="Name"
-            required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-          v-slot="{ errors }"
-          name="phoneNumber"
-          :rules="{
-          required: true,
-          digits: 7,
-          regex: '^(71|72|74|76|81|82|84|85|86|87|88|89)\\d{5}$'
-        }"
-      >
-        <v-text-field
-            v-model="phoneNumber"
-            :counter="7"
-            :error-messages="errors"
-            label="Phone Number"
-            required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-          v-slot="{ errors }"
-          name="email"
-          rules="required|email"
-      >
-        <v-text-field
-            v-model="email"
-            :error-messages="errors"
-            label="E-mail"
-            required
-        ></v-text-field>
-      </validation-provider>
-      <validation-provider
-          v-slot="{ errors }"
-          name="select"
-          rules="required"
-      >
-        <v-select
-            v-model="select"
-            :items="items"
-            :error-messages="errors"
-            label="Select"
-            data-vv-name="select"
-            required
-        ></v-select>
-      </validation-provider>
-      <validation-provider
-          v-slot="{ errors }"
-          rules="required"
-          name="checkbox"
-      >
-        <v-checkbox
-            v-model="checkbox"
-            :error-messages="errors"
-            value="1"
-            label="Option"
-            type="checkbox"
-            required
-        ></v-checkbox>
-      </validation-provider>
+  <v-card flat>
+    <v-card-title>
+      {{ formTitle }}
+    </v-card-title>
 
-      <v-btn
-          class="mr-4"
-          type="submit"
-          :disabled="invalid"
+    <v-card-text v-if="showForm">
+      <validation-observer
+          ref="form"
+          v-slot="{ invalid }"
       >
-        submit
-      </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
-    </form>
-  </validation-observer>
+        <v-form @submit.prevent="saveItem">
+          <v-container>
+            <v-row>
+              <v-col
+                  cols="12"
+                  lg="3"
+                  sm="12"
+                  md="12"
+              >
+                <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                      v-model="form.title"
+                      :label="$t('general.title')"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+          </v-container>
+
+          <DetailViewActions
+              :save-disabled="invalid"
+              :show-delete="!!editingItemId"
+              v-on:delete="deleteDialog = true"
+          />
+
+        </v-form>
+      </validation-observer>
+    </v-card-text>
+
+    <DetailViewDeleteDialog
+        v-if="editingItemId"
+        v-model="deleteDialog"
+        :item-title="form.dkpc"
+        v-on:delete="deleteItem"
+    />
+
+  </v-card>
 </template>
 
 <script>
-export default {
-  name: 'AddEdit',
-  data: () => ({
-    name: '',
-    phoneNumber: '',
-    email: '',
-    select: null,
-    items: [
-      'Item 1',
-      'Item 2',
-      'Item 3',
-      'Item 4',
-    ],
-    checkbox: null,
-  }),
+import {AddEditViewMixin} from '@/mixins/addEditView'
+import {textToolsMixin} from '@/mixins/textTools'
+import DetailViewActions from '@/components/general/DetailViewActions'
+import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
 
-  methods: {
-    submit () {
-      this.$refs.observer.validate()
+export default {
+  name: 'Details',
+  components: {
+    DetailViewActions,
+    DetailViewDeleteDialog,
+  },
+  mixins: [textToolsMixin, AddEditViewMixin],
+  props: {
+    id: {
+      type: [Number, String],
+      default: null,
     },
-    clear () {
-      this.name = ''
-      this.phoneNumber = ''
-      this.email = ''
-      this.select = null
-      this.checkbox = null
-      this.$refs.observer.reset()
+  },
+  data() {
+    return {
+      apiRoot: this.$api.brands,
+      listViewRoute: 'brandList',
+      itemType: this.$t('products.variant'),
+      form: {
+        title: '',
+      },
+    }
+  },
+  computed: {
+    itemRepr() {
+      return this.form.title.toString()
+    },
+  },
+  methods: {
+    getRequestData() {
+      return {
+        title: this.form.title,
+      }
     },
   },
 }
