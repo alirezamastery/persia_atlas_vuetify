@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       apiRoot: this.$api.actualProducts,
-      listViewRoute: 'actualProductsList',
+      listViewRoute: 'actualProductList',
       showForm: true,
       form: {
         title: null,

@@ -12,7 +12,12 @@
         <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
-              <v-col cols="12">
+              <v-col
+                  cols="12"
+                  lg="4"
+                  sm="12"
+                  md="12"
+              >
                 <ValidationProvider name="Product" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.product.id"
@@ -26,7 +31,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col>
+              <v-col
+                  cols="12"
+                  lg="4"
+                  sm="12"
+                  md="12"
+              >
                 <ValidationProvider name="ActualProduct" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.actual_product.id"
@@ -40,7 +50,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col>
+              <v-col
+                  cols="12"
+                  lg="4"
+                  sm="12"
+                  md="12"
+              >
                 <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.selector_values"
@@ -85,6 +100,8 @@
                   />
                 </ValidationProvider>
               </v-col>
+            </v-row>
+            <v-row>
               <v-col
                   cols="12"
                   sm="6"
@@ -142,7 +159,7 @@ export default {
   data() {
     return {
       apiRoot: this.$api.variants,
-      listViewRoute: 'variantsList',
+      listViewRoute: 'variantList',
       itemType: this.$t('products.variant'),
       form: {
         product: {},

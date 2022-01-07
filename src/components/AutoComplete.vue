@@ -14,7 +14,6 @@
       flat
       hide-no-data
       hide-details
-      solo-inverted
       @change="handleInput"
   >
     <template v-slot:no-data>

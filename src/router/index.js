@@ -34,10 +34,10 @@ export const routesObj = {
 
   // Products App
   // ***************** Actual Products *****************
-  actualProductsList: {
+  actualProductList: {
     path: '/actual-products',
     component: views.actualProductsList,
-    name: 'actualProductsList',
+    name: 'actualProductList',
     meta: {
       titleI18n: 'general.routes.actualProducts',
       icon: 'mdi-home',
@@ -91,10 +91,10 @@ export const routesObj = {
     },
   },
   // ***************** Products *****************
-  productsList: {
+  productList: {
     path: '/products',
     component: views.productsList,
-    name: 'productsList',
+    name: 'productList',
     meta: {
       titleI18n: 'general.routes.products',
       icon: 'mdi-home',
@@ -107,16 +107,14 @@ export const routesObj = {
     name: 'productAddEdit',
     props: true,
     meta: {
-      titleI18n: 'general.routes.products',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
   // ***************** Product Types *****************
-  productTypesList: {
+  productTypeList: {
     path: '/product-types',
     component: views.productTypesList,
-    name: 'productTypesList',
+    name: 'productTypeList',
     meta: {
       titleI18n: 'general.routes.productTypes',
       icon: 'mdi-home',
@@ -129,16 +127,14 @@ export const routesObj = {
     name: 'productTypeAddEdit',
     props: true,
     meta: {
-      titleI18n: 'general.routes.productTypes',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
   // ***************** Product Type Selectors *****************
-  productTypeSelectorsList: {
+  productTypeSelectorList: {
     path: '/product-type-selectors',
     component: views.productTypeSelectorsList,
-    name: 'productTypeSelectorsList',
+    name: 'productTypeSelectorList',
     meta: {
       titleI18n: 'general.routes.productTypeSelectors',
       icon: 'mdi-home',
@@ -151,16 +147,14 @@ export const routesObj = {
     name: 'productTypeSelectorAddEdit',
     props: true,
     meta: {
-      titleI18n: 'general.routes.productTypeSelectors',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
   // ***************** Product Type Selector Values *****************
-  productTypeSelectorValuesList: {
+  productTypeSelectorValueList: {
     path: '/product-type-selector-values',
     component: views.productTypeSelectorValuesList,
-    name: 'productTypeSelectorValuesList',
+    name: 'productTypeSelectorValueList',
     meta: {
       titleI18n: 'general.routes.productTypeSelectorValues',
       icon: 'mdi-home',
@@ -173,16 +167,14 @@ export const routesObj = {
     name: 'productTypeSelectorValueAddEdit',
     props: true,
     meta: {
-      titleI18n: 'general.routes.productTypeSelectorValues',
-      icon: 'mdi-home',
       requiresAuth: true,
     },
   },
   // ***************** Variants *****************
-  variantsList: {
+  variantList: {
     path: '/variants',
     component: views.variantsList,
-    name: 'variantsList',
+    name: 'variantList',
     meta: {
       titleI18n: 'general.routes.variants',
       icon: 'mdi-home',
