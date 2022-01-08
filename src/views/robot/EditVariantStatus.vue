@@ -1,29 +1,13 @@
 <template>
   <v-card>
     <v-card-text>
-      <!--      <v-row>-->
-      <!--        <v-col-->
-      <!--            cols="12"-->
-      <!--            lg="4"-->
-      <!--            sm="12"-->
-      <!--            md="12"-->
-      <!--        >-->
-      <!--          <AutoComplete-->
-      <!--              v-model="brandId"-->
-      <!--              :label="$t('products.brand')"-->
-      <!--              :query-param="'title'"-->
-      <!--              :obj-repr-field="'title'"-->
-      <!--              :api="$api.brands"-->
-      <!--          />-->
-      <!--        </v-col>-->
-      <!--      </v-row>-->
 
-      <v-row class="mb-20">
+      <v-row class="mb-30">
         <v-col
             cols="12"
-            lg="4"
             sm="12"
             md="12"
+            lg="4"
         >
           <AutoComplete
               v-model="actualProductId"
@@ -35,11 +19,14 @@
           />
         </v-col>
       </v-row>
+
+
       <VariantDetails
-          v-for="variant in fakeVars"
+          v-for="variant in variants"
           :key="variant.dkpc"
           :variant="variant"
       >
+
       </VariantDetails>
     </v-card-text>
   </v-card>
@@ -53,67 +40,80 @@ export default {
   name: 'EditVariantStatus',
   components: {
     AutoComplete,
-    VariantDetails
+    VariantDetails,
   },
   data() {
     return {
       brandId: null,
+      isLoading: false,
       actualProductId: null,
       variants: [],
+      product: null,
       fakeVars: [
         {
-          "id": 174,
-          "dkpc": "23968167",
-          "price_min": 37500,
-          "is_active": true,
-          "has_competition": true,
-          "product": {
-            "id": 44,
-            "dkp": "7000919",
-            "title": "چوب لباسی مدل توچال بسته 6 عددی",
-            "is_active": false,
-            "type": {
-              "id": 3,
-              "title": "infant accessory",
-              "selectors": [
-                2
-              ]
-            }
+          'id': 174,
+          'dkpc': '23968167',
+          'price_min': 37500,
+          'is_active': true,
+          'has_competition': true,
+          'product': {
+            'id': 44,
+            'dkp': '7000919',
+            'title': 'چوب لباسی مدل توچال بسته 6 عددی',
+            'is_active': false,
+            'type': {
+              'id': 3,
+              'title': 'infant accessory',
+              'selectors': [
+                2,
+              ],
+            },
           },
-          "actual_product": {
-            "id": 43,
-            "title": "چوب لباسی بزرگسال ساده سبز",
-            "brand": {
-              "id": 4,
-              "title": "توچال"
-            }
+          'actual_product': {
+            'id': 43,
+            'title': 'چوب لباسی بزرگسال ساده سبز',
+            'brand': {
+              'id': 4,
+              'title': 'توچال',
+            },
           },
-          "selector_values": [
+          'selector_values': [
             {
-              "id": 6,
-              "digikala_id": 6,
-              "value": "سبز",
-              "selector": {
-                "id": 1,
-                "title": "color"
-              }
-            }
+              'id': 6,
+              'digikala_id': 6,
+              'value': 'سبز',
+              'selector': {
+                'id': 1,
+                'title': 'color',
+              },
+            },
           ],
-          "our_stock": 2,
-          "reserved": 0,
-          "warehouse_stock": 0,
-          "price": 430000,
-          "maximum_per_order": 5
-        }
+          'our_stock': 2,
+          'reserved': 0,
+          'warehouse_stock': 0,
+          'price': 430000,
+          'maximum_per_order': 5,
+        },
       ],
     }
   },
   methods: {
     getVariants() {
       console.log('getVariants', this.actualProductId)
-
-      // this.axios.get(this.$api.actualProductVariants + this.actualProductId)
-      //     .then(res => console.log('variants', res.data))
+      this.isLoading = true
+      const url = this.$api.actualProductVariants + this.actualProductId
+      this.axios.get(url)
+          .then(res => {
+            console.log('variants', res.data)
+            this.isLoading = false
+            this.variants = res.data.variants
+            this.product = res.data.product
+          })
+          .catch(err => {
+            console.log(err)
+            this.isLoading = false
+            this.errors = err.response?.data
+          })
     },
   },
 
