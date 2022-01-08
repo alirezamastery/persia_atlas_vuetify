@@ -20,7 +20,7 @@
           <!--  Digi Status -->
           <v-col cols="12" sm="12" lg="3">
             <v-switch
-                v-model="isActive"
+                v-model="digiStatus"
                 :label="$t('products.activeInDigi')"
                 :success="digiStatus"
                 @change="handleDigiStatusUpdate"
@@ -126,6 +126,7 @@
             >
               <template v-slot:label v-if="loadingRobotStatus">
                 <v-progress-circular
+                    indeterminate
                     size="24"
                     class="ml-2"
                 />
@@ -179,12 +180,14 @@
 </template>
 
 <script>
+import store from '@/store'
+import {v4 as uuid4} from 'uuid'
+
 export default {
   name: 'VariantDetails',
   props: ['variant'],
   data() {
     return {
-      isActive: this.variant.product.is_active,
       initialPriceMin: '',
       newPriceMin: '',
       initialPrice: '',
@@ -239,17 +242,17 @@ export default {
         'dkpc': this.variant.dkpc,
         'is_active': !!event,
       }
+      this.digiStatus = !!event
       this.axios.post(this.$api.updateVariantStatus, data)
           .then(res => {
             console.log('handleDigiStatusUpdate | res', res)
             this.loadingDigiStatus = false
-            this.digiStatus = !!event
             console.log('handleDigiStatusUpdate | digiStatus', this.digiStatus)
           })
           .catch(err => {
             console.log('handleDigiStatusUpdate | error', err.response?.data)
             this.loadingDigiStatus = false
-            this.errors = err.response.data
+            this.digiStatus = !event
           })
     },
     handleDigiDataUpdate() {
@@ -274,7 +277,6 @@ export default {
           .catch(err => {
             console.log('handleDigiDataUpdate | error', err)
             this.loadingDigiData = false
-            this.errors = err.response.data
           })
     },
     handleRobotStatusUpdate(event) {
@@ -285,6 +287,7 @@ export default {
         'is_active': !!event,
       }
       console.log('data', data)
+      this.robotStatus = !!event
       this.axios.patch(`${this.$api.variants}${this.variant.id}/`, data)
           .then(res => {
             console.log('handleRobotStatusUpdate | res', res)
@@ -293,8 +296,13 @@ export default {
           })
           .catch(err => {
             console.log('handleRobotStatusUpdate | error', err)
-            this.errors = err.response.data
             this.loadingRobotStatus = false
+            this.robotStatus = !event
+            store.commit('SET_SNACKBAR', {
+              key: uuid4(),
+              color: 'red',
+              data: err,
+            })
           })
     },
     handleAtlasUpdate() {
@@ -315,7 +323,6 @@ export default {
           .catch(err => {
             console.log('handleAtlasUpdate | error', err)
             this.loadingAtlasData = false
-            this.errors = err.response.data
           })
     },
   },
