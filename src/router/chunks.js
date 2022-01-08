@@ -37,3 +37,5 @@ export const variantAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/variants/AddEdit.vue')
 
 
+export const editVariantStatus = () =>
+    import(/* webpackChunkName: "robot" */ '../views/robot/EditVariantStatus.vue')

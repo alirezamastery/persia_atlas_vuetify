@@ -18,5 +18,11 @@
   "productTypeSelector": "انتخابگر نوع محصول",
   "selectors": "انتخابگرها",
   "selector": "انتخابگر",
+  "activeInDigi": "فعال در دیجی کالا",
+  "ordered": "سفارش خورده",
+  "inDigiStock": "در انبار دیجیکالا",
+  "inventory": "موجودی",
+  "price": "قیمت",
+  "robotActive": "در لیست ربات",
   "variantDeleteQ": "آیا مطمئن به حذف {0} هستید؟"
 }

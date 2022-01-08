@@ -24,7 +24,8 @@
     "dashboard": "داشبورد",
     "home": "خانه",
     "users": "کاربران",
-    "robot": "ربات"
+    "robot": "ربات",
+    "variantStatus": "وضعیت تنوع"
   },
   "all": "همه",
   "yes": "بله",
@@ -48,6 +49,7 @@
   "cancel": "انصراف",
   "back": "بازگشت",
   "submit": "ثبت",
+  "iMadeMistake": "غلط کردم",
   "title": "عنوان",
   "active": "فعال",
   "name": "نام",

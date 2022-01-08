@@ -6,6 +6,7 @@ import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
 import NotFound from '@/views/NotFound'
 import * as views from './chunks'
+import {editVariantStatus} from './chunks'
 
 Vue.use(VueRouter)
 
@@ -227,6 +228,18 @@ export const routesObj = {
     name: 'variantEdit',
     props: true,
     meta: {
+      requiresAuth: true,
+    },
+  },
+
+  // Robot
+  // ***************** Variant Status *****************
+  editVariantStatus: {
+    path: '/robot/variant-status',
+    component: views.editVariantStatus,
+    name: 'editVariantStatus',
+    meta: {
+      titleI18n: 'general.routes.variantStatus',
       requiresAuth: true,
     },
   },
