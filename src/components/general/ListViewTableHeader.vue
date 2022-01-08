@@ -22,6 +22,7 @@
     <v-btn
         v-if="showCreateBtn"
         color="primary"
+        class="mr-2"
         dark
         @click="$router.push({name: addRoute})"
     >

@@ -10,12 +10,13 @@
     <template v-slot:prepend>
       <v-list-item two-line>
         <v-list-item-avatar>
-          <img src="https://randomuser.me/api/portraits/men/81.jpg">
+<!--          <img src="@/assets/svg/blank-user.svg" alt="">-->
+          <v-icon>mdi-account-circle</v-icon>
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Jane Smith</v-list-item-title>
-          <v-list-item-subtitle>Logged In</v-list-item-subtitle>
+          <v-list-item-title>{{ user }}</v-list-item-title>
+          <v-list-item-subtitle>خوش اومدی</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
     </template>
@@ -45,6 +46,18 @@
         <v-list-item-title v-text="$t(subItem.titleI18n)"/>
       </v-list-item>
     </v-list-group>
+
+    <template v-if="isMobileWidth" v-slot:append >
+      <div class="pa-2">
+        <v-btn
+            color="red"
+            block
+        >
+          {{ $t('general.routes.logout') }}
+        </v-btn>
+      </div>
+    </template>
+
   </v-navigation-drawer>
 </template>
 
@@ -62,8 +75,9 @@ export default {
   computed: {
     ...mapState({
       sidebarOpen: state => state.sidebarOpen,
+      user: state => state.auth.user,
     }),
-    ...mapGetters(['isMobileWidth', 'auth/isAuthenticated']),
+    ...mapGetters(['isMobileWidth']),
     sidebarOpen: {
       get() {
         return this.$store.state.sidebarOpen

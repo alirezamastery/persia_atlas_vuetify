@@ -5,7 +5,9 @@
       flat
   >
 
-    <v-toolbar-title>پرشیا اطلس</v-toolbar-title>
+    <v-icon>mdi-crown</v-icon>
+    <v-toolbar-title class="mx-1">پرشیا اطلس</v-toolbar-title>
+    <v-icon>mdi-cash-multiple</v-icon>
 
     <v-spacer/>
 
@@ -17,6 +19,7 @@
     </v-btn>
 
     <v-btn
+        v-if="!isMobileWidth"
         small
         depressed
         color="red lighten-1"

@@ -188,17 +188,15 @@ export default {
   props: ['variant'],
   data() {
     return {
-      initialPriceMin: '',
-      newPriceMin: '',
-      initialPrice: '',
-      initialStock: '',
-      newPrice: '',
-      newStock: '',
-      showBtnAtlasUpdate: Boolean,
-      showWaitAnimationPriceMin: Boolean,
+      initialPriceMin: this.variant.price_min.toString(),
+      newPriceMin: this.variant.price_min.toString(),
+      initialPrice: this.variant.price.toString(),
+      initialStock: this.variant.our_stock.toString(),
+      newPrice: this.variant.price.toString(),
+      newStock: this.variant.our_stock.toString(),
 
-      robotStatus: false,
-      digiStatus: false,
+      robotStatus: this.variant['is_active'],
+      digiStatus:  this.variant['is_digi_active'],
 
       loadingDigiStatus: false,
       loadingDigiData: false,
@@ -215,25 +213,23 @@ export default {
     },
   },
   mounted() {
-    this.initialPriceMin = this.variant.price_min.toString()
-    this.newPriceMin = this.variant.price_min.toString()
-    this.initialPrice = this.variant.price.toString()
-    this.initialStock = this.variant.our_stock.toString()
-    this.newPrice = this.variant.price.toString()
-    this.newStock = this.variant.our_stock.toString()
-    this.robotStatus = this.variant.is_active
-    this.digiStatus = this.variant['is_digi_active']
+    // this.initialPriceMin = this.variant.price_min.toString()
+    // this.newPriceMin = this.variant.price_min.toString()
+    // this.initialPrice = this.variant.price.toString()
+    // this.initialStock = this.variant.our_stock.toString()
+    // this.newPrice = this.variant.price.toString()
+    // this.newStock = this.variant.our_stock.toString()
+    // this.robotStatus = this.variant.is_active
+    // this.digiStatus = this.variant['is_digi_active']
     console.log('digiStatus', this.digiStatus)
   },
   methods: {
     revertDigiChange() {
       this.newPrice = this.initialPrice
       this.newStock = this.initialStock
-      this.showBtnDigiUpdate = false
     },
     revertAtlasDataChange() {
       this.newPriceMin = this.initialPriceMin
-      this.showBtnAtlasUpdate = false
     },
     handleDigiStatusUpdate(event) {
       this.errors = null
@@ -257,7 +253,6 @@ export default {
     },
     handleDigiDataUpdate() {
       this.errors = null
-      this.showBtnDigiUpdate = false
       this.loadingDigiData = true
       const data = {
         'dkpc': this.variant.dkpc,
@@ -307,7 +302,6 @@ export default {
     },
     handleAtlasUpdate() {
       this.errors = null
-      this.showBtnAtlasUpdate = false
       this.loadingAtlasData = true
       const data = {
         'dkpc': this.variant.dkpc,

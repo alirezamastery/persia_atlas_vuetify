@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card flat>
     <v-card-text>
 
       <v-row class="mb-30">
@@ -101,6 +101,7 @@ export default {
     getVariants() {
       console.log('getVariants', this.actualProductId)
       this.isLoading = true
+      this.variants = []
       const url = this.$api.actualProductVariants + this.actualProductId
       this.axios.get(url)
           .then(res => {
