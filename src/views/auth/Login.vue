@@ -19,6 +19,7 @@
               prepend-icon="mdi-account-circle"
               v-model="mobile"
               :rules="mobileRules"
+              solo-inverted
           />
           <v-text-field
               :type="showPassword ? 'text' : 'password'"
@@ -28,6 +29,7 @@
               @click:append="showPassword = !showPassword"
               v-model="password"
               :rules="mobileRules"
+              solo-inverted
           />
           <v-btn
               large
@@ -117,7 +119,7 @@ export default {
   display: flex;
   justify-content: center;
   width: 100%;
-  height: 100%;
+  height: 90vh;
   //height: max-content;
   background-color: transparent;
   color: white;

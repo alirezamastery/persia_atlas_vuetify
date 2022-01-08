@@ -7,6 +7,7 @@ import Login from '@/views/auth/Login'
 import NotFound from '@/views/NotFound'
 import * as views from './chunks'
 import {editVariantStatus} from './chunks'
+import {state} from '@/store/general'
 
 Vue.use(VueRouter)
 
@@ -283,6 +284,18 @@ router.beforeEach((to, from, next) => {
   } else {
     next()
   }
+})
+
+router.beforeEach((to, from, next) => {
+  store.commit('CLEAR_ALERTS')
+  console.log('pending alerts' , store.state.pendingAlerts)
+  const pendingAlerts = store.state.pendingAlerts
+  for (const pendingAlert of pendingAlerts) {
+    store.commit('ADD_ALERT' , pendingAlert)
+  }
+  console.log('alerts' , store.state.alerts)
+  store.commit('CLEAR_PENDING_ALERTS')
+  next()
 })
 
 export default router

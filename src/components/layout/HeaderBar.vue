@@ -9,7 +9,6 @@
 
     <v-spacer/>
 
-    <v-app-bar-nav-icon v-if="isMobileWidth" @click="handleNavClick"/>
     <v-btn icon v-if="!$vuetify.theme.dark" @click="toggleTheme()">
       <v-icon class="mr-1" color="blue-grey darken-4">mdi-lightbulb</v-icon>
     </v-btn>
@@ -21,11 +20,14 @@
         small
         depressed
         color="red lighten-1"
-        class="mr-5"
+        class="mx-3"
         @click="logout"
     >
       {{ $t('general.routes.logout') }}
     </v-btn>
+
+    <v-app-bar-nav-icon v-if="isMobileWidth" @click="handleNavClick"/>
+
   </v-app-bar>
 </template>
 

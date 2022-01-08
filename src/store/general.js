@@ -5,6 +5,7 @@ const state = {
   httpRequestQueue: 0,
   sidebarOpen: false,
   alerts: [],
+  pendingAlerts: [],
   snackbars: [],
   snackbar: null,
   globalCardClass: 'px-20 py-40',
@@ -34,6 +35,9 @@ const mutations = {
   SET_SIDEBAR_IS_OPEN(state, value) {
     state.sidebarOpen = value
   },
+  ADD_PENDING_ALERT(state, alert) {
+    state.pendingAlerts.push(alert)
+  },
   ADD_ALERT(state, alert) {
     state.alerts.push(alert)
   },
@@ -41,6 +45,12 @@ const mutations = {
     const index = state.alerts.findIndex(item => item.key === alert.key)
     if (index > -1)
       state.alerts.splice(index, 1)
+  },
+  CLEAR_PENDING_ALERTS(state) {
+    state.pendingAlerts = []
+  },
+  CLEAR_ALERTS(state) {
+    state.alerts = []
   },
   ADD_SNACKBAR(state, snackbar) {
     state.snackbars.push(snackbar)
@@ -61,7 +71,9 @@ const actions = {
     commit('SET_SIDEBAR_IS_OPEN', payload)
   },
   HandleAddingAlert({commit}, alert) {
-    commit('ADD_ALERT', alert)
+    // commit('ADD_ALERT', alert)
+    console.log('HandleAddingAlert' , alert)
+    commit('ADD_PENDING_ALERT', alert)
   },
   HandleRemovingAlert({commit}, alert) {
     commit('REMOVE_ALERT', alert)
@@ -75,7 +87,7 @@ const actions = {
     commit('REMOVE_SNACKBAR', snackbar)
   },
   HandleSettingSnackbar({commit}, payload) {
-    console.log('HandleSettingSnackbar' , payload)
+    console.log('HandleSettingSnackbar', payload)
     commit('SET_SNACKBAR', payload)
   },
 }
