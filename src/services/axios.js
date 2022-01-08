@@ -1,5 +1,6 @@
 import axios from 'axios'
 import store from '@/store'
+import {v4 as uuid4} from 'uuid'
 
 function getCookie(name) {
   let cookieValue = null
@@ -51,13 +52,20 @@ axiosInstance.interceptors.response.use(
       store.commit('DECREMENT_HTTP_REQUEST_QUEUE')
 
       const originalRequest = error.config
-      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error: ', error)
-      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error.response.data: ', error.response.data)
-      console.log('in axiosInstance | BEGINNING OF ERROR SECTION | error.response.status: ', error.response.status)
+      console.log('in axiosInstance | BEGINNING | error: ', error)
 
       if (typeof error.response === 'undefined') {
-        alert('A server/network error occurred')
+        store.commit('SET_SNACKBAR', {
+          key: uuid4(),
+          color: 'red',
+          data: error,
+        })
         return Promise.reject(error)
+      }
+
+      if (error.response) {
+        console.log('in axiosInstance | BEGINNING | error.response.data: ', error.response.data)
+        console.log('in axiosInstance | BEGINNING | error.response.status: ', error.response.status)
       }
 
       if (
@@ -72,7 +80,7 @@ axiosInstance.interceptors.response.use(
           error.response.status === 401 &&
           originalRequest.url === baseURL + 'token/refresh/'
       ) {
-        window.location.href = '/login/';
+        window.location.href = '/login/'
         return Promise.reject(error)
       }
 
