@@ -7,35 +7,37 @@
         style="z-index: 10000;max-height: max-content"
     >
       <v-card-text>
-<!--        <div class="alert alert-error" v-if="errors">{{ errors }}</div>-->
         <div v-if="errors">
           <v-alert type="error" v-for="error in errors" :key="error">
             {{error}}
           </v-alert>
         </div>
-        <v-form @submit.prevent="handleSubmit" v-model="formIsValid">
+        <v-form
+            @submit.prevent="handleSubmit"
+            v-model="formIsValid"
+            class="d-flex flex-column justify-center"
+        >
           <v-text-field
-              :label="$t('general.mobile')"
-              prepend-icon="mdi-account-circle"
               v-model="mobile"
+              :label="$t('general.mobile')"
               :rules="mobileRules"
+              prepend-inner-icon="mdi-account-circle"
               solo-inverted
           />
           <v-text-field
+              v-model="password"
               :type="showPassword ? 'text' : 'password'"
               :label="$t('general.password')"
-              prepend-icon="mdi-lock"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              @click:append="showPassword = !showPassword"
-              v-model="password"
               :rules="mobileRules"
+              prepend-inner-icon="mdi-lock"
               solo-inverted
+              @click:append="showPassword = !showPassword"
           />
           <v-btn
               large
               type="submit"
               color="#00ff1c"
-              class="m-10"
               style="color: black"
               :disabled="!formIsValid"
           >
@@ -44,17 +46,6 @@
         </v-form>
       </v-card-text>
     </v-card>
-    <!--    <form method="post" class="form-struct login-form" @submit.prevent="handleSubmit">-->
-    <!--      <input type="text" class="login-input" placeholder="Mobile" v-model="mobile">-->
-    <!--      <div class="password-input">-->
-    <!--        <input :type="pwInputType" class="login-input" placeholder="Password" v-model="password">-->
-    <!--        <div class="visibility-btn" @click="handleShowPassword">-->
-    <!--          <font-awesome-icon :icon="['fa', 'eye-slash']" v-if="eyeSlash"></font-awesome-icon>-->
-    <!--          <font-awesome-icon :icon="['fa', 'eye']" v-else></font-awesome-icon>-->
-    <!--        </div>-->
-    <!--      </div>-->
-    <!--      <button type="submit" class="form-submit login-btn">Login</button>-->
-    <!--    </form>-->
   </div>
 </template>
 
@@ -73,6 +64,7 @@ export default {
       eyeSlash: false,
       errors: null,
       mobile: '',
+      // TODO: use vee-validate
       mobileRules: [
         value => !!value || 'this field is required',
       ],
@@ -84,15 +76,6 @@ export default {
     }
   },
   methods: {
-    handleShowPassword() {
-      if (this.pwInputType === 'password') {
-        this.pwInputType = 'text'
-        this.eyeSlash = true
-      } else {
-        this.pwInputType = 'password'
-        this.eyeSlash = false
-      }
-    },
     handleSubmit() {
       if (!(this.mobile && this.password)) return
       this.axios.post('token/', {
