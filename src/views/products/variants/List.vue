@@ -34,6 +34,10 @@
           {{ item.price_min | price }}
         </template>
 
+        <template v-slot:item.selector="{ item }">
+          {{ item.selector_values[0].value }}
+        </template>
+
         <template v-slot:item.is_active="{ item }">
           <v-icon
               v-if="item.is_active"
@@ -123,6 +127,7 @@ export default {
       headers: [
         {text: this.$t('products.product'), value: 'product', sortable: false},
         {text: this.$t('products.DKPC'), value: 'dkpc', align: 'start'},
+        {text: this.$t('products.selector'), value: 'selector'},
         {text: this.$t('products.priceMin'), value: 'price_min'},
         {text: this.$t('products.hasCompetition'), value: 'has_competition'},
         {text: this.$t('products.isActive'), value: 'is_active'},

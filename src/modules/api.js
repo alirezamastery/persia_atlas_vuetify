@@ -1,6 +1,8 @@
 const api = process.env.VUE_APP_API_URL
 
 export default {
+  userProfile: 'users/profile/',
+
   brands: 'products/brands/',
   actualProducts: 'products/actual-products/',
   products: 'products/products/',

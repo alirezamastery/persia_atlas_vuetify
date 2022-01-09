@@ -5,6 +5,7 @@ import store from '@/store'
 import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
 import NotFound from '@/views/NotFound'
+import Profile from '@/views/dashboard/Profile'
 import * as views from './chunks'
 import {editVariantStatus} from './chunks'
 import {state} from '@/store/general'
@@ -26,10 +27,19 @@ export const routesObj = {
   home: {
     path: '/',
     name: 'Home',
-    component: Home,
+    redirect: {name: 'editVariantStatus'},
     meta: {
       titleI18n: 'general.routes.home',
       icon: 'mdi-home',
+      requiresAuth: true,
+    },
+  },
+
+  profile: {
+    path: '/user/profile',
+    name: 'Profile',
+    component: Profile,
+    meta: {
       requiresAuth: true,
     },
   },
@@ -288,12 +298,13 @@ router.beforeEach((to, from, next) => {
 
 router.beforeEach((to, from, next) => {
   store.commit('CLEAR_ALERTS')
-  console.log('pending alerts' , store.state.pendingAlerts)
+  store.commit('CLEAR_HTTP_QUEUE')
+  console.log('pending alerts', store.state.pendingAlerts)
   const pendingAlerts = store.state.pendingAlerts
   for (const pendingAlert of pendingAlerts) {
-    store.commit('ADD_ALERT' , pendingAlert)
+    store.commit('ADD_ALERT', pendingAlert)
   }
-  console.log('alerts' , store.state.alerts)
+  console.log('alerts', store.state.alerts)
   store.commit('CLEAR_PENDING_ALERTS')
   next()
 })

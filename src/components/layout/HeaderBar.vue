@@ -5,9 +5,9 @@
       flat
   >
 
-    <v-icon>mdi-crown</v-icon>
+<!--    <v-icon>mdi-crown</v-icon>-->
     <v-toolbar-title class="mx-1">پرشیا اطلس</v-toolbar-title>
-    <v-icon>mdi-cash-multiple</v-icon>
+<!--    <v-icon>mdi-cash-multiple</v-icon>-->
 
     <v-spacer/>
 

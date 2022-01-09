@@ -32,6 +32,9 @@ const mutations = {
       state.httpRequestQueue = 0
     // console.log('decre after', state.httpRequestQueue)
   },
+  CLEAR_HTTP_QUEUE(state){
+    state.httpRequestQueue = 0
+  },
   SET_SIDEBAR_IS_OPEN(state, value) {
     state.sidebarOpen = value
   },

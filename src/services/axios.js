@@ -55,6 +55,7 @@ axiosInstance.interceptors.response.use(
       console.log('in axiosInstance | BEGINNING | error: ', error)
 
       if (typeof error.response === 'undefined') {
+        console.log('sxios' , error)
         store.commit('SET_SNACKBAR', {
           key: uuid4(),
           color: 'red',

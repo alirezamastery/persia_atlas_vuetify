@@ -82,7 +82,7 @@ export default {
         mobile: this.mobile,
         password: this.password,
       }).then(res => {
-        console.log(res)
+        console.log('Login', res)
         localStorage.setItem('access_token', res.data.access)
         localStorage.setItem('refresh_token', res.data.refresh)
         this.axios.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
@@ -93,6 +93,15 @@ export default {
         this.errors = err.response.data
       })
     },
+    getUserData(){
+      this.axios.get(this.$api.userProfile)
+          .then(res => {
+            this.form = res.data
+          })
+          .catch(err => {
+            console.log('getUserData error', err)
+          })
+    }
   },
 }
 </script>
