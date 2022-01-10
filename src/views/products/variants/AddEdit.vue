@@ -88,17 +88,17 @@
                   sm="6"
                   md="4"
               >
-                <ValidationProvider
-                    name="PriceMin"
-                    rules="required|max_value:2147483647"
-                    v-slot="{ errors }"
-                >
-                  <v-text-field
-                      v-model="form.price_min"
-                      :label="$t('products.priceMin')"
-                      :error-messages="errors"
-                  />
-                </ValidationProvider>
+                <!--                <ValidationProvider-->
+                <!--                    name="PriceMin"-->
+                <!--                    rules="required|max_value:2147483647"-->
+                <!--                    v-slot="{ errors }"-->
+                <!--                >-->
+                <v-text-field
+                    v-model="form.price_min"
+                    ref="priceMin"
+                    :label="$t('general.priceMinToman')"
+                />
+                <!--                </ValidationProvider>-->
               </v-col>
             </v-row>
             <v-row>
@@ -138,6 +138,7 @@
 <script>
 import {AddEditViewMixin} from '@/mixins/addEditView'
 import {textToolsMixin} from '@/mixins/textTools'
+import {numberToolsMixin} from '@/mixins/numberTools'
 import AutoComplete from '@/components/AutoComplete'
 import DetailViewActions from '@/components/general/DetailViewActions'
 import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
@@ -149,7 +150,7 @@ export default {
     DetailViewActions,
     DetailViewDeleteDialog,
   },
-  mixins: [textToolsMixin, AddEditViewMixin],
+  mixins: [textToolsMixin, AddEditViewMixin, numberToolsMixin],
   props: {
     id: {
       type: [Number, String],
@@ -164,16 +165,22 @@ export default {
       form: {
         product: {},
         dkpc: '',
-        price_min: 0,
+        price_min: null,
         is_active: true,
         selector_values: [],
         actual_product: {},
       },
+      priceMin: null,
     }
   },
   computed: {
     itemRepr() {
       return this.form.dkpc.toString()
+    },
+  },
+  watch: {
+    'form.price_min': function (newVal) {
+      this.form.price_min = this.formatNumber(newVal)
     },
   },
   methods: {
@@ -187,7 +194,7 @@ export default {
         dkpc: this.form.dkpc,
         has_competition: this.form.has_competition,
         is_active: this.form.is_active,
-        price_min: this.form.price_min,
+        price_min: parseInt(this.removeCommas(this.form.price_min)),
         selector_values: this.form.selector_values,
         actual_product: this.form.actual_product.id,
       }
