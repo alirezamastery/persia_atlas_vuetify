@@ -6,9 +6,9 @@ import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
 import NotFound from '@/views/NotFound'
 import Profile from '@/views/dashboard/Profile'
+import JustRain from '@/views/JustRain'
 import * as views from './chunks'
 import {editVariantStatus} from './chunks'
-import {state} from '@/store/general'
 
 Vue.use(VueRouter)
 
@@ -255,6 +255,13 @@ export const routesObj = {
     },
   },
 
+  // Matrix Rain
+  justRain: {
+    path: '/just-rain',
+    component: JustRain,
+    name: 'JustRain',
+    meta: {guest: true},
+  },
   // Error
   '404': {
     path: '*',
