@@ -2,8 +2,20 @@ export const listViewMixin = {
   data() {
     return {
       items: [],
-      pageSize: 20,
+      pageSize: 20, // TODO: create a component for pagination
       pageSizeOptions: [10, 20, 50, 100],
+      loading: false,
+      page: 1,
+      queries: '',
+      totalPaginationVisible: 7,
+      data: {
+        items: [],
+        count: 0,
+        page_count: 0,
+        next: null,
+        previous: null,
+      },
+      searchPhrase: '',
       editedIndex: -1,
       dialogDelete: false,
     }
@@ -16,18 +28,50 @@ export const listViewMixin = {
       this.page = 1
       this.reFetchData()
     },
+    searchPhrase() {
+      this.page = 1
+      this.reFetchData()
+    },
   },
   created() {
     this.axios.get(this.apiRoot)
         .then(res => {
           console.log('main items', res)
-          this.items = res.data
+          // this.items = res.data
+          this.data = res.data
         })
         .catch(err => {
           console.log('main items error', err)
         })
   },
   methods: {
+    constructQuery() {
+      let query = `?${this.queries}&page_size=${this.pageSize}`
+      if (this.searchPhrase)
+        query += `&search=${this.searchPhrase}`
+      if (this.page)
+        query += `&page=${this.page}`
+      console.log('constructQuery', query)
+      return query
+    },
+    handleUpdate(event) {
+      console.log('handleUpdate | event', event)
+      const sortBy = event.sortBy
+      const sortDesc = event.sortDesc
+
+      this.queries = ''
+      this.page = 1
+      let query = ''
+      for (let i = 0; i < sortBy.length; i++) {
+        if (i === 0) query += 'o='
+        const order = sortDesc[i] ? '-' : ''
+        const comma = i > 0 ? ',' : ''
+        query += comma + order + sortBy[i]
+      }
+
+      this.queries = query
+      this.reFetchData()
+    },
     reFetchData() {
       const url = this.apiRoot + this.constructQuery()
       this.loading = true

@@ -7,10 +7,10 @@
       <v-data-table
           :headers="headers"
           :items="data.items"
-          item-key="id"
           :server-items-length="data.count"
-          hide-default-footer
+          item-key="id"
           class="elevation-1"
+          hide-default-footer
           dense
           multi-sort
           @update:options="handleUpdate"
@@ -21,7 +21,7 @@
               :title="$t('general.routes.variants')"
               :api-root="apiRoot"
               :add-route="'variantAdd'"
-              v-on:search-result="data.items = $event"
+              v-on:search-input="searchPhrase = $event"
           />
         </template>
         <!-- Customize table header END -->
@@ -96,12 +96,12 @@
       </v-data-table>
 
       <v-container class="pt-5">
-        <v-row >
+        <v-row>
           <v-col cols="12" sm="9" lg="10">
             <v-pagination
                 v-model="page"
                 :length="data.page_count"
-                :total-visible="7"
+                :total-visible="totalPaginationVisible"
                 :disabled="loading"
                 @input="reFetchData"
             />
@@ -116,7 +116,6 @@
             />
           </v-col>
         </v-row>
-
       </v-container>
 
     </v-card-text>
@@ -137,17 +136,6 @@ export default {
     return {
       apiRoot: this.$api.variants,
       editRoute: 'variantEdit',
-      loading: false,
-      page: 1,
-      itemsPerPage: 10,
-      queries: '',
-      data: {
-        items: [],
-        count: 0,
-        page_count: 0,
-        next: null,
-        previous: null,
-      },
       headers: [
         {text: this.$t('products.product'), value: 'product', sortable: false},
         {text: this.$t('products.DKPC'), value: 'dkpc', align: 'start'},
@@ -166,97 +154,6 @@ export default {
         actual_product: 0,
       },
     }
-  },
-  created() {
-    this.axios.get(this.apiRoot)
-        .then(res => {
-          console.log('main items', res)
-          this.data = res.data
-        })
-        .catch(err => {
-          console.log('main items error', err)
-        })
-  },
-  methods: {
-    constructQuery() {
-      let query = `?${this.queries}&page_size=${this.pageSize}`
-      if (this.page)
-        query += `&page=${this.page}`
-      console.log('constructQuery', query)
-      return query
-    },
-    handleUpdate(event) {
-      console.log('handleUpdate | event', event)
-      const sortBy = event.sortBy
-      const sortDesc = event.sortDesc
-
-      this.queries = ''
-      this.page = 1
-      let query = ''
-      for (let i = 0; i < sortBy.length; i++) {
-        if (i === 0) query += 'o='
-        const order = sortDesc[i] ? '-' : ''
-        const comma = i > 0 ? ',' : ''
-        query += comma + order + sortBy[i]
-      }
-
-      this.queries = query
-      this.reFetchData()
-      // this.loading = true
-      // this.axios.get(url)
-      //     .then(res => {
-      //       console.log('handleUpdate | res', res)
-      //       this.data = res.data
-      //       this.loading = false
-      //     })
-      //     .catch(err => {
-      //       console.log('handleUpdate | error', err)
-      //       this.loading = false
-      //     })
-    },
-    handleNextPage() {
-      this.loading = true
-      const url = this.apiRoot + this.constructQuery()
-      console.log('handleNextPage', this.page, url)
-      this.axios.get(url)
-          .then(res => {
-            this.data = res.data
-            this.loading = false
-          })
-          .catch(err => {
-            console.log('handleNextPage | error', err)
-            this.loading = false
-          })
-    },
-    handlePreviousPage() {
-      this.loading = true
-      const url = this.apiRoot + this.constructQuery()
-      console.log('handlePreviousPage', this.page, url)
-      this.axios.get(url)
-          .then(res => {
-            this.data = res.data
-            this.loading = false
-          })
-          .catch(err => {
-            console.log('handlePreviousPage | error', err)
-            this.loading = false
-          })
-    },
-    handlePageSelect(event) {
-      this.loading = true
-      const url = this.apiRoot + this.constructQuery()
-      console.log('handlePageSelect', this.page, event, url)
-      this.axios.get(url)
-          .then(res => {
-            console.log('handlePageSelect | response', res)
-            this.data = res.data
-            this.loading = false
-          })
-          .catch(err => {
-            console.log('handlePageSelect | error', err)
-            this.loading = false
-          })
-    },
   },
 }
 </script>

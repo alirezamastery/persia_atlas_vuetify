@@ -5,12 +5,14 @@
     <v-card-text>
       <v-data-table
           :headers="headers"
-          :items="items"
-          :items-per-page="100"
+          :items="data.items"
+          :server-items-length="data.count"
           item-key="name"
           class="elevation-1"
+          hide-default-footer
           dense
           multi-sort
+          @update:options="handleUpdate"
       >
         <!-- Customize table header START -->
         <template v-slot:top>
@@ -18,7 +20,7 @@
               :title="$t('general.routes.actualProducts')"
               :api-root="apiRoot"
               :add-route="'actualProductAdd'"
-              v-on:search-result="items = $event"
+              v-on:search-input="searchPhrase = $event"
           />
         </template>
         <!-- Customize table header END -->
@@ -41,13 +43,13 @@
           >
             mdi-pencil
           </v-icon>
-          <v-icon
-              small
-              class="mr-3"
-              @click="deleteItem(item)"
-          >
-            mdi-delete
-          </v-icon>
+          <!--          <v-icon-->
+          <!--              small-->
+          <!--              class="mr-3"-->
+          <!--              @click="deleteItem(item)"-->
+          <!--          >-->
+          <!--            mdi-delete-->
+          <!--          </v-icon>-->
         </template>
 
         <template v-slot:no-data>
@@ -55,6 +57,30 @@
         </template>
         <!-- Customize how each row is displayed END -->
       </v-data-table>
+
+      <v-container class="pt-5">
+        <v-row>
+          <v-col cols="12" sm="9" lg="10">
+            <v-pagination
+                v-model="page"
+                :length="data.page_count"
+                :total-visible="totalPaginationVisible"
+                :disabled="loading"
+                @input="reFetchData"
+            />
+          </v-col>
+          <v-spacer/>
+          <v-col cols="4" sm="3" lg="2" style="max-width: 100px">
+            <v-select
+                v-model="pageSize"
+                :items="pageSizeOptions"
+                :disabled="loading"
+                solo-inverted
+            />
+          </v-col>
+        </v-row>
+      </v-container>
+
     </v-card-text>
 
     <v-dialog v-model="dialogDelete" max-width="500px">
