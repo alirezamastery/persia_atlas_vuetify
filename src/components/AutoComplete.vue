@@ -81,7 +81,7 @@ export default {
       this.defaultItem = this.defaultValue
     this.axios.get(this.api)
         .then(res => {
-          this.items = res.data
+          this.items = res.data.items
         })
   },
   methods: {
@@ -101,7 +101,7 @@ export default {
         this.axios.get(url)
             .then(res => {
               this.loading = false
-              this.items = res.data
+              this.items = res.data.items
             })
             .catch(err => {
               console.log(err)
