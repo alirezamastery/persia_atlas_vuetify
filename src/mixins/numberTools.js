@@ -6,7 +6,7 @@ export const numberToolsMixin = {
     removeCommas(val){
       return val.replace(/,/g, '')
     },
-    formatNumber(val){
+    formatIntNumber(val){
       const commaRemoved = this.removeCommas(val)
       return this.addCommaForIntNumber(commaRemoved)
     }

@@ -182,17 +182,19 @@
 <script>
 import store from '@/store'
 import {v4 as uuid4} from 'uuid'
+import {numberToolsMixin} from '@/mixins/numberTools'
 
 export default {
   name: 'VariantDetails',
   props: ['variant'],
+  mixins:[numberToolsMixin],
   data() {
     return {
       initialPriceMin: this.variant.price_min.toString(),
-      newPriceMin: this.variant.price_min.toString(),
+      newPriceMin: this.formatIntNumber(this.variant.price_min.toString()),
       initialPrice: this.variant.price.toString(),
       initialStock: this.variant.our_stock.toString(),
-      newPrice: this.variant.price.toString(),
+      newPrice: this.formatIntNumber(this.variant.price.toString()),
       newStock: this.variant.our_stock.toString(),
 
       robotStatus: this.variant['is_active'],
@@ -206,22 +208,21 @@ export default {
   },
   computed: {
     showBtnDigi() {
-      return this.initialPrice !== this.newPrice || this.initialStock !== this.newStock
+      const commaRemovedNewPrice = this.removeCommas(this.newPrice)
+      return this.initialPrice !== commaRemovedNewPrice || this.initialStock !== this.newStock
     },
     showBtnAtlas() {
-      return this.initialPriceMin !== this.newPriceMin
+      const commaRemovedNewPriceMin = this.removeCommas(this.newPriceMin)
+      return this.initialPriceMin !== commaRemovedNewPriceMin
     },
   },
-  mounted() {
-    // this.initialPriceMin = this.variant.price_min.toString()
-    // this.newPriceMin = this.variant.price_min.toString()
-    // this.initialPrice = this.variant.price.toString()
-    // this.initialStock = this.variant.our_stock.toString()
-    // this.newPrice = this.variant.price.toString()
-    // this.newStock = this.variant.our_stock.toString()
-    // this.robotStatus = this.variant.is_active
-    // this.digiStatus = this.variant['is_digi_active']
-    console.log('digiStatus', this.digiStatus)
+  watch: {
+    newPriceMin(newVal) {
+      this.newPriceMin = this.formatIntNumber(newVal)
+    },
+    newPrice(newVal) {
+      this.newPrice = this.formatIntNumber(newVal)
+    },
   },
   methods: {
     revertDigiChange() {
@@ -256,7 +257,7 @@ export default {
       this.loadingDigiData = true
       const data = {
         'dkpc': this.variant.dkpc,
-        'price': this.newPrice,
+        'price': this.removeCommas(this.newPrice),
         'our_stock': this.newStock,
       }
       this.axios.post(this.$api.updateVariantData, data)
@@ -305,7 +306,7 @@ export default {
       this.loadingAtlasData = true
       const data = {
         'dkpc': this.variant.dkpc,
-        'price_min': parseInt(this.newPriceMin),
+        'price_min': parseInt(this.removeCommas(this.newPriceMin)),
       }
       this.axios.patch(`${this.$api.variants}${this.variant.id}/`, data)
           .then(res => {

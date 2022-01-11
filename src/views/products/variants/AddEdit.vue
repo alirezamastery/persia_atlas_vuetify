@@ -180,7 +180,7 @@ export default {
   },
   watch: {
     'form.price_min': function (newVal) {
-      this.form.price_min = this.formatNumber(newVal)
+      this.form.price_min = this.formatIntNumber(newVal)
     },
   },
   methods: {
