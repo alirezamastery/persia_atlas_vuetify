@@ -2,6 +2,8 @@ export const listViewMixin = {
   data() {
     return {
       items: [],
+      pageSize: 20,
+      pageSizeOptions: [10, 20, 50, 100],
       editedIndex: -1,
       dialogDelete: false,
     }
@@ -9,6 +11,10 @@ export const listViewMixin = {
   watch: {
     dialogDelete(val) {
       val || this.closeDelete()
+    },
+    pageSize() {
+      this.page = 1
+      this.reFetchData()
     },
   },
   created() {
@@ -22,6 +28,21 @@ export const listViewMixin = {
         })
   },
   methods: {
+    reFetchData() {
+      const url = this.apiRoot + this.constructQuery()
+      this.loading = true
+      console.log('reFetchData', url)
+      this.axios.get(url)
+          .then(res => {
+            console.log('reFetchData | response', res)
+            this.data = res.data
+            this.loading = false
+          })
+          .catch(err => {
+            console.log('reFetchData | error', err)
+            this.loading = false
+          })
+    },
     closeDelete() {
       this.dialogDelete = false
       this.$nextTick(() => {

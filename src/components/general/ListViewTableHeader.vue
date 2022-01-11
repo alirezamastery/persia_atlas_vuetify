@@ -71,12 +71,13 @@ export default {
     }
   },
   methods: {
+    // TODO: fix debounce
     handleSearchInput() {
       const apiCall = (url) => {
         this.axios.get(url)
             .then(res => {
               console.log('ListViewTableHeader | handleSearchInput', res)
-              this.$emit('search-result', res.data)
+              this.$emit('search-result', res.data.items)
             })
             .catch(err => {
               console.log(err)
