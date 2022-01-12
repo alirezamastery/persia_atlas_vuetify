@@ -4,6 +4,7 @@
       {{ $t('general.profile') }}
     </v-card-title>
     <v-card-text>
+
       <v-form>
         <v-container>
           <v-row>
@@ -14,6 +15,7 @@
                     :src="avatarSrc"
                     alt=""
                     class="avatar-img"
+                    @click="handleImageSelect"
                 >
                 <img v-else src="@/assets/svg/blank-user.svg" alt="">
                 <v-icon class="camera-icon">mdi-camera</v-icon>
@@ -39,12 +41,41 @@
         </v-container>
       </v-form>
     </v-card-text>
+    <v-dialog
+        v-model="dialogOpen"
+        fullscreen
+    >
+      <v-btn
+          icon
+          dark
+          @click="dialogOpen = false"
+      >
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <Cropper
+          :src="imageObjectURL"
+          :stencil-component="$options.components.CircleStencil"
+          :stencil-props="{
+		aspectRatio: 1/1,
+		resizable: true
+	}"
+          @change="handleChange"
+      />
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
+
+import {CircleStencil, Cropper} from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css'
+
+
 export default {
   name: 'Profile',
+  components: {
+    Cropper,
+  },
   data() {
     return {
       form: {
@@ -52,6 +83,10 @@ export default {
         last_name: null,
         avatar: null,
       },
+      imageObjectURL: null,
+      imageInput: null,
+      validExtensions: ['png', 'jpg', 'jpeg', 'JPG', 'JPEG'],
+      dialogOpen: false,
     }
   },
   computed: {
@@ -73,6 +108,35 @@ export default {
     handleAvatarClick() {
       this.$refs.avatarInput.$el.firstChild.click()
       // console.log(this.$refs.avatarInput.$el.firstChild.click())
+    },
+    handleImageSelect() {
+      this.imageInput = document.createElement('input')
+      this.imageInput.type = 'file'
+      this.imageInput.addEventListener('change', this.handleImageSelected)
+      this.imageInput.click()
+    },
+    handleImageSelected(event) {
+      console.log('handleImageSelected', event)
+      const file = event.target.files[0]
+      const extension = file.name.split('.').pop()
+      if (!this.validExtensions.includes(extension)) {
+        this.$store.dispatch('HandleSettingSnackbar', {
+          color: 'red',
+          data: this.$t('general.snack.fileFormatError'),
+        })
+        return
+      }
+
+      this.imageObjectURL = window.URL.createObjectURL(file)
+      this.dialogOpen = true
+      console.log('imgURL', this.imageObjectURL)
+    },
+    handleChange({coordinates, canvas}) {
+      this.coordinates = coordinates
+      // You able to do different manipulations at a canvas
+      // but there we just get a cropped image, that can be used
+      // as src for <img/> to preview result
+      this.image = canvas.toDataURL()
     },
   },
 }

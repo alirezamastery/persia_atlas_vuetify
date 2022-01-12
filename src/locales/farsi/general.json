@@ -86,6 +86,7 @@
   "default": "پیش فرض",
   "search": "جستجو",
   "delete": "حذف",
+  "welcome": "خوش اومدی",
   "deleteConfirm": "برای حذف این مورد مطمئن هستید؟",
   "date": "تاریخ",
   "units": {
@@ -108,7 +109,8 @@
   "snack": {
     "saveError": "خطا در ثبت",
     "deleteError": "خطا در حذف",
-    "saveSuccess": "تغییرات با موفقیت ثبت شد"
+    "saveSuccess": "تغییرات با موفقیت ثبت شد",
+    "fileFormatError": "فرمت فایل مورد قبول نیست"
   },
   "Q": {
     "deleteConfirm": "آیا مطمئن هستید که میخواهید {0} \"{1}\" را حذف کنید؟"

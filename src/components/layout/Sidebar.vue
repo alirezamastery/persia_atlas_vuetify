@@ -15,7 +15,7 @@
 
         <v-list-item-content>
           <v-list-item-title>{{ user }}</v-list-item-title>
-          <v-list-item-subtitle>خوش اومدی</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ $t('general.welcome') }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
