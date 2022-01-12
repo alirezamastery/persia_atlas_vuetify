@@ -72,28 +72,9 @@ export default {
     }
   },
   methods: {
-    // TODO: fix debounce
-    handleSearchInput() {
+    handleSearchInput: debounce(function () {
       this.$emit('search-input', this.searchPhrase)
-      // const apiCall = (url) => {
-      //   this.axios.get(url)
-      //       .then(res => {
-      //         console.log('ListViewTableHeader | handleSearchInput', res)
-      //         this.$emit('search-result', res.data.items)
-      //       })
-      //       .catch(err => {
-      //         console.log(err)
-      //       })
-      // }
-      //
-      // const debouncedAPICall = debounce(apiCall, 300)
-      //
-      // this.loading = true
-      // let url = this.apiRoot
-      // if (this.searchPhrase !== '')
-      //   url += `?${this.queryParam}=${this.searchPhrase}`
-      // debouncedAPICall(url)
-    },
+    }, 300),
   },
 }
 </script>
