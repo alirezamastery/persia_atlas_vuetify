@@ -103,7 +103,7 @@
 </template>
 
 <script>
-import {listViewMixin} from '@/modules/mixins'
+import {listViewMixin} from '@/mixins/listViewMixin'
 import ListViewTableHeader from '@/components/general/ListViewTableHeader'
 
 export default {

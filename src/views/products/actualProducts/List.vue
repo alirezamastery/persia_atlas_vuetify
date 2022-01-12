@@ -102,7 +102,7 @@
 
 <script>
 import ListViewTableHeader from '@/components/general/ListViewTableHeader'
-import {listViewMixin} from '@/modules/mixins'
+import {listViewMixin} from '@/mixins/listViewMixin'
 
 export default {
   name: 'List',
