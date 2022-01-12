@@ -75,28 +75,14 @@
 
       </v-data-table>
 
-      <v-container class="pt-5">
-        <v-row>
-          <v-col cols="12" sm="9" lg="10">
-            <v-pagination
-                v-model="page"
-                :length="data.page_count"
-                :total-visible="totalPaginationVisible"
-                :disabled="loading"
-                @input="reFetchData"
-            />
-          </v-col>
-          <v-spacer/>
-          <v-col cols="4" sm="3" lg="2" style="max-width: 100px">
-            <v-select
-                v-model="pageSize"
-                :items="pageSizeOptions"
-                :disabled="loading"
-                solo-inverted
-            />
-          </v-col>
-        </v-row>
-      </v-container>
+      <ListPagination
+          :page="page"
+          :page-size="pageSize"
+          :table-loading="loading"
+          :page-count="data.page_count"
+          @page-select="handlePageSelect"
+          @page-size-select="pageSize = $event"
+      />
 
     </v-card-text>
   </v-card>
@@ -105,11 +91,13 @@
 <script>
 import {listViewMixin} from '@/mixins/listViewMixin'
 import ListViewTableHeader from '@/components/general/ListViewTableHeader'
+import ListPagination from '@/components/general/ListPagination'
 
 export default {
   name: 'List',
   components: {
     ListViewTableHeader,
+    ListPagination
   },
   mixins: [listViewMixin],
   data() {
@@ -118,8 +106,8 @@ export default {
       editRoute: 'productEdit',
       headers: [
         {text: this.$t('general.title'), value: 'title', sortable: false},
-        {text: this.$t('general.dkp'), value: 'dkp'},
-        {text: this.$t('general.isActive'), value: 'is_active'},
+        {text: this.$t('general.dkp'), value: 'dkp', sortable: false},
+        {text: this.$t('general.isActive'), value: 'is_active', sortable: false},
         {text: this.$t('general.type'), value: 'type', sortable: false},
         {text: this.$t('products.tools'), value: 'actions', sortable: false},
       ],

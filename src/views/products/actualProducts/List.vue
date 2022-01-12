@@ -58,28 +58,14 @@
         <!-- Customize how each row is displayed END -->
       </v-data-table>
 
-      <v-container class="pt-5">
-        <v-row>
-          <v-col cols="12" sm="9" lg="10">
-            <v-pagination
-                v-model="page"
-                :length="data.page_count"
-                :total-visible="totalPaginationVisible"
-                :disabled="loading"
-                @input="reFetchData"
-            />
-          </v-col>
-          <v-spacer/>
-          <v-col cols="4" sm="3" lg="2" style="max-width: 100px">
-            <v-select
-                v-model="pageSize"
-                :items="pageSizeOptions"
-                :disabled="loading"
-                solo-inverted
-            />
-          </v-col>
-        </v-row>
-      </v-container>
+      <ListPagination
+          :page="page"
+          :page-size="pageSize"
+          :table-loading="loading"
+          :page-count="data.page_count"
+          @page-select="handlePageSelect"
+          @page-size-select="pageSize = $event"
+      />
 
     </v-card-text>
 
@@ -103,11 +89,13 @@
 <script>
 import ListViewTableHeader from '@/components/general/ListViewTableHeader'
 import {listViewMixin} from '@/mixins/listViewMixin'
+import ListPagination from '@/components/general/ListPagination'
 
 export default {
   name: 'List',
   components: {
     ListViewTableHeader,
+    ListPagination,
   },
   mixins: [listViewMixin],
   data() {

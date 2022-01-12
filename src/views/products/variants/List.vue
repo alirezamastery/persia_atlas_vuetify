@@ -116,8 +116,8 @@ import ListPagination from '@/components/general/ListPagination'
 export default {
   name: 'List',
   components: {
-    ListPagination,
     ListViewTableHeader,
+    ListPagination,
   },
   mixins: [listViewMixin],
   data() {
