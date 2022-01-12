@@ -2,7 +2,7 @@ export const listViewMixin = {
   data() {
     return {
       items: [],
-      pageSize: 20, // TODO: create a component for pagination
+      pageSize: 20,
       pageSizeOptions: [10, 20, 50, 100],
       loading: false,
       page: 1,
@@ -40,7 +40,7 @@ export const listViewMixin = {
         query += `&search=${this.searchPhrase}`
       if (this.page)
         query += `&page=${this.page}`
-      // console.log('constructQuery', query)
+      console.log('constructQuery', query)
       return query
     },
     handleUpdate(event) {
@@ -59,6 +59,11 @@ export const listViewMixin = {
       }
 
       this.queries = query
+      this.reFetchData()
+    },
+    handlePageSelect(event){
+      console.log('handlePageSelect' , event)
+      this.page = event
       this.reFetchData()
     },
     reFetchData() {
