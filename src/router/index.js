@@ -306,12 +306,10 @@ router.beforeEach((to, from, next) => {
 router.beforeEach((to, from, next) => {
   store.commit('CLEAR_ALERTS')
   store.commit('CLEAR_HTTP_QUEUE')
-  console.log('pending alerts', store.state.pendingAlerts)
   const pendingAlerts = store.state.pendingAlerts
   for (const pendingAlert of pendingAlerts) {
     store.commit('ADD_ALERT', pendingAlert)
   }
-  console.log('alerts', store.state.alerts)
   store.commit('CLEAR_PENDING_ALERTS')
   next()
 })

@@ -21,13 +21,22 @@
       </v-row>
 
 
-      <VariantDetails
-          v-for="variant in variants"
-          :key="variant.dkpc"
-          :variant="variant"
-      >
+      <v-container>
+        <v-row>
+          <v-col v-if="variants.length" cols="12">
+            <VariantDetails
+                v-for="variant in variants"
+                :key="variant.dkpc"
+                :variant="variant"
+            >
+            </VariantDetails>
+          </v-col>
+          <v-col v-else-if="searched && !isLoading" cols="12" class="justify-center">
+            {{ $t('general.noResult') }}
+          </v-col>
+        </v-row>
+      </v-container>
 
-      </VariantDetails>
     </v-card-text>
   </v-card>
 </template>
@@ -49,6 +58,7 @@ export default {
       actualProductId: null,
       variants: [],
       product: null,
+      searched: false,
       fakeVars: [
         {
           'id': 174,
@@ -100,6 +110,7 @@ export default {
   methods: {
     getVariants() {
       console.log('getVariants', this.actualProductId)
+      if (!this.actualProductId) return
       this.isLoading = true
       this.variants = []
       const url = this.$api.actualProductVariants + this.actualProductId
@@ -109,6 +120,7 @@ export default {
             this.isLoading = false
             this.variants = res.data.variants
             this.product = res.data.product
+            this.searched = true
           })
           .catch(err => {
             console.log(err)

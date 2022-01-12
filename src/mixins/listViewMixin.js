@@ -33,17 +33,17 @@ export const listViewMixin = {
       this.reFetchData()
     },
   },
-  created() {
-    this.axios.get(this.apiRoot)
-        .then(res => {
-          console.log('main items', res)
-          // this.items = res.data
-          this.data = res.data
-        })
-        .catch(err => {
-          console.log('main items error', err)
-        })
-  },
+  // created() {
+  //   this.axios.get(this.apiRoot)
+  //       .then(res => {
+  //         console.log('main items', res)
+  //         // this.items = res.data
+  //         this.data = res.data
+  //       })
+  //       .catch(err => {
+  //         console.log('main items error', err)
+  //       })
+  // },
   methods: {
     constructQuery() {
       let query = `?${this.queries}&page_size=${this.pageSize}`
@@ -51,7 +51,7 @@ export const listViewMixin = {
         query += `&search=${this.searchPhrase}`
       if (this.page)
         query += `&page=${this.page}`
-      console.log('constructQuery', query)
+      // console.log('constructQuery', query)
       return query
     },
     handleUpdate(event) {
@@ -75,7 +75,7 @@ export const listViewMixin = {
     reFetchData() {
       const url = this.apiRoot + this.constructQuery()
       this.loading = true
-      console.log('reFetchData', url)
+      // console.log('reFetchData', url)
       this.axios.get(url)
           .then(res => {
             console.log('reFetchData | response', res)
