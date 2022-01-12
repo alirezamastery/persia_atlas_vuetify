@@ -10,7 +10,6 @@
     <template v-slot:prepend>
       <v-list-item two-line>
         <v-list-item-avatar>
-<!--          <img src="@/assets/svg/blank-user.svg" alt="">-->
           <v-icon>mdi-account-circle</v-icon>
         </v-list-item-avatar>
 
@@ -19,6 +18,16 @@
           <v-list-item-subtitle>خوش اومدی</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
+
+      <div v-if="isMobileWidth" class="pa-2">
+        <v-btn
+            color="red"
+            block
+            @click="logout"
+        >
+          {{ $t('general.routes.logout') }}
+        </v-btn>
+      </div>
     </template>
 
     <v-divider></v-divider>
@@ -47,16 +56,6 @@
       </v-list-item>
     </v-list-group>
 
-    <template v-if="isMobileWidth" v-slot:append >
-      <div class="pa-2">
-        <v-btn
-            color="red"
-            block
-        >
-          {{ $t('general.routes.logout') }}
-        </v-btn>
-      </div>
-    </template>
 
   </v-navigation-drawer>
 </template>
@@ -87,7 +86,12 @@ export default {
       },
     },
   },
-  methods: {},
+  methods: {
+    async logout(){
+      await this.$store.dispatch('auth/LogOut')
+      await this.$router.push({name: 'Login'})
+    }
+  },
 }
 </script>
 

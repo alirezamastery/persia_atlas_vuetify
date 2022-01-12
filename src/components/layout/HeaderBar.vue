@@ -5,17 +5,15 @@
       flat
   >
 
-<!--    <v-icon>mdi-crown</v-icon>-->
     <v-toolbar-title class="mx-1">پرشیا اطلس</v-toolbar-title>
-<!--    <v-icon>mdi-cash-multiple</v-icon>-->
 
     <v-spacer/>
 
     <v-btn icon v-if="!$vuetify.theme.dark" @click="toggleTheme()">
-      <v-icon class="mr-1" color="blue-grey darken-4">mdi-lightbulb</v-icon>
+      <v-icon class="mr-1" color="blue-grey darken-4">mdi-theme-light-dark</v-icon>
     </v-btn>
     <v-btn icon v-if="$vuetify.theme.dark" @click="toggleTheme()">
-      <v-icon color="yellow darken-3">mdi-lightbulb-outline</v-icon>
+      <v-icon color="yellow darken-3">mdi-theme-light-dark</v-icon>
     </v-btn>
 
     <v-btn
