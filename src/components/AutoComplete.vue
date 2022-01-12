@@ -65,9 +65,9 @@ export default {
     }
   },
   watch: {
-    searchPhrase(val) {
-      val && val !== this.select && this.handleSearchInput(val)
-    },
+    // searchPhrase(val) {
+    //   val && val !== this.select && this.handleSearchInput(val)
+    // },
     // items(value) {
     //   console.log('watch', value)
     // },
@@ -86,13 +86,27 @@ export default {
   },
   methods: {
     handleInput(e) {
-      // console.log('selected value' , e, this.content)
-      this.$emit('input', this.content)
+      console.log('selected value' , e, this.content)
+      this.$emit('input', e)
     },
     handleSelect(event) {
       this.$emit('value-change', event)
     },
-    handleSearchInput() {
+    handleSearchInput: debounce(function (){
+      if (!this.searchPhrase) return
+      this.loading = true
+      const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
+      this.axios.get(url)
+          .then(res => {
+            this.loading = false
+            console.log('handleSearchInput' , res)
+            this.items = res.data.items
+          })
+          .catch(err => {
+            console.log(err)
+          })
+    }, 200),
+    handleSearchInputOld() {
       if (!this.searchPhrase) {
         return
       }
