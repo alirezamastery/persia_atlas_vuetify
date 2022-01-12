@@ -33,17 +33,6 @@ export const listViewMixin = {
       this.reFetchData()
     },
   },
-  // created() {
-  //   this.axios.get(this.apiRoot)
-  //       .then(res => {
-  //         console.log('main items', res)
-  //         // this.items = res.data
-  //         this.data = res.data
-  //       })
-  //       .catch(err => {
-  //         console.log('main items error', err)
-  //       })
-  // },
   methods: {
     constructQuery() {
       let query = `?${this.queries}&page_size=${this.pageSize}`

@@ -21,16 +21,12 @@ const mutations = {
     state.windowWidth = value
   },
   INCREMENT_HTTP_REQUEST_QUEUE(state) {
-    // console.log('incre before', state.httpRequestQueue)
     state.httpRequestQueue++
-    // console.log('incre after', state.httpRequestQueue)
   },
   DECREMENT_HTTP_REQUEST_QUEUE(state) {
-    // console.log('decre before', state.httpRequestQueue)
     state.httpRequestQueue--
     if (state.httpRequestQueue < 0)
       state.httpRequestQueue = 0
-    // console.log('decre after', state.httpRequestQueue)
   },
   CLEAR_HTTP_QUEUE(state){
     state.httpRequestQueue = 0

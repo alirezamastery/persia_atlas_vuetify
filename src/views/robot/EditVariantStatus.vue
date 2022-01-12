@@ -2,26 +2,25 @@
   <v-card flat>
     <v-card-text>
 
-      <v-row class="mb-30">
-        <v-col
-            cols="12"
-            sm="12"
-            md="12"
-            lg="4"
-        >
-          <AutoComplete
-              v-model="actualProductId"
-              :label="$t('products.actualProduct')"
-              :query-param="'search'"
-              :obj-repr-field="'title'"
-              :api="$api.actualProducts"
-              @input="getVariants"
-          />
-        </v-col>
-      </v-row>
-
-
       <v-container>
+        <v-row class="mb-30">
+          <v-col
+              cols="12"
+              sm="12"
+              md="12"
+              lg="4"
+          >
+            <AutoComplete
+                v-model="actualProductId"
+                :label="$t('products.actualProduct')"
+                :query-param="'search'"
+                :obj-repr-field="'title'"
+                :api="$api.actualProducts"
+                @input="getVariants"
+            />
+          </v-col>
+        </v-row>
+
         <v-row>
           <v-col v-if="variants.length" cols="12">
             <VariantDetails
@@ -59,52 +58,6 @@ export default {
       variants: [],
       product: null,
       searched: false,
-      fakeVars: [
-        {
-          'id': 174,
-          'dkpc': '23968167',
-          'price_min': 37500,
-          'is_active': true,
-          'has_competition': true,
-          'product': {
-            'id': 44,
-            'dkp': '7000919',
-            'title': 'چوب لباسی مدل توچال بسته 6 عددی',
-            'is_active': false,
-            'type': {
-              'id': 3,
-              'title': 'infant accessory',
-              'selectors': [
-                2,
-              ],
-            },
-          },
-          'actual_product': {
-            'id': 43,
-            'title': 'چوب لباسی بزرگسال ساده سبز',
-            'brand': {
-              'id': 4,
-              'title': 'توچال',
-            },
-          },
-          'selector_values': [
-            {
-              'id': 6,
-              'digikala_id': 6,
-              'value': 'سبز',
-              'selector': {
-                'id': 1,
-                'title': 'color',
-              },
-            },
-          ],
-          'our_stock': 2,
-          'reserved': 0,
-          'warehouse_stock': 0,
-          'price': 430000,
-          'maximum_per_order': 5,
-        },
-      ],
     }
   },
   methods: {
