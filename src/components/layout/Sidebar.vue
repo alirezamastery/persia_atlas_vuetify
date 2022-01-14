@@ -1,11 +1,11 @@
 <template>
   <v-navigation-drawer
-      app
       v-model="sidebarOpen"
-      right
-      fixed
       :permanent="!isMobileWidth"
       :temporary="isMobileWidth"
+      app
+      right
+      fixed
   >
     <template v-slot:prepend>
       <v-list-item two-line>
@@ -32,30 +32,31 @@
 
     <v-divider></v-divider>
 
-    <v-list-group
-        :value="true"
-        v-for="(item, i) in userMenuItems"
-        :key="i"
-        :prepend-icon="item.icon"
-    >
-      <template v-slot:activator>
-        <v-list-item-title v-text="$t(item.titleI18n)"/>
-      </template>
-      <v-list-item
-          v-for="(subItem, j) in item.children"
-          :key="j"
-          link
-          ripple
-          class="px-10"
-          :to="{name: subItem.routeName}"
+    <v-list expand dense nav>
+      <v-list-group
+          v-for="(item, i) in userMenuItems"
+          :key="i"
+          :value="!item.collapsed"
+          :prepend-icon="item.icon"
       >
-        <!--        <v-list-item-icon>-->
-        <!--          <v-icon v-text="subItem.icon"/>-->
-        <!--        </v-list-item-icon>-->
-        <v-list-item-title v-text="$t(subItem.titleI18n)"/>
-      </v-list-item>
-    </v-list-group>
-
+        <template v-slot:activator>
+          <v-list-item-title v-text="$t(item.titleI18n)"/>
+        </template>
+        <v-list-item
+            v-for="(subItem, j) in item.children"
+            :key="j"
+            :to="{name: subItem.routeName}"
+            class="px-10"
+            ripple
+            link
+        >
+          <!--        <v-list-item-icon>-->
+          <!--          <v-icon v-text="subItem.icon"/>-->
+          <!--        </v-list-item-icon>-->
+          <v-list-item-title v-text="$t(subItem.titleI18n)"/>
+        </v-list-item>
+      </v-list-group>
+    </v-list>
 
   </v-navigation-drawer>
 </template>
@@ -87,10 +88,10 @@ export default {
     },
   },
   methods: {
-    async logout(){
+    async logout() {
       await this.$store.dispatch('auth/LogOut')
       await this.$router.push({name: 'Login'})
-    }
+    },
   },
 }
 </script>

@@ -21,6 +21,7 @@ const menuItems = [
     icon: 'mdi-warehouse',
     order: 20,
     titleI18n: 'general.routes.products',
+    collapsed: false,
     children: [
       getRoute('actualProductList'),
       getRoute('brandList'),
@@ -35,6 +36,7 @@ const menuItems = [
     icon: 'mdi-robot-industrial',
     order: 30,
     titleI18n: 'general.routes.robot',
+    collapsed:false,
     children: [
       getRoute('editVariantStatus'),
     ],
