@@ -102,6 +102,18 @@
               </v-col>
             </v-row>
             <v-row>
+              <v-col cols="12" md="6" lg="4">
+                <ValidationProvider name="PriceMin" rules="number_with_comma" v-slot="{ errors }">
+                  <v-text-field
+                      v-model="form.price_min"
+                      ref="priceMin"
+                      :label="$t('general.priceMinToman')"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
+            <v-row>
               <v-col
                   cols="12"
                   sm="6"
@@ -186,6 +198,7 @@ export default {
   methods: {
     formInit(resData) {
       this.form = resData
+      this.form.price_min = this.formatIntNumber(this.form.price_min.toString())
       this.form.selector_values = resData.selector_values.map(itm => itm.id)
     },
     getRequestData() {
