@@ -14,6 +14,7 @@ import i18n from '@/i18n'
 import api from '@/modules/api'
 import VeeValidate from 'vee-validate';
 import {ValidationObserver, ValidationProvider} from 'vee-validate'
+import '@/mixins/notifs'
 
 Vue.config.productionTip = false
 
