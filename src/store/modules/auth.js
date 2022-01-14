@@ -27,7 +27,7 @@ const mutations = {
     for (const [key, value] of Object.entries(payload)) {
       console.log(key, value)
       let val = value
-      if (key === 'avatar')
+      if (key === 'avatar' && value !== null)
         val = process.env.VUE_APP_SERVER_BASE_URL + value
       Vue.set(state.profile, key, val)
     }

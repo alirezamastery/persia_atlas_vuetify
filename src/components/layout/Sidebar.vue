@@ -91,7 +91,9 @@ export default {
       },
     },
     fullName() {
-      return this.profile.first_name + ' ' + this.profile.last_name
+      const firstName = this.profile.first_name || ''
+      const lastName = this.profile.last_name || ''
+      return firstName + ' ' + lastName
     },
   },
   created() {
