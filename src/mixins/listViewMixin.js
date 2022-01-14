@@ -70,7 +70,7 @@ export const listViewMixin = {
       const url = this.apiRoot + this.constructQuery()
       this.loading = true
       // console.log('reFetchData', url)
-      this.axios.get(url)
+      this.axios.get(url) //TODO: use finally to set this.loading = false
           .then(res => {
             console.log('reFetchData | response', res)
             this.data = res.data
