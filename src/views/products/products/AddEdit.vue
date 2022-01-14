@@ -72,6 +72,18 @@
                 </ValidationProvider>
               </v-col>
             </v-row>
+            <v-row>
+              <v-col cols="12" lg="4" sm="12" md="12">
+                <ValidationProvider name="PriceStep" rules="required">
+                  <v-select
+                      v-model="form.price_step"
+                      :items="priceStepOptions"
+                      :label="$t('general.priceStep')"
+                      style="max-width: 100px"
+                  />
+                </ValidationProvider>
+              </v-col>
+            </v-row>
           </v-container>
 
           <DetailViewActions
@@ -125,7 +137,9 @@ export default {
         dkp: null,
         is_active: true,
         type: {},
+        price_step: '',
       },
+      priceStepOptions: [100, 200, 300, 400, 500],
     }
   },
   computed: {
@@ -143,6 +157,7 @@ export default {
         dkp: this.form.dkp,
         is_active: this.form.is_active,
         type: this.form.type.id,
+        price_step: this.form.price_step,
       }
     },
   },
