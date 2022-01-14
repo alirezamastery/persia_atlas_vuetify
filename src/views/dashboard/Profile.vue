@@ -131,13 +131,20 @@ export default {
       this.dialogOpen = true
       console.log('imgURL', this.imageObjectURL)
     },
-    handleChange({coordinates, canvas}) {
-      this.coordinates = coordinates
-      // You able to do different manipulations at a canvas
-      // but there we just get a cropped image, that can be used
-      // as src for <img/> to preview result
-      this.image = canvas.toDataURL()
-    },
+    // handleChange({coordinates, canvas}) {
+    //   this.coordinates = coordinates
+    //   // You able to do different manipulations at a canvas
+    //   // but there we just get a cropped image, that can be used
+    //   // as src for <img/> to preview result
+    //   this.image = canvas.toBlob()
+    //   canvas.toBlob(blob => {
+    //     form.append('file', blob);
+    //     // You can use axios, superagent and other libraries instead here
+    //     fetch('http://example.com/upload/', {
+    //       method: 'POST',
+    //       body: form,
+    //     });})
+    // },
   },
 }
 </script>
