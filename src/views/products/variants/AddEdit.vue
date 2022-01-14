@@ -12,12 +12,7 @@
         <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
-              <v-col
-                  cols="12"
-                  lg="4"
-                  sm="12"
-                  md="12"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="Product" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.product.id"
@@ -31,12 +26,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  lg="4"
-                  sm="12"
-                  md="12"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="ActualProduct" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.actual_product.id"
@@ -50,12 +40,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  lg="4"
-                  sm="12"
-                  md="12"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.selector_values"
@@ -70,11 +55,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="dkpc" rules="required" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.dkpc"
@@ -82,23 +63,6 @@
                       :error-messages="errors"
                   />
                 </ValidationProvider>
-              </v-col>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
-                <!--                <ValidationProvider-->
-                <!--                    name="PriceMin"-->
-                <!--                    rules="required|max_value:2147483647"-->
-                <!--                    v-slot="{ errors }"-->
-                <!--                >-->
-                <v-text-field
-                    v-model="form.price_min"
-                    ref="priceMin"
-                    :label="$t('general.priceMinToman')"
-                />
-                <!--                </ValidationProvider>-->
               </v-col>
             </v-row>
             <v-row>
@@ -114,11 +78,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <v-checkbox
                     v-model="form.is_active"
                     :label="$t('products.isActive')"

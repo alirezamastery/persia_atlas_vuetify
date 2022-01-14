@@ -12,11 +12,7 @@
         <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="dkp" rules="required" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.dkp"
@@ -27,11 +23,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.title"
@@ -42,11 +34,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  sm="6"
-                  md="4"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <v-checkbox
                     v-model="form.is_active"
                     :label="$t('products.isActive')"
@@ -54,12 +42,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col
-                  cols="12"
-                  lg="4"
-                  sm="12"
-                  md="12"
-              >
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.type.id"
@@ -73,12 +56,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" lg="4" sm="12" md="12">
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="PriceStep" rules="required">
                   <v-select
                       v-model="form.price_step"
                       :items="priceStepOptions"
-                      :label="$t('general.priceStep')"
+                      :label="$t('general.priceStepToman')"
                       style="max-width: 100px"
                   />
                 </ValidationProvider>

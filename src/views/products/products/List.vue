@@ -36,19 +36,6 @@
         </template>
 
         <template v-slot:item.price_step="{ item }">
-          <!--          <v-edit-dialog>-->
-          <!--            {{ item.price_step }}-->
-          <!--            <template v-slot:input>-->
-          <!--              <v-select-->
-          <!--                  :items="priceStepOptions"-->
-          <!--                  :value="item.price_step"-->
-          <!--                  dense-->
-          <!--                  solo-inverted-->
-          <!--                  outlined-->
-          <!--                  style="max-width: 100px"-->
-          <!--              />-->
-          <!--            </template>-->
-          <!--          </v-edit-dialog>-->
           <v-select
               v-model="item.price_step"
               :items="priceStepOptions"

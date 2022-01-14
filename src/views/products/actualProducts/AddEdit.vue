@@ -12,7 +12,7 @@
         <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
-              <v-col>
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.title"
@@ -23,7 +23,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12">
+              <v-col cols="12" md="6" lg="4">
                 <ValidationProvider name="Brand" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.brand.id"

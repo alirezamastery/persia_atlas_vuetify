@@ -52,7 +52,7 @@
     </v-snackbar>
 
     <v-footer v-if="isAuthenticated" app>
-      کلیه حقوق سایت متعلق به خودمونه
+      {{ $t('general.legal') }}
     </v-footer>
 
   </v-app>
