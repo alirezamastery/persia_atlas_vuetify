@@ -33,8 +33,10 @@
         v-if="snackbar"
         v-model="snackbar"
         :color="snackbar.color"
-        absolute
         style="z-index: 10000"
+        app
+        right
+        top
     >
       {{ snackbar.data }}
       <template v-slot:action="{ attrs }">

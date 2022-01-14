@@ -1,7 +1,6 @@
 export const listViewMixin = {
   data() {
     return {
-      items: [],
       pageSize: 20,
       pageSizeOptions: [10, 20, 50, 100],
       loading: false,
@@ -61,8 +60,8 @@ export const listViewMixin = {
       this.queries = query
       this.reFetchData()
     },
-    handlePageSelect(event){
-      console.log('handlePageSelect' , event)
+    handlePageSelect(event) {
+      console.log('handlePageSelect', event)
       this.page = event
       this.reFetchData()
     },
@@ -75,6 +74,9 @@ export const listViewMixin = {
             console.log('reFetchData | response', res)
             this.data = res.data
             this.loading = false
+            for (const item of this.data.items) {
+              item.loading = false
+            }
           })
           .catch(err => {
             console.log('reFetchData | error', err)

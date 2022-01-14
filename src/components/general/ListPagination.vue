@@ -17,6 +17,7 @@
             :items="pageSizeOptions"
             :disabled="tableLoading"
             solo-inverted
+            hide-details
             @input="$emit('page-size-select', $event)"
         />
       </v-col>

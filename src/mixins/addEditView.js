@@ -23,7 +23,7 @@ export const AddEditViewMixin = {
       this.axios.get(this.apiRoot + this.id + '/')
           .then(res => {
             console.log('item details', res)
-            this.formInit(res.data)
+            this.formInit(res.data) // handle ManyToMany relations data in formInit
             this.showForm = true
           })
       console.log('no details, getting the item details from server')
@@ -42,28 +42,14 @@ export const AddEditViewMixin = {
       this.axios.request({url, data, method})
           .then(res => {
             console.log('save success', res.data)
-            if (this.editingItemId) {
-              this.$store.dispatch('HandleSettingSnackbar', {
-                key: uuid4(),
-                color: 'green',
-                data: this.$t('general.snack.saveSuccess'),
-              })
-            } else {
-              this.$store.dispatch('HandleAddingAlert', {
-                key: uuid4(),
-                type: 'success',
-                data: this.itemAction('general.alert.saveSuccess', this.itemType, this.itemRepr),
-              })
-              this.$router.push({name: this.listViewRoute})
-            }
+            const sentence = this.editingItemId ? 'general.alert.updateSuccess' : 'general.alert.saveSuccess'
+            const alertText = this.itemAction(sentence, this.itemType, this.itemRepr)
+            this.addAlert('success' , alertText)
+            this.$router.push({name: this.listViewRoute})
           })
           .catch(err => {
             console.log('request error', err)
-            this.$store.dispatch('HandleSettingSnackbar', {
-              key: uuid4(),
-              color: 'red',
-              data: err.response.data,
-            })
+            this.addSnackbar('red' , err.response.data)
           })
     },
 
@@ -71,20 +57,14 @@ export const AddEditViewMixin = {
       this.axios.delete(this.apiRoot + this.editingItemId + '/')
           .then(res => {
             console.log('res delete', res.data)
-            this.$store.dispatch('HandleAddingAlert', {
-              key: uuid4(),
-              type: 'success',
-              data: this.itemAction('general.alert.deleteSuccess', this.itemType, this.itemRepr),
-            })
+            const txt = this.itemAction('general.alert.deleteSuccess', this.itemType, this.itemRepr)
+            this.addAlert('success' , txt)
             this.$router.push({name: this.listViewRoute})
           })
           .catch(err => {
             console.log('delete error ', err)
-            this.$store.dispatch('HandleAddingAlert', {
-              key: uuid4(),
-              type: 'error',
-              data: `error in deleting ${this.itemRepr}`,
-            })
+            const txt = `error in deleting ${this.itemRepr}`
+            this.addAlert('error' , txt)
           })
     },
 
