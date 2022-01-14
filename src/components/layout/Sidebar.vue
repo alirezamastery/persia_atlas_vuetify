@@ -8,14 +8,15 @@
       fixed
   >
     <template v-slot:prepend>
-      <v-list-item two-line>
+      <v-list-item two-line :to="{name: 'Profile'}">
         <v-list-item-avatar>
-          <v-icon>mdi-account-circle</v-icon>
+          <img v-if="profile.avatar" :src="profile.avatar" alt="">
+          <img v-else src="@/assets/svg/user-blank.svg" alt="">
         </v-list-item-avatar>
 
         <v-list-item-content>
           <v-list-item-title>{{ user }}</v-list-item-title>
-          <v-list-item-subtitle>{{ $t('general.welcome') }}</v-list-item-subtitle>
+          <v-list-item-subtitle>{{ fullName }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -70,12 +71,15 @@ export default {
   data() {
     return {
       userMenuItems: menuItems,
+      avatarSrc: null,
     }
   },
   computed: {
     ...mapState({
       sidebarOpen: state => state.sidebarOpen,
       user: state => state.auth.user,
+      userAvatarURL: state => state.auth.userAvatarURL,
+      profile: state => state.auth.profile,
     }),
     ...mapGetters(['isMobileWidth']),
     sidebarOpen: {
@@ -86,6 +90,20 @@ export default {
         this.$store.dispatch('HandleSidebarOpenStatus', value)
       },
     },
+    fullName() {
+      return this.profile.first_name + ' ' + this.profile.last_name
+    },
+  },
+  created() {
+    this.axios.get(this.$api.userProfile)
+        .then(res => {
+          console.log('sidebar | profile', res)
+          this.$store.dispatch('auth/SetProfile', res.data)
+        })
+        .catch(err => {
+          console.log('sidebar | profile error', err)
+          this.addSnackbar('red', err.response.data)
+        })
   },
   methods: {
     async logout() {

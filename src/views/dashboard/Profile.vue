@@ -148,15 +148,15 @@ export default {
     }
   },
   created() {
+    this.avatarSrc = this.$store.state.auth.profile.avatar
+    console.log('avatarSrc', this.avatarSrc)
     this.axios.get(this.$api.userProfile)
         .then(res => {
-          console.log('Profile', res)
+          console.log('Profile response', res)
           this.form = res.data
-          if (this.form.avatar)
-            this.avatarSrc = process.env.VUE_APP_SERVER_BASE_URL + this.form.avatar
         })
         .catch(err => {
-          console.log('Profile', err)
+          console.log('Profile error', err)
         })
   },
   methods: {
@@ -184,6 +184,7 @@ export default {
           .then(res => {
             console.log('delete response', res)
             this.avatarSrc = null
+            this.$store.dispatch('auth/SetProfileKeyValue', 'avatar', null)
             this.addSnackbar('success', this.$t('general.snack.saveSuccess'))
           })
           .catch(err => {
@@ -222,6 +223,9 @@ export default {
           }).then(res => {
             console.log('form patch response', res)
             this.addSnackbar('success', this.$t('general.snack.saveSuccess'))
+            // const url = process.env.VUE_APP_SERVER_BASE_URL + res.data.avatar
+            // this.$store.dispatch('auth/SetAvatar', url)
+            this.$store.dispatch('auth/SetProfile', res.data)
           }).catch(err => {
             console.log('file upload error', err)
             this.addSnackbar('red', err.response.data)
@@ -236,6 +240,7 @@ export default {
             .then(res => {
               console.log('simple patch response', res)
               this.addSnackbar('success', this.$t('general.snack.saveSuccess'))
+              this.$store.dispatch('auth/SetProfile', res.data)
             })
             .catch(err => {
               console.log('simple patch error', err)
