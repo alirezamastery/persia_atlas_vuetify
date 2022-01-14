@@ -15,6 +15,9 @@ import api from '@/modules/api'
 import VeeValidate from 'vee-validate';
 import {ValidationObserver, ValidationProvider} from 'vee-validate'
 import '@/mixins/notifs'
+import { Cropper } from 'vue-advanced-cropper'
+import 'vue-advanced-cropper/dist/style.css';
+import 'vue-advanced-cropper/dist/theme.classic.css';
 
 Vue.config.productionTip = false
 
@@ -23,6 +26,7 @@ Vue.use(VueAxios, axiosInstance)
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
+Vue.component('Cropper', Cropper)
 
 Vue.prototype.$api = api
 
