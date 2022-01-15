@@ -39,3 +39,15 @@ export const variantAddEdit = () =>
 
 export const editVariantStatus = () =>
     import(/* webpackChunkName: "robot" */ '../views/robot/EditVariantStatus.vue')
+
+
+
+export const costList  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/cost/List.vue')
+export const costAddEdit  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/cost/AddEdit.vue')
+
+export const costTypeList  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/costType/List.vue')
+export const costTypeAddEdit  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/costType/AddEdit.vue')

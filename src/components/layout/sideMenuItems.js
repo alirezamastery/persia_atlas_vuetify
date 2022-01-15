@@ -41,6 +41,16 @@ const menuItems = [
       getRoute('editVariantStatus'),
     ],
   },
+  {
+    icon: 'mdi-calculator',
+    order: 40,
+    titleI18n: 'acc.accounting',
+    collapsed:false,
+    children: [
+      getRoute('costList'),
+      getRoute('costTypeList'),
+    ],
+  },
 ]
 
 export default menuItems

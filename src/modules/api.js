@@ -19,4 +19,7 @@ export default {
   updateVariantStatus: 'products/update-variant-status/',
   updateVariantPriceMin: 'products/update-variant-price-min/',
   invoiceExcel: 'products/invoice-excel/',
+
+  costs: 'accounting/costs/',
+  costTypes: 'accounting/cost-types/',
 }

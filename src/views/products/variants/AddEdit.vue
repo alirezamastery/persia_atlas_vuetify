@@ -67,7 +67,7 @@
             </v-row>
             <v-row>
               <v-col cols="12" md="6" lg="4">
-                <ValidationProvider name="PriceMin" rules="number_with_comma" v-slot="{ errors }">
+                <ValidationProvider name="PriceMin" rules="required|number_with_comma" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.price_min"
                       ref="priceMin"

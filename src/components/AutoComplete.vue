@@ -13,8 +13,6 @@
       class="mx-4"
       cache-items
       flat
-      hide-no-data
-      hide-details
       deletable-chips
       @change="handleInput"
   >

@@ -8,7 +8,7 @@ import NotFound from '@/views/NotFound'
 import Profile from '@/views/dashboard/Profile'
 import JustRain from '@/views/JustRain'
 import * as views from './chunks'
-import {editVariantStatus} from './chunks'
+import {costList, editVariantStatus} from './chunks'
 
 Vue.use(VueRouter)
 
@@ -251,6 +251,62 @@ export const routesObj = {
     name: 'editVariantStatus',
     meta: {
       titleI18n: 'general.routes.variantStatus',
+      requiresAuth: true,
+    },
+  },
+
+  // Accounting
+  // ***************** Cost *****************
+  costList: {
+    path: '/accounting/costs',
+    component: views.costList,
+    name: 'costList',
+    meta: {
+      titleI18n: 'acc.costs',
+      requiresAuth: true,
+    },
+  },
+  costAdd: {
+    path: '/accounting/costs/add',
+    component: views.costAddEdit,
+    name: 'costAdd',
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  costEdit: {
+    path: '/accounting/costs/edit/:id?',
+    component: views.costAddEdit,
+    name: 'costEdit',
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  // ***************** Cost Type *****************
+  costTypeList: {
+    path: '/accounting/cost-types',
+    component: views.costTypeList,
+    name: 'costTypeList',
+    meta: {
+      titleI18n: 'acc.costTypes',
+      requiresAuth: true,
+    },
+  },
+  costTypeAdd: {
+    path: '/accounting/costs-types/add',
+    component: views.costTypeAddEdit,
+    name: 'costTypeAdd',
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  costTypeEdit: {
+    path: '/accounting/costs-types/edit/:id?',
+    component: views.costTypeAddEdit,
+    name: 'costTypeEdit',
+    props: true,
+    meta: {
       requiresAuth: true,
     },
   },

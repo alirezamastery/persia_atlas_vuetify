@@ -17,7 +17,7 @@ import FontAwesomeIcon from '@/components/fontawsome-icons'
 import i18n from '@/i18n'
 import {ValidationObserver, ValidationProvider} from 'vee-validate'
 import {Cropper} from 'vue-advanced-cropper'
-
+import VuePersianDatetimePicker from 'vue-persian-datetime-picker'
 
 Vue.config.productionTip = false
 
@@ -27,6 +27,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.component('ValidationObserver', ValidationObserver)
 Vue.component('ValidationProvider', ValidationProvider)
 Vue.component('Cropper', Cropper)
+Vue.component('persian-date-picker', VuePersianDatetimePicker)
 
 Vue.prototype.$api = api
 

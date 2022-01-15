@@ -12,7 +12,9 @@ extend('number_with_comma', {
   validate(value) {
     return {
       required: true,
-      valid: value.replace(/,/g, '').replace(/[0-9]/g, '') === '' && value.length > 0,
+      valid: value.toString()
+          .replace(/,/g, '')
+          .replace(/[0-9]/g, '') === '' && value.length > 0,
     }
   },
 })
