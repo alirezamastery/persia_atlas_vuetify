@@ -1,6 +1,9 @@
 import '@/assets/scss/main.scss'
 import '@/plugins/validate'
 import '@/modules/filters'
+import 'vue-advanced-cropper/dist/style.css'
+import 'vue-advanced-cropper/dist/theme.classic.css'
+import '@/mixins/notifs'
 
 import Vue from 'vue'
 import App from './App.vue'
@@ -9,15 +12,12 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import axiosInstance from './services/axios'
 import VueAxios from 'vue-axios'
+import api from '@/modules/api'
 import FontAwesomeIcon from '@/components/fontawsome-icons'
 import i18n from '@/i18n'
-import api from '@/modules/api'
-import VeeValidate from 'vee-validate';
 import {ValidationObserver, ValidationProvider} from 'vee-validate'
-import '@/mixins/notifs'
-import { Cropper } from 'vue-advanced-cropper'
-import 'vue-advanced-cropper/dist/style.css';
-import 'vue-advanced-cropper/dist/theme.classic.css';
+import {Cropper} from 'vue-advanced-cropper'
+
 
 Vue.config.productionTip = false
 
