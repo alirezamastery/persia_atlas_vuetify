@@ -10,9 +10,7 @@
       :multiple="selectMultiple"
       :chips="selectMultiple"
       :error-messages="errorMessages"
-      class="mx-4"
       cache-items
-      flat
       deletable-chips
       @change="handleInput"
   >

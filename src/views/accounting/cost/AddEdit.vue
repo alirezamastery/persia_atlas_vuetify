@@ -46,7 +46,7 @@
                   {{ $t('general.date') }}
                 </v-btn>
               </v-col>
-              <v-col cols="8" md="4" lg="1">
+              <v-col cols="8" md="4" lg="2">
                 <v-text-field
                     id="date-input"
                     hide-details
