@@ -87,9 +87,9 @@
 </template>
 
 <script>
-import ListViewTableHeader from '@/components/general/ListViewTableHeader'
+import ListViewTableHeader from '@/components/viewList/TableHeader'
 import {listViewMixin} from '@/mixins/listViewMixin'
-import ListPagination from '@/components/general/ListPagination'
+import ListPagination from '@/components/viewList/Pagination'
 
 export default {
   name: 'List',

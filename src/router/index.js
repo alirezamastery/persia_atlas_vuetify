@@ -2,7 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import store from '@/store'
 
-import Home from '@/views/Home'
 import Login from '@/views/auth/Login'
 import NotFound from '@/views/NotFound'
 import Profile from '@/views/dashboard/Profile'

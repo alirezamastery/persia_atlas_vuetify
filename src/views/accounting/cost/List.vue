@@ -1,7 +1,9 @@
 <template>
   <v-card flat>
     <v-card-title>
-      {{ $t('acc.costs') }}
+      <v-toolbar>
+        {{ $t('acc.costs') }}
+      </v-toolbar>
     </v-card-title>
     <v-card-text>
       <v-data-table
@@ -22,6 +24,7 @@
               :api-root="apiRoot"
               :add-route="addRoute"
               v-on:search-input="searchPhrase = $event"
+              hide-search
           />
         </template>
         <!-- Customize table header END -->
@@ -54,7 +57,6 @@
         <template v-slot:no-data>
           {{ $t('general.noItemsFound') }}
         </template>
-
       </v-data-table>
 
       <ListPagination
@@ -72,8 +74,8 @@
 
 <script>
 import {listViewMixin} from '@/mixins/listViewMixin'
-import ListViewTableHeader from '@/components/general/ListViewTableHeader'
-import ListPagination from '@/components/general/ListPagination'
+import ListViewTableHeader from '@/components/viewList/TableHeader'
+import ListPagination from '@/components/viewList/Pagination'
 
 export default {
   name: 'List',

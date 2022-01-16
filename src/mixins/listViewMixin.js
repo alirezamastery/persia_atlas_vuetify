@@ -39,7 +39,7 @@ export const listViewMixin = {
         query += `&search=${this.searchPhrase}`
       if (this.page)
         query += `&page=${this.page}`
-      console.log('constructQuery', query)
+      // console.log('constructQuery', query)
       return query
     },
     handleUpdate(event) {
@@ -113,3 +113,5 @@ export const listViewMixin = {
     },
   },
 }
+
+export default listViewMixin

@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  name: 'DetailViewActions',
+  name: 'Actions',
   props: {
     saveDisabled: {
       type: Boolean,

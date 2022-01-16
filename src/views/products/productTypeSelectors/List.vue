@@ -21,7 +21,7 @@
               :title="$t('general.routes.productTypeSelectors')"
               :add-route="addRoute"
               v-on:search-input="searchPhrase = $event"
-              :show-search="false"
+              hide-search
           />
         </template>
         <!-- Customize table header END -->
@@ -64,8 +64,8 @@
 
 <script>
 import {listViewMixin} from '@/mixins/listViewMixin'
-import ListViewTableHeader from '@/components/general/ListViewTableHeader'
-import ListPagination from '@/components/general/ListPagination'
+import ListViewTableHeader from '@/components/viewList/TableHeader'
+import ListPagination from '@/components/viewList/Pagination'
 
 export default {
   name: 'List',

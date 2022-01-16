@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'DetailViewDeleteDialog',
+  name: 'DeleteDialog',
   props: ['value', 'itemTitle'],
   data() {
     return {

@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'ListViewDeleteDialog',
+  name: 'DeleteDialog',
 }
 </script>
 

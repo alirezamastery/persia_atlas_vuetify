@@ -95,8 +95,8 @@
 
 <script>
 import {listViewMixin} from '@/mixins/listViewMixin'
-import ListViewTableHeader from '@/components/general/ListViewTableHeader'
-import ListPagination from '@/components/general/ListPagination'
+import ListViewTableHeader from '@/components/viewList/TableHeader'
+import ListPagination from '@/components/viewList/Pagination'
 import {v4 as uuid4} from 'uuid'
 
 export default {

@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'ListPagination',
+  name: 'Pagination',
   props: {
     page: {type: Number, required: true},
     pageSize: {type: Number, required: true},

@@ -92,8 +92,8 @@
 <script>
 import {AddEditViewMixin} from '@/mixins/addEditView'
 import {textToolsMixin} from '@/mixins/textTools'
-import DetailViewActions from '@/components/general/DetailViewActions'
-import DetailViewDeleteDialog from '@/components/general/DetailViewDeleteDialog'
+import DetailViewActions from '@/components/viewAddEdit/Actions'
+import DetailViewDeleteDialog from '@/components/viewAddEdit/DeleteDialog'
 import AutoComplete from '@/components/AutoComplete'
 
 export default {

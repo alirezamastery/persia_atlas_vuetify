@@ -1,24 +1,23 @@
 <template>
   <v-toolbar flat>
     <v-toolbar-title>{{ title }}</v-toolbar-title>
-    <v-divider
-        class="mx-4"
-        inset
-        vertical
-    />
-    <v-text-field
-        v-if="showSearch"
-        v-model="searchPhrase"
-        append-icon="mdi-magnify"
-        :label="$t('general.search')"
-        single-line
-        hide-details
-        solo
-        dense
-        flat
-        clearable
-        @input="handleSearchInput"
-    />
+    <template v-if="!hideSearch">
+      <v-divider class="mx-4" inset vertical/>
+      <v-text-field
+          v-if="!hideSearch"
+          v-model="searchPhrase"
+          append-icon="mdi-magnify"
+          class="search-field"
+          :label="$t('general.search')"
+          single-line
+          hide-details
+          solo
+          dense
+          flat
+          clearable
+          @input="handleSearchInput"
+      />
+    </template>
     <v-spacer/>
     <v-btn
         v-if="showCreateBtn"
@@ -36,11 +35,11 @@
 import {debounce} from '@/modules/api-tools'
 
 export default {
-  name: 'ListViewTableHeader',
+  name: 'TableHeader',
   props: {
     title: {
       type: String,
-      required: true,
+      required: false,
     },
     apiRoot: {
       type: String,
@@ -55,9 +54,9 @@ export default {
       default: 'search',
       required: false,
     },
-    showSearch: {
+    hideSearch: {
       type: Boolean,
-      default: true,
+      default: false,
       required: false,
     },
     showCreateBtn: {
@@ -79,6 +78,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.search-field {
+  max-width: 300px;
+}
 </style>
