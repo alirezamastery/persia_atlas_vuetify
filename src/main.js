@@ -13,6 +13,7 @@ import vuetify from './plugins/vuetify'
 import axiosInstance from './services/axios'
 import VueAxios from 'vue-axios'
 import api from '@/modules/api'
+import logger from '@/modules/logging'
 import FontAwesomeIcon from '@/components/fontawsome-icons'
 import i18n from '@/i18n'
 import {ValidationObserver, ValidationProvider} from 'vee-validate'
@@ -30,6 +31,7 @@ Vue.component('Cropper', Cropper)
 Vue.component('persian-date-picker', VuePersianDatetimePicker)
 
 Vue.prototype.$api = api
+Vue.prototype.$logger = logger
 
 new Vue({
   router,
