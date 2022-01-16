@@ -12,7 +12,7 @@
         <v-form @submit.prevent="saveItem">
           <v-container>
             <v-row>
-              <v-col cols="12" md="6" lg="4">
+              <v-col cols="12" md="6" lg="2">
                 <ValidationProvider name="Title" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.type.id"
@@ -26,7 +26,7 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" md="6" lg="4">
+              <v-col cols="12" md="6" lg="2">
                 <ValidationProvider name="Amount" rules="required|number_with_comma" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.amount"
@@ -37,16 +37,15 @@
               </v-col>
             </v-row>
             <v-row class="align-center">
-              <v-col cols="4" md="2" lg="1">
+              <v-col cols="12" sm="6" md="4" lg="3" xl="2" class="d-flex flex-row">
                 <v-btn
                     @click="showDatePicker = true"
                     color="primary"
-                    large
+                    fab
+                    small
                 >
-                  {{ $t('general.date') }}
+                  <v-icon>mdi-calendar</v-icon>
                 </v-btn>
-              </v-col>
-              <v-col cols="8" md="4" lg="2">
                 <v-text-field
                     id="date-input"
                     hide-details
@@ -55,6 +54,7 @@
                     solo
                     dense
                     :value="persianDate"
+                    class="mx-3"
                 />
                 <persian-date-picker
                     v-model="form.date"
@@ -150,9 +150,7 @@ export default {
     formInit(resData) {
       this.form = resData
       this.form.amount = this.formatIntNumber(this.form.amount.toString())
-      console.log('date' , this.form.date)
       const m = moment(this.form.date, 'YYYY/MM/DD')
-      console.log('m', m)
       this.persianDate = m.format('jYYYY/jMM/jDD')
     },
     getRequestData() {
