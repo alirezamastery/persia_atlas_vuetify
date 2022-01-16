@@ -73,7 +73,6 @@ export default {
   computed: {
     ...mapState({
       isAuthenticated: state => state.user,
-      requestQueueLength: state => state.httpRequestQueue,
       alerts: state => state.alerts,
     }),
     ...mapGetters({
@@ -103,10 +102,6 @@ export default {
     handleAlertDismiss(alert) {
       console.log('close alert', alert)
       this.$store.dispatch('HandleRemovingAlert', alert)
-    },
-    handleSnackDismiss(snack) {
-      console.log('close snack', snack)
-      this.$store.dispatch('HandleRemovingSnackbar', snack)
     },
   },
 }

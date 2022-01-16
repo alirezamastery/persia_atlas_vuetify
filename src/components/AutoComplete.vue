@@ -28,10 +28,6 @@
       </v-list-item-content>
     </template>
 
-<!--    <template v-slot:append>-->
-<!--      <v-progress-circular v-if="loading" indeterminate color="#ad5697"/>-->
-<!--    </template>-->
-
   </v-autocomplete>
 </template>
 
@@ -61,18 +57,11 @@ export default {
     }
   },
   watch: {
-    // searchPhrase(val) {
-    //   val && val !== this.select && this.handleSearchInput(val)
-    // },
-    // items(value) {
-    //   console.log('watch', value)
-    // },
     defaultValue(value) {
       console.log('AutoComplete | watch defaultValue', value)
     },
   },
   created() {
-    // console.log('AutoComplete | defaultValue', this.defaultValue)
     if (this.defaultValue)
       this.defaultItem = this.defaultValue
     this.axios.get(this.api)
@@ -102,28 +91,6 @@ export default {
             console.log(err)
           })
     }, 200),
-    handleSearchInputOld() {
-      if (!this.searchPhrase) {
-        return
-      }
-
-      const apiCall = (url) => {
-        this.axios.get(url)
-            .then(res => {
-              this.loading = false
-              this.items = res.data.items
-            })
-            .catch(err => {
-              console.log(err)
-            })
-      }
-
-      const debouncedAPICall = debounce(apiCall, 300)
-
-      this.loading = true
-      const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
-      debouncedAPICall(url)
-    },
   },
 }
 </script>
