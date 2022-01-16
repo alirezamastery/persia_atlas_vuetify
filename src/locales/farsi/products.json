@@ -1,6 +1,6 @@
 {
   "actualProduct": "محصول اصلی",
-  "actualProductس": "محصولات اصلی",
+  "actualProducts": "محصولات اصلی",
   "variants": "تنوع ها",
   "variant": "تنوع",
   "brands": "برندها",
@@ -14,8 +14,10 @@
   "tools": "ابزارها",
   "createANew": "ایجاد یک {0} جدید",
   "product": "محصول",
+  "products": "محصولات",
   "selectorValues": "مقدار انتخابگر",
   "productTypeSelector": "انتخابگر نوع محصول",
+  "productTypes": "دسته بندی محصولات",
   "selectors": "انتخابگرها",
   "selector": "انتخابگر",
   "activeInDigi": "فعال در دیجی کالا",
