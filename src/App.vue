@@ -51,10 +51,6 @@
       </template>
     </v-snackbar>
 
-    <v-footer v-if="isAuthenticated" app>
-      {{ $t('general.legal') }}
-    </v-footer>
-
   </v-app>
 </template>
 
@@ -126,19 +122,5 @@ $title-font: Samim;
   *[class^="title"] {font-family: $title-font, sans-serif !important;}
 
   *[class^="text"] {font-family: $title-font, sans-serif !important;}
-
-  //.title {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h1 {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h2 {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h3 {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h4 {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h5 {font-family: $title-font, sans-serif !important;}
-  //
-  //.text-h6 {font-family: $title-font, sans-serif !important;}
 }
 </style>

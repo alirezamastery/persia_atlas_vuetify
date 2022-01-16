@@ -9,7 +9,7 @@
       <v-card-text>
         <div v-if="errors">
           <v-alert type="error" v-for="error in errors" :key="error">
-            {{error}}
+            {{ error }}
           </v-alert>
         </div>
         <v-form
@@ -83,25 +83,30 @@ export default {
         password: this.password,
       }).then(res => {
         console.log('Login', res)
-        localStorage.setItem('access_token', res.data.access)
-        localStorage.setItem('refresh_token', res.data.refresh)
-        this.axios.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
-        this.$store.dispatch('auth/LogIn', this.mobile)
-        this.$router.push({path: '/'})
+        this.loginHandler(res.data)
       }).catch(err => {
         console.log('axios error:', err.response.data)
         this.errors = err.response.data
       })
     },
-    getUserData(){
+    loginHandler(data) {
+      localStorage.setItem('access_token', data.access)
+      localStorage.setItem('refresh_token', data.refresh)
+      this.axios.defaults.headers['Authorization'] = 'Bearer ' + localStorage.getItem('access_token')
+      this.$store.dispatch('auth/LogIn', this.mobile)
+      this.$router.push({path: '/'})
+      this.getUserData()
+    },
+    getUserData() {
       this.axios.get(this.$api.userProfile)
           .then(res => {
-            this.form = res.data
+            this.$store.dispatch('auth/SetProfile', res.data)
           })
           .catch(err => {
             console.log('getUserData error', err)
+            this.addSnackbar('red', err.response.data)
           })
-    }
+    },
   },
 }
 </script>

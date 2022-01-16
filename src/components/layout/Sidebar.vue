@@ -51,9 +51,6 @@
             ripple
             link
         >
-          <!--        <v-list-item-icon>-->
-          <!--          <v-icon v-text="subItem.icon"/>-->
-          <!--        </v-list-item-icon>-->
           <v-list-item-title v-text="$t(subItem.titleI18n)"/>
         </v-list-item>
       </v-list-group>
@@ -95,17 +92,6 @@ export default {
       const lastName = this.profile.last_name || ''
       return firstName + ' ' + lastName
     },
-  },
-  created() {
-    this.axios.get(this.$api.userProfile)
-        .then(res => {
-          console.log('sidebar | profile', res)
-          this.$store.dispatch('auth/SetProfile', res.data)
-        })
-        .catch(err => {
-          console.log('sidebar | profile error', err)
-          this.addSnackbar('red', err.response.data)
-        })
   },
   methods: {
     async logout() {
