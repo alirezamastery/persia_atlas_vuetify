@@ -158,7 +158,7 @@ export default {
     getRequestData() {
       return {
         type: this.form.type.id,
-        amount: this.form.amount,
+        amount: this.numberWithCommaToInt(this.form.amount),
         date: this.form.date,
         description: this.form.description,
       }

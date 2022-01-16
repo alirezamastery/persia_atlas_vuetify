@@ -9,6 +9,9 @@ export const numberToolsMixin = {
     formatIntNumber(val){
       const commaRemoved = this.removeCommas(val)
       return this.addCommaForIntNumber(commaRemoved)
+    },
+    numberWithCommaToInt(val){
+      return parseInt(this.removeCommas(val))
     }
   },
 }
