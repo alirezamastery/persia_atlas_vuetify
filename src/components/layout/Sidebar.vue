@@ -24,7 +24,7 @@
         <v-btn
             color="red"
             block
-            @click="logout"
+            :to="{name: 'Logout'}"
         >
           {{ $t('general.routes.logout') }}
         </v-btn>
