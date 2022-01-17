@@ -122,7 +122,6 @@ export default {
           value: 'actions',
           sortable: false,
         })
-      console.log(h)
       return h
     },
   },

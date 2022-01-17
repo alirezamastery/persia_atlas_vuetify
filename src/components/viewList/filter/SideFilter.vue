@@ -1,16 +1,15 @@
 <template>
-  <v-col cols="12" md="3" lg="2">
+  <v-col cols="12" sm="12" md="4" lg="3" xl="2">
     <v-toolbar flat dense outlined style="border-bottom: none">
-      <span>{{$t('general.filters')}}</span>
+      <span>{{ $t('general.filters') }}</span>
       <v-spacer/>
       <v-btn
           small
-          class="m-2"
-          v-if="Object.keys(filterValues).length > 0"
+          class="m-2 yellow black--text"
+          v-if="Object.keys(filterValues).length > 0 && showReset"
           @click="resetFilters"
           icon
       >
-<!--        {{$t('general.reset')}}-->
         <v-icon>mdi-refresh</v-icon>
       </v-btn>
     </v-toolbar>
@@ -46,6 +45,7 @@ export default {
     return {
       filterValues: {},
       justForResetSignal: 0,
+      showReset: false,
     }
   },
   watch: {
@@ -54,9 +54,14 @@ export default {
       handler(val) {
         console.log('side filter | watch:', val)
         let finalQuery = ''
+        let nullCount = 0
         for (const [key, value] of Object.entries(val)) {
-          finalQuery += `&${key}=${value}`
+          if (value === null)
+            nullCount++
+          else
+            finalQuery += `&${key}=${value}`
         }
+        this.showReset = nullCount !== Object.keys(val).length
         this.$emit('filter-change', finalQuery)
       },
     },

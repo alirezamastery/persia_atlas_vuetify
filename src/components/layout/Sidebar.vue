@@ -31,7 +31,7 @@
       </div>
     </template>
 
-    <v-divider></v-divider>
+    <v-divider/>
 
     <v-list expand dense nav>
       <v-list-group
@@ -91,12 +91,6 @@ export default {
       const firstName = this.profile.first_name || ''
       const lastName = this.profile.last_name || ''
       return firstName + ' ' + lastName
-    },
-  },
-  methods: {
-    async logout() {
-      await this.$store.dispatch('auth/LogOut')
-      await this.$router.push({name: 'Login'})
     },
   },
 }

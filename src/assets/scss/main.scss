@@ -5,7 +5,6 @@
 @import "animation/animations";
 @import "utils/display";
 @import "utils/width";
-//@import "form/inputs";
 @import "utils/colors";
 @import "utils/alerts";
 @import "globals";
@@ -30,10 +29,6 @@ $title-font: Samim;
   font-family: $body-font-family, sans-serif !important;
 }
 
-//.container {
-//  background-color: #1e1e1e !important;
-//}
-
 html, body {
   width: 100%;
   height: 100%;
@@ -48,29 +43,11 @@ html, body {
   justify-content: flex-start !important;
 }
 
-.vpd-container{
+.vpd-container {
   color: black !important;
 }
 
 .v-btn {
-  text-transform:none !important;
+  text-transform: none !important;
 }
 
-//.v-application{
-//  font-family: Samim, Roboto-Regular, Sahel, sans-serif!important;
-//}
-//
-//html {
-//  font-size: 62.5%!important;
-//}
-//
-//body {
-//  font-size: 1.5rem
-//}
-
-//#app {
-//  width: 100%;
-//  height: 100%;
-//  display: flex;
-//  flex-direction: column;
-//}

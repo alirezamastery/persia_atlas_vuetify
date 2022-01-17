@@ -97,6 +97,7 @@
   "search": "جستجو",
   "delete": "حذف",
   "welcome": "خوش اومدی",
+  "paginationText": "تعداد نمایش:",
   "deleteConfirm": "برای حذف این مورد مطمئن هستید؟",
   "date": "تاریخ",
   "selectDate": "انتخاب تاریخ",

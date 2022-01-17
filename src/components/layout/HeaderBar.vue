@@ -45,10 +45,6 @@ export default {
     toggleTheme() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark
     },
-    // async logout() {
-    //   await this.$store.dispatch('auth/LogOut')
-    //   await this.$router.push({name: 'Login'})
-    // },
   },
 }
 </script>

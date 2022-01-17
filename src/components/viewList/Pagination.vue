@@ -1,7 +1,7 @@
 <template>
   <v-container class="pt-5">
     <v-row>
-      <v-col cols="12" sm="9" lg="10">
+      <v-col cols="12" md="6" lg="8" xl="10">
         <v-pagination
             v-model="pageValue"
             :length="pageCount"
@@ -10,14 +10,17 @@
             @input="$emit('page-select', $event)"
         />
       </v-col>
-      <v-spacer/>
-      <v-col cols="4" sm="3" lg="2" style="max-width: 100px">
+      <v-col cols="4" md="6" lg="4" xl="2" style="max-width: 100px"
+             class="d-flex flex-row align-center justify-lg-space-between text-no-wrap"
+      >
+        <span class="mx-2">{{$t('general.paginationText')}}</span>
         <v-select
             v-model="pageSizeValue"
             :items="pageSizeOptions"
             :disabled="tableLoading"
             solo-inverted
             hide-details
+            dense
             @input="$emit('page-size-select', $event)"
         />
       </v-col>

@@ -3,6 +3,8 @@
     <v-btn
         @click="showDatePicker = true"
         small
+        depressed
+        rounded
     >
       {{ $t(filterData.label) }}
     </v-btn>
@@ -13,7 +15,8 @@
         outlined
         dense
         :value="inputValue"
-        class="mx-3"
+        class="mx-2"
+        style="font-size: 0.8rem"
     />
     <persian-date-picker
         v-model="inputValue"
