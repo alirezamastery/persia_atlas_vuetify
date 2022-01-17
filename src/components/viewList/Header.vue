@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar>
+  <v-toolbar class="elevation-2">
     <v-toolbar-title>{{ title }}</v-toolbar-title>
     <v-spacer/>
     <v-btn

@@ -13,7 +13,7 @@ const state = {
 
 const getters = {
   hasHttpRequestWaiting: state => state.httpRequestQueue > 0,
-  isMobileWidth: state => state.windowWidth < 768,
+  isMobileWidth: state => state.windowWidth < 960, // vuetify sm breakpoint is 960px
 }
 
 const mutations = {
@@ -28,7 +28,7 @@ const mutations = {
     if (state.httpRequestQueue < 0)
       state.httpRequestQueue = 0
   },
-  CLEAR_HTTP_QUEUE(state){
+  CLEAR_HTTP_QUEUE(state) {
     state.httpRequestQueue = 0
   },
   SET_SIDEBAR_IS_OPEN(state, value) {
@@ -71,7 +71,7 @@ const actions = {
   },
   HandleAddingAlert({commit}, alert) {
     // commit('ADD_ALERT', alert)
-    console.log('HandleAddingAlert' , alert)
+    console.log('HandleAddingAlert', alert)
     commit('ADD_PENDING_ALERT', alert)
   },
   HandleRemovingAlert({commit}, alert) {

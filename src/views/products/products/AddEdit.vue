@@ -56,13 +56,12 @@
               </v-col>
             </v-row>
             <v-row>
-              <v-col cols="12" md="6" lg="4">
+              <v-col cols="12" md="6" lg="4" xl="2">
                 <ValidationProvider name="PriceStep" rules="required">
                   <v-select
                       v-model="form.price_step"
                       :items="priceStepOptions"
                       :label="$t('general.priceStepToman')"
-                      style="max-width: 100px"
                   />
                 </ValidationProvider>
               </v-col>
