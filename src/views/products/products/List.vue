@@ -6,6 +6,7 @@
       :edit-route="editRoute"
       :api-root="apiRoot"
       :denseRows="false"
+      :filters="filters"
   >
     <template v-slot:col-title="{ item }">
       <v-btn text :to="{name: editRoute, params: {id: item.id}}">
@@ -77,6 +78,19 @@ export default {
         type: null,
       },
       priceStepOptions: [100, 200, 300, 400, 500],
+      filters: [
+        {
+          type: 'boolean',
+          queryParam: 'is_active',
+          label:'general.isActive'
+        },
+        {
+          type: 'select',
+          queryParam: 'price_step',
+          label:'general.priceStep',
+          options: [100, 200, 300, 400, 500],
+        },
+      ],
     }
   },
   methods: {

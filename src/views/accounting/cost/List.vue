@@ -5,6 +5,7 @@
       :api-root="apiRoot"
       :edit-route="editRoute"
       :add-route="addRoute"
+      :filters="filters"
   >
     <template v-slot:col-type="{ item }">
       <v-btn text :to="{name: editRoute, params: {id: item.id}}">
@@ -43,6 +44,18 @@ export default {
       editedItem: {
         title: null,
       },
+      filters: [
+        {
+          type: 'date',
+          queryParam: 'date_gte',
+          label:'general.fromDate'
+        },
+        {
+          type: 'date',
+          queryParam: 'date_lte',
+          label:'general.untilDate'
+        },
+      ],
     }
   },
 
