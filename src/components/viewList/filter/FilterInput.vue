@@ -73,7 +73,6 @@ export default {
   },
   watch: {
     inputValue() {
-      if (this.inputValue !== null)
         this.$emit('input', this.inputValue)
     },
     resetSignal() {
