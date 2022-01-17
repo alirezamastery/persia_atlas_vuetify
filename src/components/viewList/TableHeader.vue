@@ -12,6 +12,7 @@
           dense
           flat
           clearable
+          outlined
           @input="handleSearchInput"
       />
   </v-toolbar>
