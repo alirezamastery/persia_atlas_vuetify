@@ -5,6 +5,7 @@
       :api-root="apiRoot"
       :edit-route="editRoute"
       :add-route="addRoute"
+      :filters="filters"
   >
     <template v-slot:col-product="{ item }">
       <v-btn text :to="{name: editRoute, params:{id:item.id}}">
@@ -69,6 +70,18 @@ export default {
         selector_values: [],
         actual_product: 0,
       },
+      filters: [
+        {
+          type: 'boolean',
+          queryParam: 'is_active',
+          label:'general.isActive'
+        },
+        {
+          type: 'boolean',
+          queryParam: 'has_competition',
+          label:'general.hasCompetition'
+        },
+      ],
     }
   },
 }
