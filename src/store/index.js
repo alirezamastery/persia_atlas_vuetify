@@ -3,8 +3,9 @@ import Vuex from 'vuex'
 
 import createPersistedState from 'vuex-persistedstate'
 
-import auth from '@/store/modules/auth'
 import {state, mutations, getters, actions} from './general'
+import auth from '@/store/modules/auth'
+import crud from '@/store/modules/crud'
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
   actions: actions,
   modules: {
     auth,
+    crud
   },
   plugins: [
     createPersistedState(),  // it will persist the store next time you open the browser

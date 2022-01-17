@@ -17,6 +17,7 @@ export const listViewMixin = {
       searchPhrase: '',
       editedIndex: -1,
       dialogDelete: false,
+      sideFilterQuery: '',
     }
   },
   watch: {
@@ -39,7 +40,9 @@ export const listViewMixin = {
         query += `&search=${this.searchPhrase}`
       if (this.page)
         query += `&page=${this.page}`
-      // console.log('constructQuery', query)
+      if (this.sideFilterQuery)
+        query += this.sideFilterQuery
+      console.log('constructQuery', query)
       return query
     },
     handleUpdate(event) {
