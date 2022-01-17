@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '@/store'
 
 import Login from '@/views/auth/Login'
+import Logout from '@/views/auth/Logout'
 import NotFound from '@/views/NotFound'
 import Profile from '@/views/dashboard/Profile'
 import JustRain from '@/views/JustRain'
@@ -12,17 +13,6 @@ import {costList, editVariantStatus} from './chunks'
 Vue.use(VueRouter)
 
 export const routesObj = {
-  // Auth
-  login: {
-    path: '/login',
-    name: 'Login',
-    meta: {
-      key: 'login',
-      title: 'login',
-      guest: true,
-    },
-    component: Login,
-  },
   home: {
     path: '/',
     name: 'Home',
@@ -34,6 +24,25 @@ export const routesObj = {
     },
   },
 
+  // Auth
+  login: {
+    path: '/login',
+    name: 'Login',
+    meta: {
+      key: 'login',
+      title: 'login',
+      guest: true,
+    },
+    component: Login,
+  },
+  logout: {
+    path: '/logout',
+    name: 'Logout',
+    meta: {
+      requiresAuth: true,
+    },
+    component: Logout,
+  },
   profile: {
     path: '/user/profile',
     name: 'Profile',
