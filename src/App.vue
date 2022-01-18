@@ -89,7 +89,6 @@ export default {
     },
   },
   created() {
-    // this.$logger('test' , 'white', {})
     this.handleWindowResize()
     window.addEventListener('resize', this.handleWindowResize)
     this.$broadcast.addBroadcastCallback('LOGOUT', () => {

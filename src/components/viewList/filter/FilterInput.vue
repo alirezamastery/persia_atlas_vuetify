@@ -4,6 +4,7 @@
       v-model="inputValue"
       :label="$t(filter.label)"
       style="text-align: center"
+      dense
   >
     <v-radio :label="$t('general.all')" :value="null"/>
     <v-radio :label="$t('general.yes')" :value="true"/>
@@ -13,17 +14,21 @@
       v-else-if="uiType === 'checkbox'"
       v-model="inputValue"
       :label="$t(filter.label)"
+      dense
   />
   <v-select
       v-else-if="uiType === 'select'"
       v-model="inputValue"
       :items="filter.options"
       :label="$t(filter.label)"
+      dense
+      class="py-3"
   />
   <v-range-slider
       v-else-if="uiType === 'valueRange'"
       v-model="inputValue"
       :label="$t(filter.label)"
+      dense
   />
 
   <Date
