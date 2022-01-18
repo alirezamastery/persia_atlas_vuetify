@@ -12,38 +12,43 @@
             {{ error }}
           </v-alert>
         </div>
-        <v-form
-            @submit.prevent="handleSubmit"
-            v-model="formIsValid"
-            class="d-flex flex-column justify-center"
-        >
-          <v-text-field
-              v-model="mobile"
-              :label="$t('general.mobile')"
-              :rules="mobileRules"
-              prepend-inner-icon="mdi-account-circle"
-              solo-inverted
-          />
-          <v-text-field
-              v-model="password"
-              :type="showPassword ? 'text' : 'password'"
-              :label="$t('general.password')"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="mobileRules"
-              prepend-inner-icon="mdi-lock"
-              solo-inverted
-              @click:append="showPassword = !showPassword"
-          />
-          <v-btn
-              large
-              type="submit"
-              color="#00ff1c"
-              style="color: black"
-              :disabled="!formIsValid"
+        <validation-observer ref="form" v-slot="{ invalid }">
+          <v-form
+              @submit.prevent="handleSubmit"
+              class="d-flex flex-column justify-center"
           >
-            {{ $t('general.routes.login') }}
-          </v-btn>
-        </v-form>
+            <ValidationProvider name="Mobile" rules="required" v-slot="{ errors }">
+              <v-text-field
+                  v-model="mobile"
+                  :label="$t('general.mobile')"
+                  prepend-inner-icon="mdi-account-circle"
+                  solo-inverted
+                  :error-messages="errors"
+              />
+            </ValidationProvider>
+            <ValidationProvider name="Password" rules="required" v-slot="{ errors }">
+              <v-text-field
+                  v-model="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  :label="$t('general.password')"
+                  :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  prepend-inner-icon="mdi-lock"
+                  solo-inverted
+                  @click:append="showPassword = !showPassword"
+                  :error-messages="errors"
+              />
+            </ValidationProvider>
+            <v-btn
+                large
+                type="submit"
+                color="#00ff1c"
+                style="color: black"
+                :disabled="invalid"
+            >
+              {{ $t('general.routes.login') }}
+            </v-btn>
+          </v-form>
+        </validation-observer>
       </v-card-text>
     </v-card>
   </div>
@@ -64,15 +69,7 @@ export default {
       eyeSlash: false,
       errors: null,
       mobile: '',
-      // TODO: use vee-validate
-      mobileRules: [
-        value => !!value || 'this field is required',
-      ],
       password: '',
-      passwordRules: [
-        value => !!value || 'this field is required',
-      ],
-      formIsValid: false,
     }
   },
   methods: {
