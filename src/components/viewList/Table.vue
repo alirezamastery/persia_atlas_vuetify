@@ -35,9 +35,10 @@
                   v-for="(column) in headers"
                   v-slot:[`item.${column.value}`]="{ item }"
               >
-                <slot :name="`col-${column.value}`"
-                      v-bind:item="item"
-                      v-bind:data="data"
+                <slot
+                    :name="`col-${column.value}`"
+                    v-bind:item="item"
+                    v-bind:data="data"
                 >
                   {{ item[column.value] }}
                 </slot>
@@ -68,6 +69,7 @@
                   :page-size="pageSize"
                   :table-loading="loading"
                   :page-count="data.page_count"
+                  :total-count="data.count"
                   @page-select="handlePageSelect"
                   @page-size-select="pageSize = $event"
               />
@@ -128,7 +130,7 @@ export default {
   methods: {
     handleSideFilterChange(event) {
       console.log('handleSideFilterChange', event)
-      if(event === undefined) return
+      if (event === undefined) return
       this.sideFilterQuery = event
       this.reFetchData()
     },
