@@ -4,6 +4,7 @@ import '@/modules/filters'
 import 'vue-advanced-cropper/dist/style.css'
 import 'vue-advanced-cropper/dist/theme.classic.css'
 import '@/mixins/notifs'
+import '@/modules/initialSetup'
 
 import Vue from 'vue'
 import App from './App.vue'

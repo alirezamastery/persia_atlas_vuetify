@@ -92,6 +92,9 @@ export default {
     // this.$logger('test' , 'white', {})
     this.handleWindowResize()
     window.addEventListener('resize', this.handleWindowResize)
+    this.$broadcast.addBroadcastCallback('LOGOUT', () => {
+      this.$store.dispatch('auth/LogOut')
+    })
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)

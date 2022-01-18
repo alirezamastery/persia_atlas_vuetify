@@ -22,15 +22,18 @@
 </template>
 
 <script>
+import broadcastMixin from '@/mixins/broadcast'
+
 export default {
   name: 'Logout',
+  mixins: [broadcastMixin],
   methods: {
     goBack() {
       this.$router.go(-1)
     },
     async logout() {
       await this.$store.dispatch('auth/LogOut')
-      await this.$router.push({name: 'Login'})
+      this.$broadcast.sendBroadcastMessage('LOGOUT', {})
     },
   },
 }

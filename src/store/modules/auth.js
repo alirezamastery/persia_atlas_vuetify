@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import router from '@/router'
 
 const state = {
   user: null,
@@ -38,8 +39,8 @@ const mutations = {
   SET_AVATAR(state, url) {
     Vue.set(state.profile, 'avatar', url)
   },
-  LOGOUT(state, user) {
-    state.user = user
+  LOGOUT(state) {
+    state.user = null
   },
 }
 
@@ -47,11 +48,12 @@ const actions = {
   LogIn({commit}, userMobile) {
     commit('SET_USER', userMobile)
   },
-  LogOut({commit}) {
+  async LogOut({commit}) {
     let user = null
     localStorage.removeItem('access_token')
     localStorage.removeItem('refresh_token')
     commit('LOGOUT', user)
+    await router.push({name: 'Login'})
   },
   SetProfile({commit}, payload) {
     commit('SET_PROFILE', payload)
