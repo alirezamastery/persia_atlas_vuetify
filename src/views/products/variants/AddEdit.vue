@@ -41,7 +41,7 @@
             </v-row>
             <v-row>
               <v-col cols="12" md="6" lg="4">
-                <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
+                <ValidationProvider name="SelectorValue" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.selector_values"
                       :label="$t('products.selectorValues')"

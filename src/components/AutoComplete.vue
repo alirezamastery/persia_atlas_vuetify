@@ -45,7 +45,7 @@ export default {
     api: String,
     queryParam: String,
     selectMultiple: {type: Boolean, default: false},
-    errorMessages: [],
+    errorMessages: {type: Array, default: () => ([])},
   },
   data() {
     return {
@@ -71,20 +71,20 @@ export default {
   },
   methods: {
     handleInput(e) {
-      console.log('selected value' , e, this.content)
+      console.log('selected value', e, this.content)
       this.$emit('input', e)
     },
     handleSelect(event) {
       this.$emit('value-change', event)
     },
-    handleSearchInput: debounce(function (){
+    handleSearchInput: debounce(function () {
       if (!this.searchPhrase) return
       this.loading = true
       const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
       this.axios.get(url)
           .then(res => {
             this.loading = false
-            console.log('handleSearchInput' , res)
+            console.log('handleSearchInput', res)
             this.items = res.data.items
           })
           .catch(err => {

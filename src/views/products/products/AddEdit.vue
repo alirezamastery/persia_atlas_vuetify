@@ -43,7 +43,7 @@
             </v-row>
             <v-row>
               <v-col cols="12" md="6" lg="4">
-                <ValidationProvider name="SelectorValues" rules="required" v-slot="{ errors }">
+                <ValidationProvider name="Type" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.type.id"
                       :label="$t('products.productType')"
@@ -57,11 +57,12 @@
             </v-row>
             <v-row>
               <v-col cols="12" md="6" lg="4" xl="2">
-                <ValidationProvider name="PriceStep" rules="required">
+                <ValidationProvider name="PriceStep" rules="required" v-slot="{ errors }">
                   <v-select
                       v-model="form.price_step"
                       :items="priceStepOptions"
                       :label="$t('general.priceStepToman')"
+                      :error-messages="errors"
                   />
                 </ValidationProvider>
               </v-col>

@@ -17,11 +17,12 @@
                     class="avatar-img"
                     @click="handleImageSelect"
                 >
-                <img v-else
-                     src="@/assets/svg/user-blank.svg"
-                     alt=""
-                     class="avatar-img"
-                     @click="handleImageSelect"
+                <img
+                    v-else
+                    src="@/assets/svg/user-blank.svg"
+                    alt=""
+                    class="avatar-img"
+                    @click="handleImageSelect"
                 >
                 <div class="action-icons">
                   <v-menu
@@ -104,12 +105,7 @@
               :src="cropperImageObjectURL"
               :stencil-props="{aspectRatio: 1, resizable: true}"
               stencil-component="circle-stencil"
-              :canvas="{
-		minHeight: 0,
-		minWidth: 0,
-		maxHeight: 200,
-		maxWidth: 200,
-	}"
+              :canvas="{minHeight: 0, minWidth: 0, maxHeight: 200, maxWidth: 200}"
           />
         </v-card-text>
         <v-card-actions>
