@@ -10,6 +10,14 @@
                   v-model="username"
                   :disabled="!editUsername"
                   :label="$t('general.username')"
+                  class="latin-text-font"
+              />
+            </v-col>
+            <v-col cols="2" md="1" lg="1">
+              <v-switch
+                  v-model="editUsername"
+                  color="red"
+                  :success="!editUsername"
               />
             </v-col>
           </v-row>
@@ -18,8 +26,8 @@
               <v-text-field
                   v-model="password"
                   :disabled="!editPassword"
-                  :solo-inverted="editPassword"
                   :label="$t('general.password')"
+                  class="latin-text-font"
               />
             </v-col>
             <v-col cols="2" md="1" lg="1">
