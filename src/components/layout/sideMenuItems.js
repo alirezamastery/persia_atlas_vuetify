@@ -39,6 +39,8 @@ const menuItems = [
     collapsed:false,
     children: [
       getRoute('editVariantStatus'),
+      getRoute('invoiceDownload'),
+      getRoute('digiCredentials'),
     ],
   },
   {

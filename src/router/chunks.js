@@ -38,9 +38,11 @@ export const variantAddEdit = () =>
 
 
 export const editVariantStatus = () =>
-    import(/* webpackChunkName: "robot" */ '../views/robot/EditVariantStatus.vue')
-
-
+    import(/* webpackChunkName: "robot" */ '../views/robot/variantStatus/EditVariantStatus.vue')
+export const invoiceDownload = () =>
+    import(/* webpackChunkName: "robot" */ '../views/robot/invoice/Download.vue')
+export const digiCredentials = () =>
+    import(/* webpackChunkName: "robot" */ '../views/robot/digiCredentials/DigiCredentials.vue')
 
 export const costList  = () =>
     import(/* webpackChunkName: "accounting" */ '../views/accounting/cost/List.vue')

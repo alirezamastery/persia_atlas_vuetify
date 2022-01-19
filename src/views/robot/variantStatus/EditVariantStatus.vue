@@ -42,7 +42,7 @@
 
 <script>
 import AutoComplete from '@/components/AutoComplete'
-import VariantDetails from '@/views/robot/VariantDetails'
+import VariantDetails from '@/views/robot/variantStatus/components/VariantDetails'
 
 export default {
   name: 'EditVariantStatus',

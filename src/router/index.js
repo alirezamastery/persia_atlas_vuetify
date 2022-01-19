@@ -262,6 +262,25 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
+  // Invoice Download
+  invoiceDownload: {
+    path: '/robot/invoice-download',
+    component: views.invoiceDownload,
+    name: 'invoiceDownload',
+    meta: {
+      titleI18n: 'general.routes.invoices',
+      requiresAuth: true,
+    },
+  },
+  digiCredentials: {
+    path: '/robot/digi-creds',
+    component: views.digiCredentials,
+    name: 'digiCredentials',
+    meta: {
+      titleI18n: 'general.routes.digiPassword',
+      requiresAuth: true,
+    },
+  },
 
   // Accounting
   // ***************** Cost *****************
