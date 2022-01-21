@@ -8,9 +8,9 @@
         style="z-index: 10000"
     />
 
-    <HeaderBar v-if="isAuthenticated"/>
+    <HeaderBar v-if="showAppLayout"/>
 
-    <Sidebar v-if="isAuthenticated"/>
+    <Sidebar v-if="showAppLayout"/>
 
     <v-main>
       <v-container class="rounded-0" style="padding: 40px 20px">
@@ -86,6 +86,10 @@ export default {
       set(value) {
         this.$store.dispatch('HandleSettingSnackbar', value)
       },
+    },
+    showAppLayout() {
+      const noAuthRoutes = ['404', 'Login', 'justRain']
+      return this.isAuthenticated && !noAuthRoutes.includes(this.$route.name)
     },
   },
   created() {
