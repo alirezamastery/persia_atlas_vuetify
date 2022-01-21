@@ -23,8 +23,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
-  // Auth
+  // #################### Auth ####################
   Login: {
     path: '/login',
     name: 'Login',
@@ -52,8 +51,8 @@ export const routesObj = {
     },
   },
 
-  // Products App
-  // ***************** Actual Products *****************
+  // #################### Products App ####################
+  // ********** Actual Products **********
   actualProductList: {
     path: '/actual-products',
     component: views.actualProductsList,
@@ -81,7 +80,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Brands *****************
+  // ********** Brands **********
   brandList: {
     path: '/brands',
     component: views.brandList,
@@ -110,7 +109,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Products *****************
+  // ********** Products **********
   productList: {
     path: '/products',
     component: views.productsList,
@@ -138,7 +137,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Product Types *****************
+  // ********** Product Types **********
   productTypeList: {
     path: '/product-types',
     component: views.productTypesList,
@@ -166,7 +165,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Product Type Selectors *****************
+  // ********** Product Type Selectors **********
   productTypeSelectorList: {
     path: '/product-type-selectors',
     component: views.productTypeSelectorsList,
@@ -194,7 +193,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Product Type Selector Values *****************
+  // ********** Product Type Selector Values **********
   productTypeSelectorValueList: {
     path: '/product-type-selector-values',
     component: views.productTypeSelectorValuesList,
@@ -222,7 +221,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Variants *****************
+  // ********** Variants **********
   variantList: {
     path: '/variants',
     component: views.variantsList,
@@ -251,8 +250,8 @@ export const routesObj = {
     },
   },
 
-  // Robot
-  // ***************** Variant Status *****************
+  // #################### Robot ####################
+  // ********** Variant Status **********
   editVariantStatus: {
     path: '/robot/variant-status',
     component: views.editVariantStatus,
@@ -262,7 +261,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // Invoice Download
+  // ********** Invoice Download **********
   invoiceDownload: {
     path: '/robot/invoice-download',
     component: views.invoiceDownload,
@@ -272,6 +271,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
+  // ********** Digi Credentials **********
   digiCredentials: {
     path: '/robot/digi-creds',
     component: views.digiCredentials,
@@ -282,8 +282,8 @@ export const routesObj = {
     },
   },
 
-  // Accounting
-  // ***************** Cost *****************
+  // #################### Accounting ####################
+  // ********** Cost **********
   costList: {
     path: '/accounting/costs',
     component: views.costList,
@@ -310,7 +310,7 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-  // ***************** Cost Type *****************
+  // ********** Cost Type **********
   costTypeList: {
     path: '/accounting/cost-types',
     component: views.costTypeList,
@@ -337,15 +337,14 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
-
-  // Matrix Rain
+  // #################### Other ####################
+  // ********** Matrix Rain **********
   justRain: {
     path: '/just-rain',
     component: JustRain,
     name: 'justRain',
-    // meta: {guest: true},
   },
-  // Error
+  // ********** 404 **********
   '404': {
     path: '*',
     name: 'NotFound',
@@ -358,8 +357,6 @@ export const routesObj = {
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  // routes,
-  // routes: Object.values(routesObj),
   routes: Object.entries(routesObj).map(([name, route]) => {
     route.name = name
     route.meta = route.meta || {}
