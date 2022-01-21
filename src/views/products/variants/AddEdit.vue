@@ -17,7 +17,7 @@
                   <AutoComplete
                       v-model="form.product.id"
                       :label="$t('products.product')"
-                      :query-param="'title'"
+                      :query-param="'search'"
                       :obj-repr-field="'title'"
                       :api="$api.products"
                       :error-messages="errors"
@@ -31,7 +31,7 @@
                   <AutoComplete
                       v-model="form.actual_product.id"
                       :label="$t('products.actualProduct')"
-                      :query-param="'title'"
+                      :query-param="'search'"
                       :obj-repr-field="'title'"
                       :api="$api.actualProducts"
                       :error-messages="errors"

@@ -24,11 +24,11 @@
             </v-row>
             <v-row>
               <v-col cols="12" md="6" lg="4">
-                <ValidationProvider name="Product" rules="required" v-slot="{ errors }">
+                <ValidationProvider name="ProductTypeSelector" rules="required" v-slot="{ errors }">
                   <AutoComplete
                       v-model="form.selectors"
                       :label="$t('products.productTypeSelector')"
-                      :query-param="'title'"
+                      :query-param="'search'"
                       :obj-repr-field="'title'"
                       :api="$api.productTypeSelectors"
                       :error-messages="errors"
