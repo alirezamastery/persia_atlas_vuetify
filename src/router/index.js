@@ -13,7 +13,7 @@ import {costList, editVariantStatus} from './chunks'
 Vue.use(VueRouter)
 
 export const routesObj = {
-  home: {
+  Home: {
     path: '/',
     name: 'Home',
     redirect: {name: 'editVariantStatus'},
@@ -25,7 +25,7 @@ export const routesObj = {
   },
 
   // Auth
-  login: {
+  Login: {
     path: '/login',
     name: 'Login',
     meta: {
@@ -35,7 +35,7 @@ export const routesObj = {
     },
     component: Login,
   },
-  logout: {
+  Logout: {
     path: '/logout',
     name: 'Logout',
     meta: {
@@ -43,7 +43,7 @@ export const routesObj = {
     },
     component: Logout,
   },
-  profile: {
+  Profile: {
     path: '/user/profile',
     name: 'Profile',
     component: Profile,
@@ -342,8 +342,8 @@ export const routesObj = {
   justRain: {
     path: '/just-rain',
     component: JustRain,
-    name: 'JustRain',
-    meta: {guest: true},
+    name: 'justRain',
+    // meta: {guest: true},
   },
   // Error
   '404': {
@@ -359,28 +359,35 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   // routes,
-  routes: Object.values(routesObj),
+  // routes: Object.values(routesObj),
+  routes: Object.entries(routesObj).map(([name, route]) => {
+    route.name = name
+    route.meta = route.meta || {}
+    return route
+  }),
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta['requiresAuth'])) {
-    if (store.getters['auth/isAuthenticated']) {
+  const needsAuthentication = to.matched.some((record) => record.meta['requiresAuth'])
+  const isAuthenticated = store.getters['auth/isAuthenticated']
+  if (needsAuthentication) {
+    if (isAuthenticated)
       next()
-      return
-    }
-    next({name: 'Login'})
+    else
+      next({name: 'Login'})
   } else {
     next()
   }
 })
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some((record) => record.meta['guest'])) {
-    if (store.getters['auth/isAuthenticated']) {
-      next({name: 'Brands'})
-      return
-    }
-    next()
+  const guestRoute = to.matched.some((record) => record.meta['guest'])
+  const isAuthenticated = store.getters['auth/isAuthenticated']
+  if (guestRoute) {
+    if (isAuthenticated)
+      next({name: 'Home'})
+    else
+      next()
   } else {
     next()
   }
