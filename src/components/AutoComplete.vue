@@ -60,6 +60,10 @@ export default {
     defaultValue(value) {
       console.log('AutoComplete | watch defaultValue', value)
     },
+    searchPhrase(val){
+      // console.log('searchPhrase' , val)
+      this.handleSearchInput()
+    }
   },
   created() {
     if (this.defaultValue)
@@ -78,6 +82,7 @@ export default {
       this.$emit('value-change', event)
     },
     handleSearchInput: debounce(function () {
+      console.log('this.searchPhrase' , this.searchPhrase)
       if (!this.searchPhrase) return
       this.loading = true
       const url = `${this.api}?${this.queryParam}=${this.searchPhrase}`
