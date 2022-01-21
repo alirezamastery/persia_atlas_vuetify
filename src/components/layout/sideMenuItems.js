@@ -49,8 +49,10 @@ const menuItems = [
     titleI18n: 'acc.accounting',
     collapsed:false,
     children: [
-      getRoute('costList'),
       getRoute('costTypeList'),
+      getRoute('costList'),
+      getRoute('incomeList'),
+      getRoute('productCostList'),
     ],
   },
 ]

@@ -64,8 +64,9 @@ export const AddEditViewMixin = {
           })
           .catch(err => {
             console.log('delete error ', err)
-            const txt = `error in deleting ${this.itemRepr}`
-            this.addSnackbar('error', txt)
+            // const txt = `error in deleting ${this.itemRepr}`
+            const resText = err.response.data.error
+            this.addSnackbar('error', resText)
           })
     },
 

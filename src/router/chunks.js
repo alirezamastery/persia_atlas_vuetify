@@ -18,18 +18,15 @@ export const productTypesList = () =>
 export const productTypeAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/productTypes/AddEdit.vue')
 
-
 export const productTypeSelectorsList = () =>
     import(/* webpackChunkName: "products" */ '../views/products/productTypeSelectors/List.vue')
 export const productTypeSelectorAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/productTypeSelectors/AddEdit.vue')
 
-
 export const productTypeSelectorValuesList = () =>
     import(/* webpackChunkName: "products" */ '../views/products/productTypeSelectorValues/List.vue')
 export const productTypeSelectorValueAddEdit = () =>
     import(/* webpackChunkName: "products" */ '../views/products/productTypeSelectorValues/AddEdit.vue')
-
 
 export const variantsList = () =>
     import(/* webpackChunkName: "products" */ '../views/products/variants/List.vue')
@@ -44,6 +41,7 @@ export const invoiceDownload = () =>
 export const digiCredentials = () =>
     import(/* webpackChunkName: "robot" */ '../views/robot/digiCredentials/DigiCredentials.vue')
 
+
 export const costList  = () =>
     import(/* webpackChunkName: "accounting" */ '../views/accounting/cost/List.vue')
 export const costAddEdit  = () =>
@@ -53,3 +51,13 @@ export const costTypeList  = () =>
     import(/* webpackChunkName: "accounting" */ '../views/accounting/costType/List.vue')
 export const costTypeAddEdit  = () =>
     import(/* webpackChunkName: "accounting" */ '../views/accounting/costType/AddEdit.vue')
+
+export const incomeList  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/income/List.vue')
+export const incomeAddEdit  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/income/AddEdit.vue')
+
+export const productCostList  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/productCost/List.vue')
+export const productCostAddEdit  = () =>
+    import(/* webpackChunkName: "accounting" */ '../views/accounting/productCost/AddEdit.vue')

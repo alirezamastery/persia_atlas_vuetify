@@ -337,6 +337,54 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
+  // ********** Income **********
+  incomeList: {
+    path: '/accounting/income',
+    component: views.incomeList,
+    meta: {
+      titleI18n: 'acc.incomes',
+      requiresAuth: true,
+    },
+  },
+  incomeAdd: {
+    path: '/accounting/income/add',
+    component: views.incomeAddEdit,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  incomeEdit: {
+    path: '/accounting/income/edit/:id?',
+    component: views.incomeAddEdit,
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  // ********** Product Cost **********
+  productCostList: {
+    path: '/accounting/product-cost',
+    component: views.productCostList,
+    meta: {
+      titleI18n: 'acc.productCosts',
+      requiresAuth: true,
+    },
+  },
+  productCostAdd: {
+    path: '/accounting/product-cost/add',
+    component: views.productCostAddEdit,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  productCostEdit: {
+    path: '/accounting/product-cost/edit/:id?',
+    component: views.productCostAddEdit,
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
   // #################### Other ####################
   // ********** Matrix Rain **********
   justRain: {

@@ -23,4 +23,6 @@ export default {
 
   costs: 'accounting/costs/',
   costTypes: 'accounting/cost-types/',
+  incomes: 'accounting/incomes/',
+  productCosts: 'accounting/product-costs/',
 }
