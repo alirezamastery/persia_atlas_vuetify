@@ -28,6 +28,7 @@
     "invoices": "صورت حساب ها",
     "digiCreds": "یوزر پسورد دیجیکالا",
     "digiPassword": "پسورد دیجیکالا",
+    "scrapeInvoice": "استخراج صورت حساب",
     "variantStatus": "وضعیت تنوع"
   },
   "siteHeader": "پرشیا اطلس",
@@ -56,6 +57,7 @@
   "isActive": "فعال",
   "totalCount": "تعداد کل",
   "tools": "ابزارها",
+  "start": "شروع",
   "reset": "ریست",
   "profile": "پروفایل",
   "avatar": "عکس آواتار",
@@ -123,7 +125,8 @@
   "alert": {
     "saveSuccess": "{0} \"{1}\" با موفقیت ثبت شد",
     "updateSuccess": "تغییرات {0} \"{1}\" با موفقیت ثبت شد",
-    "deleteSuccess": "{0} \"{1}\" با موفقیت حذف شد"
+    "deleteSuccess": "{0} \"{1}\" با موفقیت حذف شد",
+    "operationSuccess": "عملیت موفق بود"
   },
   "snack": {
     "saveError": "خطا در ثبت",

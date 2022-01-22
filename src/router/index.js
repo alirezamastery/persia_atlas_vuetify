@@ -281,6 +281,15 @@ export const routesObj = {
       requiresAuth: true,
     },
   },
+  // ********** Scrape Invoice **********
+  scrapeInvoice: {
+    path: '/robot/scrape-invoice',
+    component: views.scrapeInvoice,
+    meta: {
+      titleI18n: 'general.routes.digiPassword',
+      requiresAuth: true,
+    },
+  },
 
   // #################### Accounting ####################
   // ********** Cost **********

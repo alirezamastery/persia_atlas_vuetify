@@ -40,7 +40,8 @@ export const invoiceDownload = () =>
     import(/* webpackChunkName: "robot" */ '../views/robot/invoice/Download.vue')
 export const digiCredentials = () =>
     import(/* webpackChunkName: "robot" */ '../views/robot/digiCredentials/DigiCredentials.vue')
-
+export const scrapeInvoice = () =>
+    import(/* webpackChunkName: "robot" */ '../views/robot/scrapeInvoice/scrape.vue')
 
 export const costList  = () =>
     import(/* webpackChunkName: "accounting" */ '../views/accounting/cost/List.vue')

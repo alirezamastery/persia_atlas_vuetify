@@ -20,6 +20,9 @@ export default {
   updateVariantPriceMin: 'products/update-variant-price-min/',
   invoiceExcel: 'products/invoice-excel/',
   digiCreds: 'products/digi-creds/',
+  celeryTest: 'products/celery-task-test/',
+  scrapeInvoice: 'products/scrape-invoice-page/',
+  taskState: 'products/task-state/{0}/',
 
   costs: 'accounting/costs/',
   costTypes: 'accounting/cost-types/',
