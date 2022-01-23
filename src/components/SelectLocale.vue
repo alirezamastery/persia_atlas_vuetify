@@ -33,6 +33,7 @@
 import {updateI18nLocale} from '@/i18n'
 import {localeRTL} from '@/plugins/vuetify'
 import {setVeeValidateLocale} from '@/plugins/validate'
+import {localize as datePickerLocalize} from '@/plugins/datePicker'
 
 export default {
   name: 'SelectLocale',
@@ -52,14 +53,17 @@ export default {
       this.$store.dispatch('SetLocale', locale)
       this.$vuetify.rtl = localeRTL[locale]
       setVeeValidateLocale(locale)
-      // if (locale === 'fa') {
-      //   // document.body.style.direction = 'rtl'
-      //   this.$vuetify.rtl = true
-      // } else if (locale === 'en') {
-      //   // document.body.style.direction = 'ltr'
-      //   this.$vuetify.rtl = false
-      //   // document.getElementsByTagName('body')[0].style.direction = 'ltr'
-      // }
+      datePickerLocalize(locale)
+      if (locale === 'fa') {
+        // document.body.style.direction = 'rtl'
+        document.body.classList.remove('ltr')
+        this.$vuetify.rtl = true
+      } else if (locale === 'en') {
+        // document.body.style.direction = 'ltr'
+        this.$vuetify.rtl = false
+        document.body.classList.add('ltr')
+        // document.getElementsByTagName('body')[0].style.direction = 'ltr'
+      }
     },
   },
 }

@@ -22,11 +22,25 @@
   text-rendering: optimizeLegibility;
 }
 
-$body-font-family: Samim;
-$title-font: Samim;
-
+//$body-font-family: Samim;
+//$title-font: Samim;
+//
 .v-application {
-  font-family: $body-font-family, sans-serif !important;
+  font-family: Samim, sans-serif !important;
+
+  *[class^="title"] {font-family: Samim, sans-serif !important;}
+
+  *[class^="text"] {font-family: Samim, sans-serif !important;}
+}
+
+body.ltr {
+  .v-application {
+    font-family: Roboto-Regular, Samim, sans-serif !important;
+
+    *[class^="title"] {font-family: Roboto-Regular, Samim, sans-serif !important;}
+
+    *[class^="text"] {font-family: Roboto-Regular, Samim, sans-serif !important;}
+  }
 }
 
 html, body {

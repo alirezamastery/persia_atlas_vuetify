@@ -20,8 +20,6 @@
     />
     <persian-date-picker
         v-model="inputValue"
-        format="YYYY-MM-DD"
-        display-format="jYYYY/jMM/jDD"
         :show="showDatePicker"
         :custom-input="`date-input-${filterData.queryParam}`"
         @close="showDatePicker = false"

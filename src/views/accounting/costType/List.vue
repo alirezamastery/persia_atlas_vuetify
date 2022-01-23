@@ -6,6 +6,11 @@
       :edit-route="editRoute"
       :add-route="addRoute"
   >
+    <template v-slot:col-title="{ item }">
+      <v-btn text :to="{name: editRoute, params: {id: item.id}}">
+        {{ item.title }}
+      </v-btn>
+    </template>
   </Table>
 </template>
 

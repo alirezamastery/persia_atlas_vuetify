@@ -61,6 +61,7 @@ import HeaderBar from '@/components/layout/HeaderBar'
 import {updateI18nLocale} from '@/i18n'
 import {localeRTL} from '@/plugins/vuetify'
 import {setVeeValidateLocale} from '@/plugins/validate'
+import {localize as datePickerLocalize} from '@/plugins/datePicker'
 
 export default {
   name: 'App',
@@ -100,22 +101,27 @@ export default {
     },
   },
   created() {
-    console.log('locale:', this.locale)
-    // updateI18nLocale(this.locale)
-    this.$i18n.locale = this.locale
-    this.$vuetify.rtl = localeRTL[this.locale]
-    setVeeValidateLocale(this.locale)
+    this.setInitialLocale()
 
     window.addEventListener('resize', this.handleWindowResize)
     this.$broadcast.addBroadcastCallback('LOGOUT', () => {
       this.$store.dispatch('auth/LogOut')
     })
-    document.body.style.direction = this.pageDirection
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)
   },
   methods: {
+    setInitialLocale() {
+      console.log('locale:', this.locale)
+      // updateI18nLocale(this.locale)
+      this.$i18n.locale = this.locale
+      this.$vuetify.rtl = localeRTL[this.locale]
+      setVeeValidateLocale(this.locale)
+      datePickerLocalize(this.locale)
+      if (this.locale === 'en')
+        document.body.classList.add('ltr')
+    },
     handleWindowResize() {
       this.$store.commit('SET_WINDOW_WIDTH', window.innerWidth)
     },
@@ -128,14 +134,14 @@ export default {
 </script>
 
 <style lang="scss">
-$body-font-family: Samim, Roboto-Regular;
-$title-font: Samim, Roboto-Regular;
+//$body-font-family: Samim, Roboto-Regular;
+//$title-font: Samim, Roboto-Regular;
 
-.v-application {
-  font-family: $body-font-family, sans-serif !important;
-
-  *[class^="title"] {font-family: $title-font, sans-serif !important;}
-
-  *[class^="text"] {font-family: $title-font, sans-serif !important;}
-}
+//.v-application {
+//  font-family: Samim, sans-serif !important;
+//
+//  *[class^="title"] {font-family: Samim, sans-serif !important;}
+//
+//  *[class^="text"] {font-family: Samim, sans-serif !important;}
+//}
 </style>
