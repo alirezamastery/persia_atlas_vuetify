@@ -91,6 +91,9 @@ export default {
       const noAuthRoutes = ['404', 'Login', 'justRain']
       return this.isAuthenticated && !noAuthRoutes.includes(this.$route.name)
     },
+    pageDirection() {
+      return this.$vuetify.rtl
+    },
   },
   created() {
     this.handleWindowResize()
@@ -98,6 +101,7 @@ export default {
     this.$broadcast.addBroadcastCallback('LOGOUT', () => {
       this.$store.dispatch('auth/LogOut')
     })
+    document.body.style.direction = this.pageDirection
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)
