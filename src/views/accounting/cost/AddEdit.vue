@@ -53,7 +53,6 @@
                     outlined
                     solo
                     dense
-                    :value="persianDate"
                     class="mx-3"
                 />
                 <persian-date-picker

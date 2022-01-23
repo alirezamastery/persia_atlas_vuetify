@@ -121,6 +121,8 @@ export default {
       datePickerLocalize(this.locale)
       if (this.locale === 'en')
         document.body.classList.add('ltr')
+      else
+        document.body.classList.remove('ltr')
     },
     handleWindowResize() {
       this.$store.commit('SET_WINDOW_WIDTH', window.innerWidth)
