@@ -50,19 +50,16 @@ export default {
     handleLocaleSelect(locale) {
       console.log('locale', locale)
       updateI18nLocale(locale)
-      this.$store.dispatch('SetLocale', locale)
-      this.$vuetify.rtl = localeRTL[locale]
       setVeeValidateLocale(locale)
       datePickerLocalize(locale)
+      this.$vuetify.rtl = localeRTL[locale]
+      this.$store.dispatch('SetLocale', locale)
       if (locale === 'fa') {
-        // document.body.style.direction = 'rtl'
-        document.body.classList.remove('ltr')
         this.$vuetify.rtl = true
+        document.body.classList.remove('ltr')
       } else if (locale === 'en') {
-        // document.body.style.direction = 'ltr'
         this.$vuetify.rtl = false
         document.body.classList.add('ltr')
-        // document.getElementsByTagName('body')[0].style.direction = 'ltr'
       }
     },
   },
