@@ -8,7 +8,8 @@ const state = {
   pendingAlerts: [],
   snackbars: [],
   snackbar: null,
-  globalCardClass: 'px-20 py-40',
+  locale: 'fa',
+  vuetifyRTL: true,
 }
 
 const getters = {
@@ -63,6 +64,12 @@ const mutations = {
   SET_SNACKBAR(state, payload) {
     state.snackbar = payload
   },
+  SET_LOCALE(state, locale) {
+    state.locale = locale
+  },
+  SET_VUETIFY_RTL(state, payload) {
+    state.vuetifyRTL = payload
+  },
 }
 
 const actions = {
@@ -88,6 +95,12 @@ const actions = {
   HandleSettingSnackbar({commit}, payload) {
     console.log('HandleSettingSnackbar', payload)
     commit('SET_SNACKBAR', payload)
+  },
+  SetLocale({commit}, payload) {
+    commit('SET_LOCALE', payload)
+  },
+  SetVuetifyRTL({commit}, payload) {
+    commit('SET_VUETIFY_RTL', payload)
   },
 }
 

@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      {{ $t('general.profile') }}
+      {{ $t('general.routes.profile') }}
     </v-card-title>
     <v-card-text>
 
@@ -66,7 +66,7 @@
             <v-col cols="12" md="6" lg="3">
               <v-text-field
                   v-model="form.first_name"
-                  :label="$t('general.name')"
+                  :label="$t('general.firstName')"
               />
             </v-col>
           </v-row>
@@ -74,7 +74,7 @@
             <v-col cols="12" md="6" lg="3">
               <v-text-field
                   v-model="form.last_name"
-                  :label="$t('general.family')"
+                  :label="$t('general.lastName')"
               />
             </v-col>
           </v-row>

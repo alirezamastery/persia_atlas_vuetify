@@ -58,6 +58,9 @@
 import {mapGetters, mapState} from 'vuex'
 import Sidebar from '@/components/layout/Sidebar'
 import HeaderBar from '@/components/layout/HeaderBar'
+import {updateI18nLocale} from '@/i18n'
+import {localeRTL} from '@/plugins/vuetify'
+import {setVeeValidateLocale} from '@/plugins/validate'
 
 export default {
   name: 'App',
@@ -74,6 +77,7 @@ export default {
     ...mapState({
       isAuthenticated: state => state.user,
       alerts: state => state.alerts,
+      locale: state => state.locale,
     }),
     ...mapGetters({
       isAuthenticated: 'auth/isAuthenticated',
@@ -96,7 +100,12 @@ export default {
     },
   },
   created() {
-    this.handleWindowResize()
+    console.log('locale:', this.locale)
+    // updateI18nLocale(this.locale)
+    this.$i18n.locale = this.locale
+    this.$vuetify.rtl = localeRTL[this.locale]
+    setVeeValidateLocale(this.locale)
+
     window.addEventListener('resize', this.handleWindowResize)
     this.$broadcast.addBroadcastCallback('LOGOUT', () => {
       this.$store.dispatch('auth/LogOut')
@@ -119,8 +128,8 @@ export default {
 </script>
 
 <style lang="scss">
-$body-font-family: Samim;
-$title-font: Samim;
+$body-font-family: Samim, Roboto-Regular;
+$title-font: Samim, Roboto-Regular;
 
 .v-application {
   font-family: $body-font-family, sans-serif !important;

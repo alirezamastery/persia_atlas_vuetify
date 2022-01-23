@@ -4,7 +4,7 @@
       :permanent="!isMobileWidth"
       :temporary="isMobileWidth"
       app
-      right
+      :right="$vuetify.rtl"
       fixed
   >
     <template v-slot:prepend>
@@ -78,7 +78,9 @@ export default {
       userAvatarURL: state => state.auth.userAvatarURL,
       profile: state => state.auth.profile,
     }),
-    ...mapGetters(['isMobileWidth']),
+    ...mapGetters({
+      isMobileWidth: 'isMobileWidth',
+    }),
     sidebarOpen: {
       get() {
         return this.$store.state.sidebarOpen

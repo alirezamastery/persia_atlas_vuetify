@@ -4,6 +4,11 @@ import colors from 'vuetify/lib/util/colors'
 
 Vue.use(Vuetify)
 
+export const localeRTL = {
+  'fa': true,
+  'en': false,
+}
+
 export default new Vuetify({
   rtl: true,
   // rtl: false,
