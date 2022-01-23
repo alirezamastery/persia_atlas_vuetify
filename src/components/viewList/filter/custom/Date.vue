@@ -14,14 +14,13 @@
         flat
         outlined
         dense
-        :value="inputValue"
         class="mx-2"
         style="font-size: 0.8rem"
     />
     <persian-date-picker
         v-model="inputValue"
+        :custom-input="`#date-input-${filterData.queryParam}`"
         :show="showDatePicker"
-        :custom-input="`date-input-${filterData.queryParam}`"
         @close="showDatePicker = false"
     />
   </div>
