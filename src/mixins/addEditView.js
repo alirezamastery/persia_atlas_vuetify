@@ -14,7 +14,7 @@ export const AddEditViewMixin = {
     formTitle() {
       if (this.editingItemId)
         return this.$t('general.change') + ' ' + this.$t(this.itemType)
-      return this.$t('general.createANew').replace('{0}', this.itemType)
+      return this.$t('general.createANew').replace('{0}', this.$t(this.itemType))
     },
   },
   created() {
@@ -43,7 +43,7 @@ export const AddEditViewMixin = {
           .then(res => {
             console.log('save success', res.data)
             const sentence = this.editingItemId ? 'general.alert.updateSuccess' : 'general.alert.saveSuccess'
-            const alertText = this.itemAction(sentence, this.itemType, this.itemRepr)
+            const alertText = this.itemAction(sentence, this.$t(this.itemType), this.itemRepr)
             this.addAlert('success', alertText)
             this.$router.push({name: this.listViewRoute})
           })
@@ -58,7 +58,7 @@ export const AddEditViewMixin = {
       this.axios.delete(this.apiRoot + this.editingItemId + '/')
           .then(res => {
             console.log('res delete', res.data)
-            const txt = this.itemAction('general.alert.deleteSuccess', this.itemType, this.itemRepr)
+            const txt = this.itemAction('general.alert.deleteSuccess', this.$t(this.itemType), this.itemRepr)
             this.addAlert('success', txt)
             this.$router.push({name: this.listViewRoute})
           })
