@@ -14,7 +14,7 @@
           پروسه استخراج صورت حساب حدود یک تا دو دقیقه طول میکشه
         </li>
         <li>
-          باید مطمئن باشید رمز دیجیکالا آپدیت هست.
+          باید مطمئن باشید پسورد دیجیکالا آپدیت هست.
         </li>
         <li>
           در صورت عدم موفقیت مجدد بزنید.
@@ -104,19 +104,14 @@ export default {
               console.log('task state response:', res)
               this.taskState = res.data.state
               console.log('taskState', this.taskState)
-              if (this.taskState === 'SUCCESS') {
-                this.taskSucceeded = true
+              if (this.taskState !== 'PENDING') {
+                this.stopChecking()
                 this.taskDone = true
                 this.taskId = null
-                this.stopChecking()
-                this.addAlert('success' , this.$t('general.alert.operationSuccess'))
-                this.$router.push({name: 'invoiceDownload'})
-              }
-              if (this.taskState === 'FAILURE') {
-                this.taskFailed = true
-                this.taskDone = true
-                this.taskId = null
-                this.stopChecking()
+                if (this.taskState === 'SUCCESS') {
+                  this.addAlert('success', this.$t('general.alert.operationSuccess'))
+                  this.$router.push({name: 'invoiceDownload'})
+                }
               }
             })
             .catch(err => {

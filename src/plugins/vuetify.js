@@ -6,6 +6,7 @@ Vue.use(Vuetify)
 
 export default new Vuetify({
   rtl: true,
+  // rtl: false,
   theme: {
     dark: true,
     // themes: {
