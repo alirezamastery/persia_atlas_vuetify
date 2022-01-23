@@ -114,7 +114,7 @@ export default {
     return {
       apiRoot: this.$api.products,
       listViewRoute: 'productList',
-      itemType: this.$t('products.product'),
+      itemType: 'products.product',
       form: {
         title: '',
         dkp: null,

@@ -58,8 +58,6 @@
                 />
                 <persian-date-picker
                     v-model="form.date"
-                    format="YYYY-MM-DD"
-                    display-format="jYYYY/jMM/jDD"
                     custom-input="#date-input"
                     :show="showDatePicker"
                     @close="showDatePicker = false"
@@ -125,7 +123,7 @@ export default {
     return {
       apiRoot: this.$api.costs,
       listViewRoute: 'costList',
-      itemType: this.$t('acc.cost'),
+      itemType: 'acc.cost',
       form: {
         type: {title: ''},
         amount: '',

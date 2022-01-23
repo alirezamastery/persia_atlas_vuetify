@@ -133,7 +133,7 @@ export default {
     return {
       apiRoot: this.$api.variants,
       listViewRoute: 'variantList',
-      itemType: this.$t('products.variant'),
+      itemType: 'products.variant',
       form: {
         product: {},
         dkpc: '',

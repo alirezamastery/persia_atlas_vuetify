@@ -108,7 +108,7 @@ export default {
     return {
       apiRoot: this.$api.incomes,
       listViewRoute: 'incomeList',
-      itemType: this.$t('acc.income'),
+      itemType: 'acc.income',
       form: {
         amount: '',
         date: '',

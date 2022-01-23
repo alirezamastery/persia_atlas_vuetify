@@ -13,7 +13,7 @@ export const AddEditViewMixin = {
     },
     formTitle() {
       if (this.editingItemId)
-        return this.$t('general.change') + ' ' + this.itemType
+        return this.$t('general.change') + ' ' + this.$t(this.itemType)
       return this.$t('general.createANew').replace('{0}', this.itemType)
     },
   },

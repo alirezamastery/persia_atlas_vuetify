@@ -108,7 +108,7 @@ export default {
     return {
       apiRoot: this.$api.productCosts,
       listViewRoute: 'productCostList',
-      itemType: this.$t('acc.productCost'),
+      itemType: 'acc.productCost',
       form: {
         amount: '',
         date: '',
