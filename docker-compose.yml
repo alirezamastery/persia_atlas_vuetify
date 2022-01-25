@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  vue:
+    build: .
+    container_name: persia_atlas_vuetify
+    command: npm run serve
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "8080:8080"
+    environment:
+      - CHOKIDAR_USEPOLLING=true
