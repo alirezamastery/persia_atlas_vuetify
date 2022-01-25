@@ -42,15 +42,24 @@ export const AddEditViewMixin = {
       this.axios.request({url, data, method})
           .then(res => {
             console.log('save success', res.data)
-            const sentence = this.editingItemId ? 'general.alert.updateSuccess' : 'general.alert.saveSuccess'
-            const alertText = this.itemAction(sentence, this.$t(this.itemType), this.itemRepr)
-            this.addAlert('success', alertText)
+            this.handleAlert()
             this.$router.push({name: this.listViewRoute})
           })
           .catch(err => {
             console.log('request error', err)
             this.addSnackbar('red', err.response.data)
           })
+    },
+
+    handleAlert() {
+      const sentence = this.editingItemId ? 'general.alert.updateSuccess' : 'general.alert.saveSuccessGeneral'
+      let alertText
+      if(this.editingItemId)
+        alertText = this.itemAction(sentence, this.$t(this.itemType), this.itemRepr)
+      else
+        alertText = this.itemTypeAction(sentence, this.$t(this.itemType))
+
+      this.addAlert('success', alertText)
     },
 
     deleteItem() {
