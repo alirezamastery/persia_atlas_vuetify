@@ -13,6 +13,10 @@ const i18n = new VueI18n({
   messages: {fa: fa, en: en},
 })
 
+export const siteTitle = {
+  'fa': 'پرشیا اطلس',
+  'en': 'Persia Atlas',
+}
 
 export const updateI18nLocale = locale => i18n.locale = locale
 

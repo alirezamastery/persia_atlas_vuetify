@@ -58,7 +58,7 @@
 import {mapGetters, mapState} from 'vuex'
 import Sidebar from '@/components/layout/Sidebar'
 import HeaderBar from '@/components/layout/HeaderBar'
-import {updateI18nLocale} from '@/i18n'
+import {siteTitle, updateI18nLocale} from '@/i18n'
 import {localeRTL} from '@/plugins/vuetify'
 import {setVeeValidateLocale} from '@/plugins/validate'
 import {localize as datePickerLocalize} from '@/plugins/datePicker'
@@ -107,6 +107,7 @@ export default {
     this.$broadcast.addBroadcastCallback('LOGOUT', () => {
       this.$store.dispatch('auth/LogOut')
     })
+    document.title = siteTitle[this.locale]
   },
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize)

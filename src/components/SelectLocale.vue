@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import {updateI18nLocale} from '@/i18n'
+import {siteTitle, updateI18nLocale} from '@/i18n'
 import {localeRTL} from '@/plugins/vuetify'
 import {setVeeValidateLocale} from '@/plugins/validate'
 import {localize as datePickerLocalize} from '@/plugins/datePicker'
@@ -54,6 +54,7 @@ export default {
       datePickerLocalize(locale)
       this.$vuetify.rtl = localeRTL[locale]
       this.$store.dispatch('SetLocale', locale)
+      document.title = siteTitle[locale]
       if (locale === 'fa') {
         this.$vuetify.rtl = true
         document.body.classList.remove('ltr')
