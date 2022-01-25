@@ -50,10 +50,10 @@
                     id="date-input"
                     hide-details
                     flat
-                    outlined
                     solo
                     dense
                     class="mx-3"
+                    :value="persianDate"
                 />
                 <persian-date-picker
                     v-model="form.date"
@@ -141,6 +141,9 @@ export default {
   watch: {
     'form.amount': function (newVal) {
       this.form.amount = this.formatIntNumber(newVal)
+    },
+    'form.date': function (newVal) {
+      this.persianDate = moment(newVal,'YYYY/MM/DD').format('jYYYY/jMM/jDD')
     },
   },
   methods: {
