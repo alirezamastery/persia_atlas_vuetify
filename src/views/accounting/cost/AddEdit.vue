@@ -30,7 +30,7 @@
                 <ValidationProvider name="Amount" rules="required|number_with_comma" v-slot="{ errors }">
                   <v-text-field
                       v-model="form.amount"
-                      :label="$t('general.amount')"
+                      :label="$t('general.amountToman')"
                       :error-messages="errors"
                   />
                 </ValidationProvider>
@@ -46,15 +46,20 @@
                 >
                   <v-icon>mdi-calendar</v-icon>
                 </v-btn>
-                <v-text-field
-                    id="date-input"
-                    hide-details
-                    flat
-                    solo
-                    dense
-                    class="mx-3"
-                    :value="persianDate"
-                />
+                <ValidationProvider name="Date" rules="required" v-slot="{ errors }">
+                  <v-text-field
+                      id="date-input"
+                      hide-details
+                      flat
+                      outlined
+                      solo
+                      dense
+                      class="mx-3"
+                      :label="$t('general.date')"
+                      :value="persianDate"
+                      :error-messages="errors"
+                  />
+                </ValidationProvider>
                 <persian-date-picker
                     v-model="form.date"
                     custom-input="#date-input"

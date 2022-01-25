@@ -88,6 +88,8 @@
   "filter": "filter",
   "filters": "filters",
   "amount": "amount",
+  "amountToman": "amount (Toman)",
+  "amountRial": "amount (Rial)",
   "description": "description",
   "region": "region",
   "lang": "language",

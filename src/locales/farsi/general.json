@@ -91,6 +91,8 @@
   "filter": "فیلتر",
   "filters": "فیلترها",
   "amount": "مقدار",
+  "amountToman": "مقدار (تومان)",
+  "amountRial": "مقدار (ریال)",
   "description": "توضیحات",
   "region": "منطقه",
   "lang": "زبان",
@@ -114,6 +116,7 @@
   "lastName": "نام خانوادگی",
   "alert": {
     "saveSuccess": "{0} \"{1}\" با موفقیت ثبت شد",
+    "saveSuccessGeneral": "{0} با موفقیت ثبت شد",
     "updateSuccess": "تغییرات {0} \"{1}\" با موفقیت ثبت شد",
     "deleteSuccess": "{0} \"{1}\" با موفقیت حذف شد",
     "operationSuccess": "عملیت موفق بود"

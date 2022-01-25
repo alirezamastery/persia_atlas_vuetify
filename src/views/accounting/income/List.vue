@@ -33,7 +33,7 @@ export default {
       editRoute: 'incomeEdit',
       addRoute: 'incomeAdd',
       headers: [
-        {text: this.$t('general.amount'), value: 'amount', sortable: false},
+        {text: this.$t('general.amountToman'), value: 'amount', sortable: false},
         {text: this.$t('general.date'), value: 'date', sortable: false},
       ],
       filters: [
