@@ -76,7 +76,7 @@ export default {
   },
   computed: {
     ...mapState({
-      isAuthenticated: state => state.user,
+      // isAuthenticated: state => state.user,
       alerts: state => state.alerts,
       locale: state => state.locale,
     }),
